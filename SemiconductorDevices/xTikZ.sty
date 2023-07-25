@@ -1,0 +1,66 @@
+\ProvidesPackage{xTikZ}
+
+% tikz
+\RequirePackage{tikz}
+
+\usetikzlibrary{intersections}
+\usetikzlibrary{decorations.markings}
+
+\usetikzlibrary{quotes}
+\usetikzlibrary{angles}
+
+\usetikzlibrary{graphs}
+
+\tikzset%
+{%
+    point/.style=%
+    {%
+        circle,%
+        draw=#1,%
+        solid,%
+        thin,%
+        radius=0.03,%
+        fill=white,%
+        inner sep=0.8pt%
+    },%
+    point/.default=black%
+}%
+
+\tikzset{ss graph/.style={>={Stealth}}}
+
+\tikzset{ss integ/.style={draw,thick,rectangle,minimum size=0.8cm,inner sep=0cm,label=center:$\Int$}}
+\tikzset{ss dtime/.style={draw,thick,rectangle,minimum size=0.8cm,inner sep=0cm,label=center:T}}
+\tikzset{ss delay/.style={draw,thick,rectangle,minimum size=0.8cm,inner sep=0cm,label=center:D}}
+\tikzset{ss sum/.style={draw,thick,circle,minimum size=0.8cm,inner sep=0cm,label=center:$\Sum$}}
+\tikzset{ss odot/.style={draw,circle,minimum size=0.08cm,inner sep=0cm,fill=white}}
+\tikzset{ss dot/.style={draw,circle,minimum size=0.08cm,inner sep=0cm,fill=black}}
+
+\tikzset{ss xy/.style={to path={-|(\tikztotarget) \tikztonodes}}}
+\tikzset{ss yx/.style={to path={|-(\tikztotarget) \tikztonodes}}}
+
+\tikzset{ss skip loop/.style n args=1{to path={-- ++(0,#1) -| (\tikztotarget) \tikztonodes}}}
+
+\tikzset{ss x/.style={to path={-- ++ (#1,0)}}}
+\tikzset{ss y/.style={to path={-- ++ (0,#1)}}}
+
+\tikzset{ss pos/.style={edge node={node[very near end,#1] {\tiny $+$}}}}
+\tikzset{ss neg/.style={edge node={node[very near end,#1] {\tiny $-$}}}}
+
+% pgfplots
+\RequirePackage{pgfplots}
+
+\pgfplotsset{trig format plots=rad}
+
+\usepgfplotslibrary{fillbetween}
+
+% circuitikz
+\RequirePackage[european,americaninductors,americanvoltages,americancurrents,RPvoltages]{circuitikz}
+
+\ctikzset{logic ports=ieee}
+\ctikzset{voltage/distance from node=0.85}
+
+\ctikzset{bipoles/length=1.4cm}
+\ctikzset{resistors/scale=0.8}
+\ctikzset{capacitors/scale=0.8}
+\ctikzset{inductors/scale=0.8}
+\ctikzset{sources/scale=0.9}
