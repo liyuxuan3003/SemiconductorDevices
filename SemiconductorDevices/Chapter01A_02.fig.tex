@@ -1,0 +1,141 @@
+\documentclass{xStandalone}
+
+\tikzset{PRegion/.style={fill=red!50!white}}
+\tikzset{NRegion/.style={fill=blue!50!white}}
+\tikzset{DZone/.style={fill=gray}}
+
+\begin{document}
+\begin{tikzpicture}
+
+\draw[thick] 
+(-3,0) coordinate(A) 
+rectangle 
+(+3,2) coordinate(B);
+
+\fill[PRegion] 
+($(A|-B)!0.4!(B)$) coordinate (Px)
+rectangle node[white] {\LARGE P} (A);
+
+\fill[NRegion] 
+($(A)!0.6!(B|-A)$) coordinate (Nx)
+rectangle node[white] {\LARGE N} (B);
+
+\fill[DZone] (Px) rectangle (Nx);
+
+\draw[dashed]
+(Px)--(Px|-A);
+
+\draw[dashed]
+(Nx)--(Nx|-B);
+
+\draw[thin]
+($(A|-B)!0.5!(B)$) coordinate (MU)
+--
+($(A)!0.5!(A-|B)$) coordinate (MD);
+
+\draw[ultra thin]
+(Px) -- ++(0,0.4) coordinate (Px');
+
+\draw[ultra thin]
+(Nx|-Px) -- ++(0,0.4) coordinate (Nx');
+
+\draw[ultra thin,<->] 
+($(Px)!0.5!(Px')$)
+-- node[above] {$W$}
+($(Nx|-Px)!0.5!(Nx')$);
+
+\draw[-latex]
+($(MD)+(+0.5,-0.5)$) --
+node[below] {$\E$} 
+($(MD)+(-0.5,-0.5)$);
+
+\path
+($(A)!0.5!(A|-B)$) coordinate (ML)
+++(-0.75,0) coordinate (ML')
+($(B)!0.5!(B|-A)$) coordinate (MR)
+++(+0.75,0) coordinate (MR');
+
+\draw (ML)
+-- (ML')
+-- ++(0,2.5)
+coordinate (ML'')
+to[battery1,invert,v<=$V_a$] (ML''-|MR')
+coordinate (MR'')
+-- (MR')
+-- (MR);
+
+\path 
+($(A)!0.5!(MD)$) coordinate (MDA)
+($(A-|B)!0.5!(MD)$) coordinate (MDB);
+
+\path
+(0,-8.0) coordinate (MIN)
+(0,-1.0) coordinate (MAX)
+++(0,-0.5) coordinate (Ecp)
+++(0,-0.8) coordinate (Ecn)
+++(0,-1.0) coordinate (EFn)
+++(0,-1.2) coordinate (EFp)
+++(0,-1.0) coordinate (Evp)
+++(0,-0.8) coordinate (Evn);
+
+\path 
+($(Ecp)!0.5!(Evp)$) coordinate (EFip)
+($(Ecn)!0.5!(Evn)$) coordinate (EFin);
+
+\foreach \y in {MIN,MAX,Ecp,Ecn,EFn,EFp,Evp,Evn,EFip,EFin}
+{
+    \foreach \x in {A,Px,Nx,B,MD,MDA,MDB}
+    {
+        \path (\x|-\y) coordinate (\y\x);
+    }
+}
+
+\foreach \x in {A,Px,Nx,B}
+{
+    \draw[dotted,thin,gray] 
+    (MIN\x)--(MAX\x);
+}
+
+\draw[thick] 
+(EcpA) node[left] {$E_c$}
+--(EcpPx) 
+parabola ($(EcpPx)!0.5!(EcnNx)$) 
+parabola[bend at end] (EcnNx)--(EcnB) node[right] {$E_c$};
+
+\draw[thick] 
+(EvpA) node[left] {$E_v$}
+--(EvpPx) 
+parabola ($(EvpPx)!0.5!(EvnNx)$) 
+parabola[bend at end] (EvnNx)--(EvnB) node[right] {$E_v$};
+
+\draw[gray,dashed] 
+(EFipA) node[left] {$E_{Fi}$}
+--(EFipPx) 
+parabola ($(EFipPx)!0.5!(EFinNx)$) 
+parabola[bend at end] (EFinNx)--(EFinB) node[right] {$E_{Fi}$};
+
+\draw[red]
+(EFpA) node[left]  {$E_{Fp}$} -- (EFpMDA) -- (EFnPx) -- (EFnMDB);
+
+\draw[blue]
+(EFnB) node[right]  {$E_{Fn}$} -- (EFnMDB) --  (EFpNx) -- (EFpMDA);
+
+
+\draw[ultra thin]
+(EcpMD)--(EcpB);
+
+\draw[ultra thin,<->]
+($(EcpNx)!0.15!(EcpB)$) --
+node[right] {$e(V_{bi}-V_a)$}
+($(EcnNx)!0.15!(EcnB)$);
+
+\draw[ultra thin]
+(EFpMDB)--(EFpB);
+
+\draw[ultra thin,<->]
+($(EFpMDB)!0.5!(EFpB)$) --
+node[right] {$eV_a$}
+($(EFnMDB)!0.5!(EFnB)$);
+
+\end{tikzpicture}
+\end{document}

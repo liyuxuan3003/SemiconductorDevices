@@ -1,0 +1,307 @@
+\section{PN结电流}
+我们已经熟知，当PN结上加正偏电压时，在PN结内就会产生电流。在本节，我们先定性讨论PN结内的电荷是如何流动的，随后，再考虑PN结电压--电流定量关系的数学推导。
+
+\subsection{PN结内电荷流动的定性描述}
+通过\xref{fig:PN结能带图}所示的能带图，我们可以定性地理解PN结电流的机理。\xref{fig:零偏PN结}展示了热平衡状态下的PN结能带图。我们指出，电子遇到的势垒阻碍了N区大量电子流入P区，而完全类似的，空穴遇到的势垒同样阻碍了P区大量空穴流入N区\footnote{空穴能带的正负方向与电子相反，而我们看到的能带图都是从电子视角绘制的。}。由此，势垒维持了热平衡。
+
+那为何正偏时PN结中会产生电流？\xref{fig:正偏PN结}展现了PN结正偏时的能带图。由于正偏时，外加电压削弱了势垒，而更小的势垒意味着耗尽区电场减小，进而导致其无法再阻止P区空穴和N区电子。因此将产生“P区至N区的电子扩散流”和“N区至P区的空穴扩散流”。这些载流子的扩散就在PN结中形成了一个由P区至N区的电流，其方向与电压方向一致。
+
+\begin{Figure}[PN结能带图]
+    \begin{FigureSub}[零偏PN结]
+        \includegraphics[width=0.45\linewidth]{build/Chapter01A_01.fig.pdf}
+    \end{FigureSub}
+    \hspace{0.05\linewidth}
+    \begin{FigureSub}[正偏PN结]
+        \includegraphics[width=0.45\linewidth]{build/Chapter01A_02.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+注入N区的电子是N区少子，注入P区的电子是P区少子。而少数载流子的行为可以通过在半导体物理中已经学习过的\uwave{连续性方程}（Continous Equations）描述，在这些区域中，过剩载流子将发生漂移--扩散--复合行为，形成电流。而PN结的电压--电流关系将在下一节讨论。
+
+\begin{BoxEquation}[连续性方程]
+    连续性方程描述了半导体中少数载流子的时空分布规律。
+
+    对于空穴，这是
+    \begin{Equation}
+        D_p\pdv[2]{(\fdd{p})}{x}-\mu_p\qty[\E\pdv{(\fdd{p})}{x}+p\pdv{\E}{x}]+g_p'-\frac{\fdd{p}}{\tau_{p0}}=\pdv{(\fdd{p})}{t}
+    \end{Equation}
+    对于电子，这是
+    \begin{Equation}
+        D_n\pdv[2]{(\fdd{n})}{x}-\mu_n\qty[\E\pdv{(\fdd{n})}{x}+n\pdv{\E}{x}]+g_n'-\frac{\fdd{n}}{\tau_{n0}}=\pdv{(\fdd{n})}{t}
+    \end{Equation}
+\end{BoxEquation}
+
+\subsection{PN结的理想假设}
+PN结的理想电流--电压关系是在以下四个假设的基础上推导的
+\begin{enumerate}
+    \item 耗尽区适用突变边界近似，耗尽区之外的半导体视为中性区域，换言之，不存在漂移。
+    \item 适用麦克斯韦--玻尔兹曼载流子统计近似，即半导体是非简并的。
+    \item 适用小注入和完全电离。
+    \item PN结总电流为常量，电子电流与空穴电流，在耗尽区内为常量，在耗尽区外连续。
+\end{enumerate}
+
+\subsection{PN结的边界条件}
+我们已经知道，PN结的\uwave{内建电势}（Built-in Potential Barrier）$V_{bi}$由以下公式决定。
+\begin{BoxFormula}[PN结的内建电势]
+    PN结的内建电势$V_{bi}$由以下公式决定
+    \begin{Equation}
+        V_{bi}=\frac{\kB T}{e}\ln(\frac{N_aN_d}{n_i^2})
+    \end{Equation}
+\end{BoxFormula}
+现在要解决的两个问题是
+\begin{enumerate}
+    \item PN结在平衡状态下，电子和空穴在其多子侧和少子侧分别为常量，且是已知的。这很显然，电子$n_{n0}=N_d, n_{p0}=n_i^2/N_a$，空穴$p_{p0}=N_a, p_{n0}=n_i^2/N_d$，该结果实际与PN结没有任何关系，仅来自P区和N区作为独立的杂质半导体的特性。但是，这并不妨碍我们将试图用PN结内建电势$V_{bi}$来描述$n_{n0},n_{p0}$以及$p_{p0},p_{n0}$，即平衡载流子多子侧浓度和少子侧浓度间的关系，因为依照\xref{fml:PN结的内建电势}，本质上$V_{bi}$仍然是关于$N_d,N_a,n_i^2$的。
+    \item PN结在正偏状态下，势垒将被削弱，电子和空穴将从其多子侧注入少子侧，这意味着载流子在少子侧不再是$n_{p0}$或$p_{n0}$的常量，而是随$x$变化的$n_{p},p_{n}$的变量。在本小节关注的是$n_{p},p_{n}$的边界条件，即耗尽区边界处$n_p(-x_p),p_n(+x_n)$与$n_{p0}, p_{n0}$的关系是什么？
+    % \item PN结在正偏状态下，势垒将被削弱，电子和空穴将从其多子侧注入少子侧，这意味着载流子在少子侧不再是$n_{p0}$或$p_{n0}$的常量，而是随$x$变化的$n_{p},p_{n}$的变量。正如小节标题所写，这里我们关注的是$n_{p},p_{n}$的边界条件。很明显，当$x\to\pm\infty$时，注入的影响将趋于零，少子浓度将回归其平衡浓度，即$n_p(-\infty)=n_{p0}$和$p_n(+\infty)=p_{n0}$，这就是无穷远处的边界条件。那么，由于势垒减弱导致的电注入（具体而言，势垒减弱后，载流子将从多子侧穿过耗尽区到达少子侧边界，这增加了少子侧边界处载流子浓度），在耗尽区边界处的$n_p(-x_p)$和$p_n(+x_n)$与$n_{p0}, p_{n0}$的关系是什么？相较于$n_{p0}, p_{n0}$增加了多少？
+\end{enumerate}
+
+\begin{BoxFormula}[PN结的平衡少子多子比]
+    PN结在平衡态时，同种载流子在少子侧和多子侧的浓度比，可用$V_{bi}$表示为
+    \begin{Equation}
+        n_{p0}=n_{n0}\exp(-\frac{eV_{bi}}{\kB T})\qquad
+        p_{n0}=p_{p0}\exp(-\frac{eV_{bi}}{\kB T})
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    根据\fancyref{fml:PN结的内建电势}
+    \begin{Equation}&[1]
+        V_{bi}=\frac{\kB T}{e}\ln(\frac{N_aN_d}{n_i^2})
+    \end{Equation}
+    稍作变换
+    \begin{Equation}&[2]
+        \frac{N_aN_d}{n_i^2}=\exp(\frac{eV_{bi}}{\kB T})
+    \end{Equation}
+    或
+    \begin{Equation}&[3]
+        \frac{n_i^2}{N_aN_d}=\exp(-\frac{eV_{bi}}{\kB T})
+    \end{Equation}
+    我们已知
+    \begin{Equation}&[4]
+        \begin{cases}
+            n_{n0}=N_d\\
+            n_{p0}=n_i^2/N_a
+        \end{cases}\qquad
+        \begin{cases}
+            p_{p0}=N_a\\
+            p_{n0}=n_i^2/N_d
+        \end{cases}
+    \end{Equation}
+    将\xrefpeq{4}分别代入\xrefpeq{3}中，分别得到
+    \begin{Equation}
+        \frac{n_{p0}}{n_{n0}}=\exp(-\frac{eV_{bi}}{\kB T})\qquad
+        \frac{p_{n0}}{p_{p0}}=\exp(-\frac{eV_{bi}}{\kB T})
+    \end{Equation}
+    即
+    \begin{Equation}*
+        n_{p0}=n_{n0}\exp(-\frac{eV_{bi}}{\kB T})\qquad
+        p_{n0}=p_{p0}\exp(-\frac{eV_{bi}}{\kB T})\qedhere
+    \end{Equation}
+\end{Proof}
+
+\begin{BoxFormula}[PN结的边界条件]
+    PN结在正偏时，当外加正向电压为$V_a$时，少子浓度在耗尽区边界满足
+    \begin{Equation}&[A]
+        n_p(-x_p)=n_{p0}\exp(\frac{eV_a}{\kB T})\qquad
+        p_n(+x_n)=p_{n0}\exp(\frac{eV_a}{\kB T})
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    依据\fancyref{fml:PN结的平衡少子多子比}
+    \begin{Equation}&[1]
+        n_{p0}=n_{n0}\exp(-\frac{eV_{bi}}{\kB T})\qquad
+        p_{n0}=p_{p0}\exp(-\frac{eV_{bi}}{\kB T})
+    \end{Equation}
+    这是平衡态的结果，在正偏时，势垒$V_{bi}$减小至$V_{bi}-V_a$，即
+    \begin{Equation}&[2]
+        \qquad\qquad
+        n_{p}(-x_p)=n_{n0}\exp[-\frac{e(V_{bi}-V_a)}{\kB T}]\qquad
+        p_{n}(+x_n)=p_{p0}\exp[-\frac{e(V_{bi}-V_a)}{\kB T}]
+        \qquad\qquad
+    \end{Equation}
+    稍作整理
+    \begin{Equation}&[3]
+        n_{p}(-x_p)=n_{n0}\exp(-\frac{eV_{bi}}{\kB T})\exp(\frac{V_a}{\kB T})\qquad
+        p_{n}(+x_n)=p_{p0}\exp(-\frac{eV_{bi}}{\kB T})\exp(\frac{V_a}{\kB T})
+    \end{Equation}
+    将\xrefpeq{1}代入\xrefpeq{3}
+    \begin{Equation}*
+        n_p(-x_p)=n_{p0}\exp(\frac{eV_a}{\kB T})\qquad
+        p_n(+x_n)=p_{n0}\exp(\frac{eV_a}{\kB T})
+        \qedhere
+    \end{Equation}
+\end{Proof}
+
+\subsection{PN结的载流子分布}
+在本节，我们将在\xref{fml:PN结的边界条件}的基础上，进一步推出PN结中少数载流子的浓度分布。
+
+\begin{BoxFormula}[PN结的载流子分布]
+    PN结在正偏时，少子浓度分别满足
+    \begin{Align}[20pt]
+        \qquad\fdd{p_n(x)}=p_n(x)-p_{n0}=p_{n0}&\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(\frac{x_n-x}{L_p})\qquad x\geq +x_n\qquad\\
+        \qquad\fdd{n_p(x)}=n_p(x)-n_{p0}=n_{p0}&\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(\frac{x_p+x}{L_n})\qquad x\leq -x_p\qquad
+    \end{Align}
+\end{BoxFormula}
+
+\begin{Proof}
+    根据\fancyref{eqt:连续性方程}，空穴的连续性方程满足
+    \begin{Equation}&[1]
+        D_p\pdv[2]{(\fdd{p_n})}{x}-\mu_p\qty[\E\pdv{(\fdd{p_n})}{x}+p\pdv{\E}{x}]+g_p'-\frac{\fdd{p_n}}{\tau_{p0}}=\pdv{(\fdd{p_n})}{t}
+    \end{Equation}
+    依照\xref{subsec:PN结的理想假设}的假设，耗尽区外无电场$\E=0$且$g_p'=0$，若再假设稳态$\pdv*{(\fdd{p_n})}{t}=0$
+    \begin{Equation}&[2]
+        D_p\dv[2]{(\fdd{p_n})}{x}-\frac{\fdd{p_n}}{\tau_{p0}}=0\qquad x>+x_n
+    \end{Equation}
+    两端同除$D_p$，引入扩散长度$L_p=\sqrt{D_p\tau_{p0}}$
+    \begin{Equation}&[3]
+        \dv[2]{(\fdd{p_n})}{x}-\frac{\fdd{p_n}}{L_p^2}=0\qquad x>+x_n
+    \end{Equation}
+    类似亦可得到电子的情形
+    \begin{Equation}&[4]
+        \dv[2]{(\fdd{n_p})}{x}-\frac{\fdd{n_p}}{L_n^2}=0\qquad x<-x_p
+    \end{Equation}
+    \xrefpeq{3}的通解为
+    \begin{Equation}&[5]
+        \fdd{p_n(x)}=p_n(x)-p_{n0}=P_1\e^{x/L_p}+P_2\e^{-x/L_p}\qquad x\geq +x_n
+    \end{Equation}
+    \xrefpeq{4}的通解为
+    \begin{Equation}&[6]
+        \fdd{n_p(x)}=n_p(x)-n_{p0}=N_1\e^{x/L_n}+N_2\e^{-x/L_n}\qquad x\leq -x_p
+    \end{Equation}
+    依据\fancyref{fml:PN结的边界条件}，相应的边界条件为
+    \begin{Gather}[12pt]
+        \fdd{p_n(+x_n)}=p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]\xlabelpeq{7}\\
+        \fdd{n_p(-x_p)}=n_{p0}\qty[\exp(\frac{eV_a}{\kB T})-1]\xlabelpeq{8}\\
+        \fdd{p_n}(+\infty)=0\xlabelpeq{9}\\
+        \fdd{n_p}(-\infty)=0\xlabelpeq{10}
+    \end{Gather}
+    当少数载流子由空间电荷区边界向中性区扩散时，它们将与多数载流子复合并减少。此处假定P型区和N型区的长度$W_p,W_n$远大于扩散长度$L_p,L_n$，故过剩少数载流子$\fdd{p_n}, \fdd{n_p}$在远离空间电荷区时将趋于零，这才有上述$\fdd{p_n}(+\infty)=0$和$\fdd{n_p}(-\infty)=0$的无穷边界条件。
+
+    以空穴为例求解，将\xrefpeq{9}代入\xrefpeq{5}，容易定出$P_1=0$，从而
+    \begin{Equation}&[11]
+        \fdd{p_n(x)}=P_2\exp(-\frac{x}{L_p})
+    \end{Equation}
+    特别的，当$x=+x_n$时
+    \begin{Equation}&[12]
+        \fdd{p_n(+x_n)}=P_2\exp(-\frac{x_n}{L_p})
+    \end{Equation}
+    而\xrefpeq{7}又告诉我们
+    \begin{Equation}&[13]
+        \fdd{p_n(+x_n)}=p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]
+    \end{Equation}
+    对比\xrefpeq{12}和\xrefpeq{13}可知
+    \begin{Equation}&[14]
+        P_2=p_{n0}\exp(\frac{x_n}{L_p})\qty[\exp(\frac{eV_a}{\kB T})-1]
+    \end{Equation}
+    将\xrefpeq{14}代回\xrefpeq{11}
+    \begin{Equation}*
+        \fdd{p_n(x)}=p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(\frac{x_n-x}{L_p})
+    \end{Equation}
+    类似也可以得到
+    \begin{Equation}*
+        \fdd{n_p(x)}=n_{p0}\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(\frac{x_p+x}{L_n})\qedhere
+    \end{Equation}
+\end{Proof}
+
+\xref{fig:PN结的载流子分布}形象展示了\xref{subsec:PN结的边界条件}和\xref{subsec:PN结的载流子分布}的工作
+\begin{itemize}
+    \item 平衡少子浓度$p_{n0}, n_{p0}$。
+    \item 平衡多子浓度$p_{p0}, n_{n0}$，在$p_{n0}, n_{p0}$上乘$\exp(eV_{bi})$。
+    \item 非平衡态下，少子在耗尽区边界处浓度$p_{n}(+x_n), n_p(-x_p)$，在$p_{n0}, n_{p0}$上乘$\exp(eV_a)$。
+    \item 非平衡少子$\fdd{p_n}(x), \fdd{n_p}(x)$由边界$+x_n, -x_p$向无穷远$\pm\infty$以指数方式衰减。
+\end{itemize}
+
+\begin{Figure}[PN结的载流子分布]
+    \includegraphics[scale=1]{build/Chapter01A_03.fig.pdf}
+\end{Figure}
+
+\subsection{PN结的理想电流--电压关系}
+推导PN结理想电流--电压关系的关键在于\xref{subsec:PN结的理想假设}第四条假设。试想，PN结的总电流密度$J(x)$是由空穴电流$J_p(x)$和电子电流$J_n(x)$的和组成的。而依据第四条假设
+\begin{itemize}
+    \item $J(x)$是无关$x$的常数$J$，那我们不妨就在耗尽区内计算总电流密度$J(x)=J$。
+    \item $J_p(x)$和$J_n(x)$在耗尽区内也是常数，故不妨取边界处计算，即$J=J_p(+x_n)+J_n(-x_p)$。
+    \item $J_p(x)$和$J_n(x)$是由少子扩散形成的扩散电流，正比于$p_n(x), n_p(x)$的梯度。
+\end{itemize}
+
+以上就是本小节推导$J, J_p(x), J_n(x)$表达式的基本思路。
+
+\begin{BoxEquation}[PN结的理想电流--电压关系]*
+    PN结的\uwave{理想电流--电压关系}（Ideal Current-Voltage Relationship）为
+    \begin{Equation}
+        J=J_S\qty[\exp(\frac{eV_a}{\kB T})-1]
+    \end{Equation}
+    其中$J_S$称为\uwave{理想反向饱和电流密度}（Ideal Reverse Saturation Current Density）
+    \begin{Equation}
+        J_S=\qty[\frac{eD_pp_{n0}}{L_p}+\frac{eD_nn_{p0}}{L_n}]
+    \end{Equation}
+    空穴电流$J_p(x)$满足
+    \begin{Equation}
+        \qquad\qquad
+        J_p(x)=\frac{eD_pp_{n0}}{L_p}\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(\frac{x_n-x}{L_p})\qquad
+        x\geq +x_n
+        \qquad\qquad
+    \end{Equation}
+    电子电流$J_n(x)$满足
+    \begin{Equation}
+        \qquad\qquad
+        J_n(x)=\frac{eD_nn_{p0}}{L_n}\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(\frac{x_p+x}{L_n})\qquad
+        x\geq -x_p
+        \qquad\qquad
+    \end{Equation}
+\end{BoxEquation}
+
+\begin{Proof}
+    空穴扩散电流为
+    \begin{Equation}&[1]
+        J_p(x)=-eD_p\dv{p_n(x)}{x}
+    \end{Equation}
+    由于考虑的是均匀掺杂区域，平衡少子浓度$p_{n0}$为常量，故$p_n(x)$可用$\fdd{n_p(x)}$替代
+    \begin{Equation}&[2]
+        J_p(x)=-eD_p\dv{(\fdd{p_n(x)})}{x}
+    \end{Equation}
+    代入\fancyref{fml:PN结的载流子分布}
+    \begin{Equation}&[3]
+        J_p(x)=\frac{eD_pp_{n0}}{L_p}\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(\frac{x_n-x}{L_p})
+    \end{Equation}
+    电子扩散电流可以通过类似方法得到
+    \begin{Equation}&[4]
+        J_n(x)=\frac{eD_nn_{p0}}{L_n}\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(\frac{x_p+x}{L_n})
+    \end{Equation}
+    在\xrefpeq{3}中取$x=+x_n$
+    \begin{Equation}&[5]
+        J_p(+x_n)=\frac{eD_pp_{n0}}{L_p}\qty[\exp(\frac{eV_a}{\kB T})-1]
+    \end{Equation}
+    在\xrefpeq{4}中取$x=-x_p$
+    \begin{Equation}&[6]
+        J_n(-x_p)=\frac{eD_nn_{p0}}{L_n}\qty[\exp(\frac{eV_a}{\kB T})-1]
+    \end{Equation}
+    将\xrefpeq{5}和\xrefpeq{6}相加
+    \begin{Equation}&[7]
+        \qquad\qquad
+        J=J_p(+x_n)+J_n(-x_p)=\qty[\frac{eD_pp_{n0}}{L_p}+\frac{eD_nn_{p0}}{L_n}]\qty[\exp(\frac{eV_a}{\kB T})-1]
+        \qquad\qquad
+    \end{Equation}
+    若引入代换变量$J_s$
+    \begin{Equation}*
+        J_S=\qty[\frac{eD_pp_{n0}}{L_p}+\frac{eD_nn_{p0}}{L_n}]
+    \end{Equation}
+    则\xrefpeq{7}可以简化为
+    \begin{Equation}*
+        J=J_S\qty[\exp(\frac{eV_a}{\kB T})-1]\qedhere
+    \end{Equation}
+\end{Proof}
+
+PN结的理想电流--电压关系如\xref{fig:PN结的理想电流--电压关系}所示。尽管上述推导均是在正偏$V_a>0$的背景下进行的，但是反偏$V_a<0$也完全适用该结论。值得注意的是，当$V_a$反偏超过数个$\kB T/eV$后，电流密度$J$将趋于常量$-J_S$，不再随反偏电压变化，故$J_S$也被称为理想反向饱和电流密度。而同时，当$V_a$正偏超过数个$\kB T/eV$后，则$-1$可以被忽略，此时可认为$J\propto\exp(eV_a/\kB T)$。
+
+\begin{Figure}[PN结的理想电流--电压关系]
+    \includegraphics[scale=1]{build/Chapter01A_05.fig.pdf}
+\end{Figure}
+
+PN结的空穴扩散电流$J_p(x), x\geq +x_n$和电子扩散电流$J_n(x), x\leq -x_p$在中性区内向两端指数衰减，但根据前面的假设，PN结的总电流密度$J$是一个常量，这该怎么解释呢？总电流密度与少子扩散电流密度间的差，来自多子漂移电流。它们补充了多子因注入而造成的损失。
+
+\begin{Figure}[PN结的电流密度分布]
+    \includegraphics[scale=1]{build/Chapter01A_04.fig.pdf}
+\end{Figure}
+
+当然，应当指出的是，多子漂移电流的存在意味着我们先前中性区的假设并不严谨，因为存在漂移电流就意味着空间电荷区外仍有电场。不过这电场实际很小，故这个假设仍可以适用。

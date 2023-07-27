@@ -1,0 +1,48 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}[scale=1.5]
+
+\draw[gray,ultra thin] (-4,0) -- (4,0);
+
+\draw[gray,ultra thin]
+    (-1,0) coordinate (xp) node[below] {$-x_p$}
+    -- ++(0,4) coordinate (xp');
+
+\draw[gray,ultra thin]
+    (+1,0) coordinate (xn) node[below] {$+x_n$}
+    -- ++(0,4) coordinate (xn');
+
+\draw[gray,ultra thin,dashed]
+    (0,0) coordinate (O)
+    -- ++(0,4) coordinate (O');
+
+\def\ncc{0.75}
+\def\pcc{1.10}
+
+\draw[thick] (-4,{2*(\pcc+\ncc)}) node[above right] {\small $J=J_p(x)+J_n(x)$} -- (4,{2*(\pcc+\ncc)});
+
+\draw[red,thick] (-1,2*\pcc) -- plot[domain=1:4] (\x,{2*\pcc*exp(1-\x)});
+\draw[red,thick,dashed] plot[domain=-4:-1] (\x,{2*(\pcc+\ncc)-2*\ncc*exp(1+\x)})  ;
+
+\draw[blue,thick] (1,2*\ncc) -- plot[domain=-1:-4] (\x,{2*\ncc*exp(1+\x)});
+\draw[blue,thick,dashed] plot[domain=1:4] (\x,{2*(\pcc+\ncc)-2*\pcc*exp(1-\x)});
+
+\path
+(+1,2*\pcc) node[point=red] {}
+node[above left,red] {\small $J_p(+x_n)$}
+(-1,2*\pcc) node[point=red] {}
+(+1,2*\ncc) node[point=blue] {}
+(-1,2*\ncc) node[point=blue] {}
+node[below right,blue] {\small $J_n(-x_p)$};
+
+\path
+(+4,0) ++(0,0.9)  node[left,red]   {\small 空穴扩散电流}
+(-4,0) ++(0,0.9)  node[right,blue] {\small 电子扩散电流}
+(+4,4) ++(0,-0.9) node[left,blue]  {\small 电子漂移电流}
+(-4,4) ++(0,-0.9) node[right,red]  {\small 空穴漂移电流};
+
+\draw[ultra thin] (-4.1,-0.4) rectangle (4.1,4.1);
+
+\end{tikzpicture}
+\end{document}
