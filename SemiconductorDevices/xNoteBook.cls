@@ -5,7 +5,7 @@
 \let\xdate=\@date
 
 %基于ctexbook改造的文档类型
-\LoadClass[a4paper,openany,oneside,sub4section,heading=true,draft]{ctexbook}
+\LoadClass[a4paper,openany,oneside,sub4section,heading=true]{ctexbook}
 \RequirePackage{xeCJKfntef}
 
 %引入超链接

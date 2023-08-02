@@ -139,8 +139,8 @@ PN结的理想电流--电压关系是在以下四个假设的基础上推导的
 \begin{BoxFormula}[PN结的载流子分布]
     PN结在正偏时，少子浓度分别满足
     \begin{Align}[20pt]
-        \qquad\fdd{p_n(x)}=p_n(x)-p_{n0}=p_{n0}&\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(\frac{x_n-x}{L_p})\qquad x\geq +x_n\qquad\\
-        \qquad\fdd{n_p(x)}=n_p(x)-n_{p0}=n_{p0}&\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(\frac{x_p+x}{L_n})\qquad x\leq -x_p\qquad
+        \fdd{p_n(x)}=p_{n0}&\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(\frac{x_n-x}{L_p})\qquad x\geq +x_n\\
+        \fdd{n_p(x)}=n_{p0}&\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(\frac{x_p+x}{L_n})\qquad x\leq -x_p
     \end{Align}
 \end{BoxFormula}
 
@@ -163,11 +163,11 @@ PN结的理想电流--电压关系是在以下四个假设的基础上推导的
     \end{Equation}
     \xrefpeq{3}的通解为
     \begin{Equation}&[5]
-        \fdd{p_n(x)}=p_n(x)-p_{n0}=P_1\e^{x/L_p}+P_2\e^{-x/L_p}\qquad x\geq +x_n
+        \fdd{p_n(x)}=P_1\exp(\frac{x}{L_p})+P_2\exp(-\frac{x}{L_p})\qquad x\geq +x_n
     \end{Equation}
     \xrefpeq{4}的通解为
     \begin{Equation}&[6]
-        \fdd{n_p(x)}=n_p(x)-n_{p0}=N_1\e^{x/L_n}+N_2\e^{-x/L_n}\qquad x\leq -x_p
+        \fdd{n_p(x)}=N_1\exp(\frac{x}{L_n})+N_2\exp(-\frac{x}{L_n})\qquad x\leq -x_p
     \end{Equation}
     依据\fancyref{fml:PN结的边界条件}，相应的边界条件为
     \begin{Gather}[12pt]
@@ -305,3 +305,150 @@ PN结的空穴扩散电流$J_p(x), x\geq +x_n$和电子扩散电流$J_n(x), x\le
 \end{Figure}
 
 当然，应当指出的是，多子漂移电流的存在意味着我们先前中性区的假设并不严谨，因为存在漂移电流就意味着空间电荷区外仍有电场。不过这电场实际很小，故这个假设仍可以适用。
+
+\subsection{短二极管}
+在前面的分析中，我们假设P型区域和N型区域的长度$W_p, W_n$都远大于相应的少子扩散长度$L_n, L_p$，即$W_p\gg L_n$且$W_n\gg L_p$（注意此处两者是相反的）。然而，在许多实际PN结的结构中，有一个区域，反而远小于相应的少子扩散长度，即$W_p\ll L_n$或$W_n\ll L_p$。这类PN结被称为\uwave{短二极管}（The Short Diode），相较于通常的\uwave{长二极管}（The Long Diode）。短二极管将导致许多问题，\fancyref{fml:PN结的载流子分布}中，应用了\empx{过剩载流子浓度在无穷远处减少至零}的边界条件，然而在短二极管的短侧，由于区域长度远小于扩散长度，因此边界条件需要相应改为\empx{过剩载流子浓度在区域边界处减小至零}。在这一新边界条件下，我们将会重新推导出短二极管的载流子分布和电流密度分布函数。\xref{fig:短二极管与长二极管}给出了短二极管的结构示意图。
+
+\begin{Figure}[短二极管与长二极管]
+    \begin{FigureSub}[长二极管]
+        \includegraphics[scale=0.9]{build/Chapter01A_06.fig.pdf}
+    \end{FigureSub}\\ \vspace{0.5cm}
+    \begin{FigureSub}[短二极管（N侧）]
+        \includegraphics[scale=0.9]{build/Chapter01A_07.fig.pdf}
+    \end{FigureSub}\hspace{0.25cm}
+    \begin{FigureSub}[短二极管（P侧）]
+        \includegraphics[scale=0.9]{build/Chapter01A_08.fig.pdf}
+    \end{FigureSub}
+\end{Figure}\vspace{0.15cm}
+
+\begin{BoxFormula}[短二极管的载流子分布]
+    对于N侧较短$W_n\ll L_p$的短二极管，其过剩空穴分布$\fdd{p_n}$需修正为
+    \begin{Equation}
+        \fdd{p_n}(x)=p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]\qty(\frac{W_n+x_n-x}{W_n})
+    \end{Equation}
+    对于P侧较短$W_p\ll L_n$的短二极管，其过剩电子分布$\fdd{n_p}$需修正为
+    \begin{Equation}
+        \fdd{n_p}(x)=n_{p0}\qty[\exp(\frac{eV_a}{\kB T})-1]\qty(\frac{W_p+x_p+x}{W_p})
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    以空穴的分布为例推导，连续性方程的通解仍然是\xrefpeq[PN结的载流子分布]{5}
+    \begin{Equation}&[1]
+        \fdd{p_n(x)}=P_1\exp(\frac{x}{L_p})+P_2\exp(-\frac{x}{L_p})
+    \end{Equation}
+    在耗尽区边界处的边界条件\xrefpeq[PN结的载流子分布]{7}仍然满足
+    \begin{Equation}&[2]
+        \fdd{p_n(x_n)}=p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]
+    \end{Equation}
+    在无穷远处的边界条件则不再成立，取而代之，$\fdd{p_n}$在N区边界$x_n+W$处衰减至零
+    \begin{Equation}&[3]
+        \fdd{p_n(x_n+W)}=0
+    \end{Equation}
+    将\xrefpeq{2}和\xrefpeq{3}代入\xrefpeq{1}，构建方程阻
+    \begin{Equation}&[4]
+        \begin{pmatrix}
+            \mal{\exp(\frac{x_n}{L_p})}&
+            \mal{\exp(-\frac{x_n}{L_p})}\\[6mm]
+            \mal{\exp(\frac{x_n+W_n}{L_p})}&
+            \mal{\exp(-\frac{x_n+W_n}{L_p})}
+        \end{pmatrix}
+        \begin{pmatrix}
+            P_1\vphantom{\mal{\qty(\frac{1}{1})}}\\[6mm]
+            P_2\vphantom{\mal{\qty(\frac{1}{1})}}
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            \mal{p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]}\\[6mm]
+            0\vphantom{\mal{\qty(\frac{1}{1})}}
+        \end{pmatrix}
+    \end{Equation}
+    计算$D$
+    \begin{Equation}&[5]
+        D=\begin{vmatrix}
+            \mal{\exp(\frac{x_n}{L_p})}&
+            \mal{\exp(-\frac{x_n}{L_p})}\\[6mm]
+            \mal{\exp(\frac{x_n+W_n}{L_p})}&
+            \mal{\exp(-\frac{x_n+W_n}{L_p})}
+        \end{vmatrix}=
+        \exp(-\frac{W_n}{L_p})-\exp(\frac{W_n}{L_p})=-2\sinh(\frac{W_n}{L_p})
+    \end{Equation}
+    计算$D_1$
+    \begin{Equation}&[6]
+        D_1=\begin{vmatrix}
+            \mal{p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]}&
+            \mal{\exp(-\frac{x_n}{L_p})}\\[6mm]
+            0&
+            \mal{\exp(-\frac{x_n+W_n}{L_p})}    
+        \end{vmatrix}=
+        p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(-\frac{x_n+W_n}{L_p})
+    \end{Equation}
+    计算$D_2$
+    \begin{Equation}&[7]
+        D_2=\begin{vmatrix}
+            \mal{\exp(\frac{x_n}{L_p})}&
+            \mal{p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]}\\[6mm]
+            \mal{\exp(\frac{x_n+W_n}{L_p})}&
+            0
+        \end{vmatrix}=
+        -p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]\exp(\frac{x_n+W_n}{L_p})
+    \end{Equation}
+    其中，$P_1=D_1/D$，$P_2=D_2/D$，故\xrefpeq{1}表示为
+    \begin{Equation}&[8]
+        \fdd{p_n(x)}=\frac{D_1}{D}\exp(\frac{x}{L_p})+\frac{D_2}{D}\exp(-\frac{x}{L_p})
+    \end{Equation}
+    将\xrefpeq{5}、\xrefpeq{6}、\xrefpeq{7}代入\xrefpeq{8}
+    \begin{Equation}&[9]
+        \fdd{p_n(x)}=p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]\qty[\exp(-\frac{x_n+W_n-x}{L_p})-\exp(\frac{x_n+W_n-x}{L_p})]\frac{1}{-2\sinh(W_n/L_p)}
+    \end{Equation}
+    再次用双曲正弦简化
+    \begin{Equation}
+        \fdd{p_n(x)}=p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]\frac{\sinh[(W_n+x_n-x)/L_p]}{\sinh[W_n/L_p]}
+    \end{Equation}
+    而当$W_n\ll L_p$时，可以进一步近似为
+    \begin{Equation}*
+        \fdd{p_n(x)}=p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]\qty(\frac{W_n+x_n-x}{W_n})
+    \end{Equation}
+    而对于$W_p\ll L_n$的情况，类似可以正面$\fdd{n_p(x)}$满足
+    \begin{Equation}*
+        \fdd{n_p(x)}=n_{p0}\qty[\exp(\frac{eV_a}{\kB T})-1]\qty(\frac{W_p+x_p+x}{W_p})\qedhere
+    \end{Equation}
+\end{Proof}
+
+\begin{BoxFormula}[短二极管的电流密度]
+    对于N侧较短$W_n\ll L_p$的短二极管，其$J_p(x)$应修正为
+    \begin{Equation}
+        J_p(x)=\frac{eD_pp_{n0}}{W_n}\qty[\exp(\frac{eV_a}{\kB T})-1]
+    \end{Equation}
+    对于P侧较短$W_p\ll L_n$的短二极管，其$J_n(x)$应修正为
+    \begin{Equation}
+        J_n(x)=\frac{eD_nn_{p0}}{W_p}\qty[\exp(\frac{eV_a}{\kB T})-1]
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    以空穴而的分布为例推导，根据\fancyref{fml:短二极管的载流子分布}
+    \begin{Equation}&[1]
+        \fdd{p_n}(x)=p_{n0}\qty[\exp(\frac{eV_a}{\kB T})-1]\qty(\frac{W_n+x_n-x}{W_n})
+    \end{Equation}
+    空穴扩散电流为
+    \begin{Equation}&[2]
+        J_p(x)=-eD_p\dv{(\fdd{p_n(x)})}{x}
+    \end{Equation}
+    代入\xrefpeq{1}
+    \begin{Equation}*
+        J_p(x)=\frac{eD_pp_{n0}}{W_n}\qty[\exp(\frac{eV_a}{\kB T})-1]
+    \end{Equation}
+    电子扩散电流可以类似求得
+    \begin{Equation}*
+        J_n(x)=\frac{eD_nn_{p0}}{W_p}\qty[\exp(\frac{eV_a}{\kB T})-1]\qedhere
+    \end{Equation}
+\end{Proof}
+
+通过\fancyref{fml:短二极管的载流子分布}和\fancyref{fml:短二极管的电流密度}
+\begin{itemize}
+    \item 长二极管至短二极管，载流子分布由指数衰减变为了线性衰减。
+    \item 长二极管至短二极管，电流密度分布由指数衰减变为了常量。
+\end{itemize}
+除此之外，长二极管的公式包含$L_p,L_n$，短二极管的公式则包含$W_n,W_p$，这是因为在短二极管中区域长度相较扩散长度是更重要的因素。同时，我们刚刚已提到，在短二极管中，少数载流子分布变为线性，少子扩散电流密度变为常量，而恒定电流密度表明，\empx{短区中不存在复合}。
+

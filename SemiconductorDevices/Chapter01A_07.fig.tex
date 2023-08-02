@@ -1,0 +1,26 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\draw[very thick] (-5,-0.5) rectangle (1.75,0.5); 
+\draw[fill=red!50!white]  (-5,-0.5) coordinate (P) rectangle node[white] {P} (-1,0.5) coordinate (P');
+\draw[fill=blue!50!white] (1.75,-0.5) coordinate (N) rectangle node[white] {N} (+1,0.5) coordinate (N');
+
+\foreach \c in {P,P',N,N'}
+{
+    \draw[ultra thin] (\c|-P) coordinate (\c 1)
+    -- ++(0,-0.35) coordinate (\c 2);
+    \path ($(\c 1)!0.5!(\c 2)$) coordinate (\c 3);
+}
+
+\draw[<->,ultra thin] (P3)-- node[below] {$W_p$} (P'3);
+\draw[<->,ultra thin] (N3)-- node[below] {$W_n$} (N'3);
+
+\draw[white,-latex] ($(P')!0.7!(P'1)$) -- node[above] {$L_n$} ++(-1,0);
+
+\path ($(P|-P')!0.5!(P')$) node[above] {$W_p\gg L_n$};
+\path ($(N|-N')!0.5!(N')$) node[above] {$W_n\ll L_p$};
+
+\end{tikzpicture}
+\end{document}
