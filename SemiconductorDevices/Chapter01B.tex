@@ -1,0 +1,231 @@
+\section{PN结的产生--复合电流和大注入}
+在\xref{sec:PN结电流}，推导理想电流--电压关系时，我们假定了小注入并忽略了耗尽区的影响，然而
+\begin{itemize}
+    \item 在耗尽区中实际会发生载流子的产生与复合，这并不影响载流子分布，后者是由能带决定的。但是，为了抵消其带来的影响，将有额外电流产生。这就是产生电流和复合电流。
+    \item 在过去，我们总是假定PN结是满足\uwave{小注入}（Low-Level Injection）近似的，耗尽区边界处的非平衡载流子，对于少子而言很显著，对于多子而言则可以忽略。但是随着PN结两端的电压增大，非平衡载流子的浓度将同时高于平衡少子浓度和平衡多子浓度，非平衡少子和非平衡多子都需要被充分考虑，这就是所谓的\uwave{大注入}（High-Level Injection）。
+\end{itemize}
+
+这些非理想因素会导致PN结的电流--电压关系偏离其理想表达式。
+
+\subsection{间接复合理论}
+在开始前，我们简要回顾一下\uwave{间接复合}，亦称为\uwave{肖克利--里德--霍尔复合}（Shockley-Read-Hall Recombination, SRH）的理论。在间接复合理论中，电子和空穴的净复合率$R$可以表示为
+\begin{BoxFormula}[间接复合率]
+    间接复合率可以表示为
+    \begin{Equation}
+        R=\frac{C_nC_pN_t(np-n_i^2)}{C_n(n+n')+C_p(p+p')}
+    \end{Equation}
+    其中，$N_t$是掺杂的复合中心的浓度，$C_n,C_p$是电子和空穴的俘获系数。
+\end{BoxFormula}
+
+在这里需要说明的$n',p'$的含义，我们知道，$n$和$p$是电子和空穴浓度，可以表示为
+\begin{Equation}
+    n=N_c\exp(\frac{E_{Fn}-E_c}{\kB T})\qquad
+    p=N_v\exp(\frac{E_v-E_{Fp}}{\kB T})
+\end{Equation}\goodbreak
+而$n',p'$的意义是，当费米能级$E_F$置于复合中心能级$E_t$时对应的“浓度”
+\begin{Equation}
+    n'=N_c\exp(\frac{E_t-E_c}{\kB T})\qquad
+    p'=N_v\exp(\frac{E_v-E_t}{\kB T})
+\end{Equation}
+而很多时候，近似认为复合中心能级$E_t$位于$E_{Fi}$附近，因此
+\begin{Equation}
+    n_i=N_c\exp(\frac{E_{Fi}-E_c}{\kB T})=N_v\exp(\frac{E_v-E_{Fi}}{\kB T})=n'=p'
+\end{Equation}
+该近似是本节推导的一个重要工具。
+
+另外，在间接复合中定义有电子寿命$\tau_{n0}$和空穴寿命$\tau_{p0}$，它们反映了过剩载流子的存在时间。
+\begin{BoxDefinition}[载流子的寿命]
+    电子寿命$\tau_{n0}$被定义为
+    \begin{Equation}
+        \tau_{n0}=\frac{1}{N_tC_n}
+    \end{Equation}
+    空穴寿命$\tau_{p0}$被定义为
+    \begin{Equation}
+        \tau_{p0}=\frac{1}{N_tC_p}
+    \end{Equation}
+\end{BoxDefinition}
+
+另还常定义有平均寿命
+\begin{BoxDefinition}[载流子的平均寿命]
+    过剩载流子的平均寿命$\tau_0$被定义为
+    \begin{Equation}
+        \tau_0=\frac{\tau_{p0}+\tau_{n0}}{2}
+    \end{Equation}
+\end{BoxDefinition}
+
+\subsection{反偏产生电流}\setpeq{反偏产生电流}
+对于一个反偏状态下的PN结，我们认为其在空间电荷区不存在可以移动的电子和空穴。换言之，在空间电荷区中，可以取$n=p=0$，因此，\fancyref{fml:间接复合率}可以简化为
+\begin{Equation}&[1]
+    R=\frac{-C_nC_pN_tn_i^2}{C_nn'+C_pp'}
+\end{Equation}
+这里的负号表明负的净复合率，这意味着，在反偏的空间电荷区中，电子--空穴对实际是在产生而非复合。这很容易理解，因为，在反偏时空间电荷区中电子和空穴的浓度几乎是零，因此电子--空穴对被产生以试图重新建立热平衡。当电子和空穴产生后，它们被电场扫出空间电荷区，它们在扫出的运动过程中就形成了\uwave{反偏产生电流}（Reverse-Biased Generation Current）。由于反偏电压是由N区指向P区的，产生的空穴向P区移动，产生的电子向N区移动，故反偏产生电流$J_{gen}$和原先理想的反偏饱和电流$J_{s}$的方向是相同的，均是由N区指向P区。
+
+我们下面来计算反偏产生电流$J_{gen}$，在\xrefpeq{1}中取$n_i=n'=p'$的近似
+\begin{Equation}&[2]
+    R=\frac{-C_nC_pN_tn_i^2}{C_nn'+C_pp'}
+\end{Equation}
+上下同除以$C_nC_pN_tn_i$
+\begin{Equation}&[3]
+    R=\frac{-n_i}{(1/N_tC_p)+(1/N_tC_n)}
+\end{Equation}
+应用\fancyref{def:载流子的寿命}代换
+\begin{Equation}
+    R=\frac{-n_i}{\tau_{p0}+\tau_{n0}}
+\end{Equation}
+应用\fancyref{def:载流子的平均寿命}代换
+\begin{Equation}
+    R=-\frac{n_i}{2\tau_0}
+\end{Equation}
+这是一个负的净复合率，我们将其转用净产生率来表示。
+\begin{BoxFormula}[反偏PN结的耗尽区产生率]
+    对于一个反偏的PN结，其耗尽区的产生率为
+    \begin{Equation}
+        G=\frac{n_i}{2\tau_0}
+    \end{Equation}
+\end{BoxFormula}
+那么，产生电流该如何计算呢？显然，单位时间内在空间电荷区产生多少电子--空穴对，产生电流就将有多大，因此，产电流$J_{gen}$即净产生率$G$在空间电荷区上的积分，而$G$又是常数
+\begin{Equation}
+    J_{gen}=\Int[0][W]eG\dx=\Int[0][W]\frac{en_i}{2\tau_0}\dx=\frac{en_iW}{2\tau_0}
+\end{Equation}
+这就有
+\begin{BoxFormula}[反偏产生电流]
+    反偏产生电流$J_{gen}$为
+    \begin{Equation}
+        J_{gen}=\frac{en_iW}{2\tau_0}
+    \end{Equation}
+\end{BoxFormula}
+而完整的反偏电流是由反偏饱和电流$J_s$和反偏产生电流$J_{gen}$两部分组成
+\begin{Equation}
+    J_R=J_s+J_{gen}
+\end{Equation}
+而其中
+\begin{Equation}
+    J_s=\frac{eD_pp_{n0}}{L_p}+\frac{eD_nn_{p0}}{L_n}\qquad
+    J_{gen}=\frac{en_iW}{2\tau_0}
+\end{Equation}
+形式上$J_s$和$J_{gen}$都是常量，但是应当注意到$J_{gen}$关于耗尽区长度$W$而后者随着反偏电压的增大而增大。因此，实际上PN结的反偏电流并不趋于饱和，而是会随反偏电压略微增大。\goodbreak
+
+\subsection{正偏复合电流}
+对于一个正偏状态下的PN结，相反，电子和空穴被注入空间电荷区，因此，空间电荷区存在过剩的载流子。电子和空穴通过空间电荷区的过程中，有一定概率会在空间电荷区内发生复合而无法到达空间电荷区边界参与少子扩散。为此，额外的电子和空穴将被注入以弥补这种损耗，额外注入的这些载流子就形成了\uwave{正偏复合电流}（Forward-Biased Recombination Current）。
+
+和前面的思路一样，我们先来计算复合率，随后计算复合电流的大小。
+
+根据\fancyref{fml:间接复合率}
+\begin{Equation}&[1]
+    R=\frac{C_nC_pN_t(np-n_i^2)}{C_n(n+n')+C_p(p+p')}
+\end{Equation}
+上下同除$C_nC_pN_t$
+\begin{Equation}&[2]
+    R=\frac{np-n_i^2}{(1/C_pN_t)(n+n')+(1/C_nN_t)(p+p')}
+\end{Equation}
+代入\fancyref{def:载流子的寿命}
+\begin{Equation}&[3]
+    R=\frac{np-n_i^2}{\tau_{p0}(n+n')+\tau_{n0}(p+p')}
+\end{Equation}
+作$n_i=n'=p'$的近似
+\begin{Equation}&[4]
+    R=\frac{np-n_i^2}{\tau_{p0}(n+n_i)+\tau_{n0}(p+n_i)}
+\end{Equation}
+作$\tau_0=\tau_{p0}=\tau_{n0}$的近似
+\begin{Equation}
+    R=\frac{np-n_i^2}{\tau_0\qty(2n_i+n+p)}
+\end{Equation}
+
+而我们知道，$n,p$可以很容易的用$n_i$表示
+\begin{Equation}
+    n=n_i\exp(\frac{E_{Fn}-E_{Fi}}{\kB T})
+    \qquad
+    p=n_i\exp(\frac{E_{Fi}-E_{Fp}}{\kB T})
+\end{Equation}
+而两者的乘积则可以表示为（参照\xref{fig:PN结能带图}，有$E_{Fn}-E_{Fp}=eV_a$）
+\begin{Equation}
+    np=n_i^2\exp(\frac{E_{Fn}-E_{Fp}}{\kB T})=n_i^2\exp(\frac{eV_a}{\kB T})
+\end{Equation}
+换言之，$np$是定值。而由\xref{fig:PN结能带图}注意到，$E_{Fp},E_{Fn}$在空间电荷区内是定值，而$E_{Fi}$随着$x$增加而减小，由接近$E_{Fp}$减小至接近$E_{Fn}$，而在该过程中，$p$逐渐减小，$n$逐渐增大。而可以证明的是复合率$R$关于$x$的函数是一个在$x=0$取极值$R_{\max}$的尖峰，因为$x=0$处$p,n$都能取一个较适中的值，使复合率最大。而由于$x=0$处$E_{Fn}-E_{Fi}=E_{Fi}-E_{Fp}=eV_a/2$
+\begin{Equation}
+    n=p=n_i\exp(\frac{eV_a}{2\kB T})
+\end{Equation}
+
+因此$x=0$处的最大复合率$R_{max}$就可以表示为
+\begin{Equation}
+    R_{\max}=\frac{n_i^2\qty[\exp(eV_a/\kB T)-1]}{2n_i\tau_0[\exp(eV_{a}/2\kB T)+1]}
+\end{Equation}
+当$V_a$较大时，上式中的$\pm 1$都可以忽略，故
+\begin{BoxFormula}[正偏PN结的耗尽区复合率]
+    对于一个正偏的PN结，其耗尽区中心的最大复合率为
+    \begin{Equation}
+        R_{\max}=\frac{n_i}{2\tau_0}\exp(\frac{eV_a}{2\kB T})
+    \end{Equation}
+\end{BoxFormula}
+尽管，我们只计算出了$R$在$x=0$处的最大值$R_{\max}$，但考虑到空间电荷区很窄，我们可以近似认为在空间电荷区中$R=R_{\max}$为常数。这样，计算正偏复合电流$J_{rec}$就同样简单了
+\begin{Equation}
+    J_{rec}=\Int[0][W]eR\dx=\Int[0][W]eR_{\max}\dx=\Int[0][W]\frac{en_i}{2\tau_0}\exp(\frac{eV_a}{2\kB T})\dx=\frac{en_iW}{2\tau_0}\exp(\frac{eV_a}{2\kB T})
+\end{Equation}
+这就有
+\begin{BoxFormula}[正偏复合电流]
+    正偏复合电流$J_{rec}$为
+    \begin{Equation}
+        J_{rec}=\frac{en_iW}{2\tau_0}\exp(\frac{eV_a}{2\kB T})
+    \end{Equation}
+    或记为
+    \begin{Equation}
+        J_{rec}=J_{r0}\exp(\frac{eV_a}{2\kB T})
+    \end{Equation}
+\end{BoxFormula}
+而完整的正偏电流是由扩散电流$J_D$和复合电流两部分组成
+\begin{Equation}
+    J=J_D+J_{rec}
+\end{Equation}
+而这两项分别等于（这里省略$J_D$表达式中的$-1$项）
+\begin{Equation}&[x]
+    J_D=J_s\exp(\frac{eV_a}{\kB T})\qquad J_{rec}=J_{r0}\exp(\frac{eV_a}{2\kB T})
+\end{Equation}
+事实是系数$J_{r0}>J_D$，这就意味着尽管$J_{rec}\propto\exp(eV_a/2\kB T)$相较$J_{D}\propto\exp(eV_a/\kB T)$增长较慢，理应被忽略，但由于$J_{rec}$前的系数大于$J_D$，电压较小时，复合电流仍将占主导地位
+\begin{itemize}
+    \item 当电压$V_a$较小时，$J$将主要由复合电流$J_s$决定，正比于$\exp(eV_a/2\kB T)$增长。
+    \item 当电压$V_a$较大时，$J$将主要由扩散电流$J_D$决定，正比于$\exp(eV_a/\kB T)$增长。
+\end{itemize}
+如果在\xrefpeq{x}两端取对数
+\begin{Equation}
+    \ln J_D=\ln J_s+\frac{eV_a}{\kB T}\qquad
+    \ln J_{rec}=\ln J_{r0}+\frac{eV_a}{2\kB T}
+\end{Equation}
+并将这种关系在对数图上呈现，如\xref{fig:实际PN结的电流--电压关系}所示，上述这种主导关系会显得更为清晰。
+
+\begin{Figure}[实际PN结的电流--电压关系]
+    \includegraphics{build/Chapter01B_01.fig.pdf}
+\end{Figure}
+
+\subsection{大注入}
+在推导PN结的理想电流--电压关系时，假设小注入是成立的
+\begin{itemize}
+    \item 小注入，非平衡载流子浓度低，远小于平衡多子。仅考虑非平衡少子。
+    \item 大注入，非平衡载流子浓度高，远大于平衡多子。需考虑非平衡少子和非平衡多子。
+\end{itemize}
+当正偏电压增大，非平衡载流子浓度增加，就需要充分考虑大注入带来的非理想因素了。
+
+我们已经很熟悉，对于PN结
+\begin{Equation}
+    np=n_i^2\exp(\frac{V_a}{\kB T})
+\end{Equation}
+而$n,p$可以分别表示为$n_0+\fdd{n}$和$p_0+\fdd{p}$
+\begin{Equation}
+    (n_0+\fdd{n})(p_0+\fdd{p})=n_i^2\exp(\frac{V_a}{\kB T})
+\end{Equation}
+由于在大注入情况下，$\fdd{n}\gg n_0, \fdd{p}\gg p_0$
+\begin{Equation}
+    (\fdd{n})(\fdd{p})=n_i^2\exp(\frac{V_a}{\kB T})
+\end{Equation}
+而又考虑到$\fdd{n}=\fdd{n}$
+\begin{Equation}
+    \fdd{n}=\fdd{p}=n_i\exp(\frac{V_a}{\kB T})
+\end{Equation}
+电流密度又正比于非平衡载流子的浓度，因此，在大注入情形下
+\begin{Equation}
+    J\propto \exp(\frac{V_a}{2\kB T})
+\end{Equation}
+我们可以将PN结的电流--电压关系统一记为
+\begin{Equation}
+    J\propto\exp(\frac{V_a}{n\kB T})
+\end{Equation}
+如\xref{fig:实际PN结的电流--电压关系}所示，随电压增加，复合电流阶段$n=2$，扩散电流阶段$n=1$，大注入阶段$n=2$。

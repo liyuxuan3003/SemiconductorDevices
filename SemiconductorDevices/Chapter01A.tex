@@ -229,11 +229,11 @@ PN结的理想电流--电压关系是在以下四个假设的基础上推导的
 \begin{BoxEquation}[PN结的理想电流--电压关系]*
     PN结的\uwave{理想电流--电压关系}（Ideal Current-Voltage Relationship）为
     \begin{Equation}
-        J=J_S\qty[\exp(\frac{eV_a}{\kB T})-1]
+        J=J_s\qty[\exp(\frac{eV_a}{\kB T})-1]
     \end{Equation}
-    其中$J_S$称为\uwave{理想反向饱和电流密度}（Ideal Reverse Saturation Current Density）
+    其中$J_s$称为\uwave{理想反向饱和电流密度}（Ideal Reverse Saturation Current Density）
     \begin{Equation}
-        J_S=\qty[\frac{eD_pp_{n0}}{L_p}+\frac{eD_nn_{p0}}{L_n}]
+        J_s=\qty[\frac{eD_pp_{n0}}{L_p}+\frac{eD_nn_{p0}}{L_n}]
     \end{Equation}
     空穴电流$J_p(x)$满足
     \begin{Equation}
@@ -284,15 +284,15 @@ PN结的理想电流--电压关系是在以下四个假设的基础上推导的
     \end{Equation}
     若引入代换变量$J_s$
     \begin{Equation}*
-        J_S=\qty[\frac{eD_pp_{n0}}{L_p}+\frac{eD_nn_{p0}}{L_n}]
+        J_s=\qty[\frac{eD_pp_{n0}}{L_p}+\frac{eD_nn_{p0}}{L_n}]
     \end{Equation}
     则\xrefpeq{7}可以简化为
     \begin{Equation}*
-        J=J_S\qty[\exp(\frac{eV_a}{\kB T})-1]\qedhere
+        J=J_s\qty[\exp(\frac{eV_a}{\kB T})-1]\qedhere
     \end{Equation}
 \end{Proof}
 
-PN结的理想电流--电压关系如\xref{fig:PN结的理想电流--电压关系}所示。尽管上述推导均是在正偏$V_a>0$的背景下进行的，但是反偏$V_a<0$也完全适用该结论。值得注意的是，当$V_a$反偏超过数个$\kB T/eV$后，电流密度$J$将趋于常量$-J_S$，不再随反偏电压变化，故$J_S$也被称为理想反向饱和电流密度。而同时，当$V_a$正偏超过数个$\kB T/eV$后，则$-1$可以被忽略，此时可认为$J\propto\exp(eV_a/\kB T)$。
+PN结的理想电流--电压关系如\xref{fig:PN结的理想电流--电压关系}所示。尽管上述推导均是在正偏$V_a>0$的背景下进行的，但是反偏$V_a<0$也完全适用该结论。值得注意的是，当$V_a$反偏超过数个$\kB T/eV$后，电流密度$J$将趋于常量$-J_s$，不再随反偏电压变化，故$J_s$也被称为理想反向饱和电流密度。而同时，当$V_a$正偏超过数个$\kB T/eV$后，则$-1$可以被忽略，此时可认为$J\propto\exp(eV_a/\kB T)$。
 
 \begin{Figure}[PN结的理想电流--电压关系]
     \includegraphics[scale=1]{build/Chapter01A_05.fig.pdf}
