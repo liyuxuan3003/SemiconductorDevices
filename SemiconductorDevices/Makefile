@@ -1,4 +1,4 @@
-PROJECT:=SignalsAndSystems
+PROJECT:=SemiconductorDevices
 
 BUILD_DIR:=build
 
