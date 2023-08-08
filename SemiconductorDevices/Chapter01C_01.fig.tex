@@ -1,0 +1,122 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}[scale=1.1]
+
+\draw[gray,ultra thin] (-7,0) -- (7,0);
+
+\draw[gray,ultra thin]
+    (-1,0) coordinate (xp) node[below] {$-x_n$}
+    -- ++(0,6) coordinate (xp');
+
+\draw[gray,ultra thin]
+    (+1,0) coordinate (xn) node[below] {$+x_p$}
+    -- ++(0,6) coordinate (xn');
+
+\draw[gray,ultra thin,dashed]
+    (0,0) coordinate (O)
+    -- ++(0,6) coordinate (O');
+
+\draw[dashed] (+1,0.5) -- ++(+6,0) node[right] {$p_{n0}$};
+
+\draw[dashed] (-1,0.5) -- ++(-6,0) node[left]  {$n_{p0}$};
+
+\draw[thick,dotted] plot[domain=1:7,smooth,samples=200] (\x,{3*exp(-(\x-1))+0.5});
+
+\draw[red,thick] plot[domain=1:7,smooth,samples=200] (\x,{5*exp(-(\x-1))+0.5});
+
+\draw[blue,thick] plot[domain=1:7,smooth,samples=200] (\x,{1*exp(-(\x-1))+0.5});
+
+\fill[red,fill opacity=0.1]
+plot[domain=1:7,smooth,samples=200] 
+(\x,{5*exp(-(\x-1))+0.5})
+--
+plot[domain=7:1,smooth,samples=200] 
+(\x,{3*exp(-(\x-1))+0.5})
+-- cycle;
+
+\fill[blue,fill opacity=0.1]
+plot[domain=1:7,smooth,samples=200] 
+(\x,{3*exp(-(\x-1))+0.5})
+--
+plot[domain=7:1,smooth,samples=200] 
+(\x,{1*exp(-(\x-1))+0.5})
+-- cycle;
+
+\draw[thick,dotted] plot[domain=-1:-7,smooth,samples=200] (\x,{3*exp(+(\x+1))+0.5});
+
+\draw[red,thick] plot[domain=-1:-7,smooth,samples=200] (\x,{5*exp(+(\x+1))+0.5});
+
+\draw[blue,thick] plot[domain=-1:-7,smooth,samples=200] (\x,{1*exp(+(\x+1))+0.5});
+
+\fill[red,fill opacity=0.1]
+plot[domain=-1:-7,smooth,samples=200] 
+(\x,{5*exp(+(\x+1))+0.5})
+--
+plot[domain=-7:-1,smooth,samples=200] 
+(\x,{3*exp(+(\x+1))+0.5})
+-- cycle;
+
+\fill[blue,fill opacity=0.1]
+plot[domain=-1:-7,smooth,samples=200] 
+(\x,{3*exp(+(\x+1))+0.5})
+--
+plot[domain=-7:-1,smooth,samples=200] 
+(\x,{1*exp(+(\x+1))+0.5})
+-- cycle;
+
+\path 
+(+1,5+0.5) node[point=red] {}
+(-1,5+0.5) node[point=red] {}
+(+1,3+0.5) node[point=black] {}
+node[left=0.35cm] {$t_0$}
+(-1,3+0.5) node[point=black] {}
+node[right=0.35cm] {$t_0$}
+(+1,1+0.5) node[point=blue] {}
++(0,-0.15)
+node[above right] {\small $+\delt{Q}$}
+(-1,1+0.5) node[point=blue] {}
++(0,-0.15)
+node[above left] {\small $-\delt{Q}$};
+
+\path
+(+2.5,+3) node {$p_n(x,t)$};
+
+\path
+(-2.5,+3) node {$n_p(x,t)$};
+
+\path
+(+4,+2) node {储存空穴--正电荷};
+
+\path
+(-4,+2) node {储存电子--负电荷};
+
+\draw[-latex]
+(+0.75,3.1+0.5) -- ++(0,+0.5) node[above] {$t_{+}$};
+\draw[-latex]
+(+0.75,2.9+0.5) -- ++(0,-0.5) node[below] {$t_{-}$};
+
+\draw[-latex]
+(-0.75,3.1+0.5) -- ++(0,+0.5) node[above] {$t_{+}$};
+\draw[-latex]
+(-0.75,2.9+0.5) -- ++(0,-0.5) node[below] {$t_{-}$};
+
+\path (-4,0) node[below] {P型区};
+\path (+4,0) node[below] {N型区};
+
+\path (1,6) node[above,gray] {$x=0$};
+
+\draw[ultra thin] (-8,-0.75) rectangle (8,7.5);
+
+\draw (-7.5,7)
+coordinate (P1)
+to[D,v=$V_a$] ++(6,0)
+coordinate (P2)
+to[short] ++(0,-2)
+coordinate (P3)
+to[vsource={$v_1(t)=\hat{V_1}\e^{\j\omega t}$}] ($(P3)!0.5!(P3-|P1)$)
+to[battery1=$V_0$] (P3-|P1)
+to[short] (P1);
+
+\end{tikzpicture}
+\end{document}
