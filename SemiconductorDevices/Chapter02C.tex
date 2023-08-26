@@ -1,0 +1,302 @@
+\section{PN结二极管的小信号模型}
+前面我们一直在讨论PN结二极管的直流特性。当包含PN结的半导体器件用于线性放大电路中时，交变的正弦信号就会叠加在直流上。因此PN结的小信号特性就显得尤为重要了。
+
+\subsection{扩散电阻}
+PN结的理想电流--电压关系已经在\fancyref{eqt:PN结的理想电流--电压关系}给出
+\begin{Equation}
+    J=J_s\qty[\exp(\frac{eV_a}{\kB T})-1]
+\end{Equation}
+但作为器件，我们更希望采用电流而不是电流密度，故两端同乘以PN结的面积$A$
+\begin{BoxFormula}[二极管的特性方程]
+    二极管的电流和电压间的关系是
+    \begin{Equation}
+        I_D=I_s\qty[\exp(\frac{eV_a}{\kB T})-1]
+    \end{Equation}
+    其中$I_D$是\uwave{二极管}（Diode）电流，而$I_s$是二极管的反向饱和电流。
+\end{BoxFormula}
+
+假定二极管正偏，直流电压$V_0$，直流电流$I_{DQ}$，如果我们在$V_0$上叠加一个幅度很小频率不太高的正弦电压$v_1(t)=\hat{V_1}\e^{\j\omega t}$，那么将产生一个小的正弦电流叠加在$I_{DQ}$上。我们将正弦电流和正弦电压间的比定义为增量电导，由于小信号的幅度很小，因此小信号增量电导事实上就是直流电流$I_{DQ}$对直流电压$V_a$在$V_0$处的导数值。这就是二极管的扩散电导（电阻）的含义。
+
+\begin{BoxDefinition}[二极管的扩散电导]
+    二极管的扩散电导定义为
+    \begin{Equation}
+        g_d=\eval{\dv{I_D}{V_a}}_{V_a=V_0}
+    \end{Equation}
+    二极管的扩散电阻定义为扩散电导的倒数
+    \begin{Equation}
+        r_d=\frac{1}{g_d}
+    \end{Equation}
+\end{BoxDefinition}
+
+\begin{BoxFormula}[二极管的扩散电导]
+    二极管的扩散电导可以表示为
+    \begin{Equation}
+        g_d=\frac{e}{\kB T}I_{DQ}
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    根据\fancyref{fml:二极管的特性方程}
+    \begin{Equation}&[1]
+        I_D=I_s\qty[\exp(\frac{eV_a}{\kB T})-1]
+    \end{Equation}
+    假定$V_a$较大，忽略$-1$
+    \begin{Equation}&[2]
+        I_D=I_s\exp(\frac{eV_a}{\kB T})
+    \end{Equation}
+    若取$V_a=V_0$，则$I_D=I_{DQ}$
+    \begin{Equation}&[3]
+        I_{DQ}=I_s\exp(\frac{eV_0}{\kB T})
+    \end{Equation}
+    根据\fancyref{def:二极管的扩散电导}，先后代入\xrefpeq{2}和\xrefpeq{3}
+    \begin{Equation}*
+        g_d=\eval{\dv{I_D}{V_a}}_{V_a=V_0}=\frac{e}{\kB T}I_s\exp(\frac{eV_0}{\kB T})=\frac{eI_{DQ}}{\kB T}\qedhere
+    \end{Equation}
+\end{Proof}
+
+根据\fancyref{fml:二极管的扩散电导}，随着二极管的电流增大，其扩散电阻逐渐减小。
+
+\subsection{扩散电容和小信号导纳}
+我们或许会很难理解，为什么PN结二极管会有什么扩散电容呢？在定量计算扩散电容前，我们先定性分析一下扩散电容的来源。如\xref{fig:扩散电容的来源}所示，在直流电压下$V_0$下，PN结在两侧分别保持了一定的电荷分布，P区为带负电的过剩电子$-\delt{Q}$，N区为带正电的过剩空穴$+\delt{Q}$，此时边界处的载流子浓度正比于$\exp(e V_0/\kB T)$。在交流电压$v_1(t)=\hat{V_1}\e^{\j\omega t}$的作用下，PN结两端的电压将在$V_0-\hat{V_1}$和$V_0+\hat{V_1}$之间变化，该过程中，耗尽区边界处的载流子浓度也将相应在正比于${\exp}[e(V_0-\hat{V_1})/\kB T]$和正比于${\exp}[e(V_0+\hat{V_1})/\kB T]$间变化，即N区和P区内“存储”的正负电荷，将随交流电压$v_1(t)$的变化而增减，这就是\uwave{扩散电容}（Diffusion Capacitance）。
+\begin{BoxFormula}[二极管的扩散电容]
+    二极管的扩散电容可以表示为
+    \begin{Equation}
+        C_d=\frac{e}{2\kB T}\qty(I_{p0}\tau_{p0}+I_{n0}\tau_{n0})
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Figure}[扩散电容的来源]
+    \includegraphics[width=0.95\linewidth]{build/Chapter02C_01.fig.pdf}
+\end{Figure}
+
+我们下面将定量计算PN结的扩散电容$C_d$（实际我们将直接计算小信号下的导纳）。
+
+\begin{BoxFormula}[PN结的小信号导纳]
+    PN结的小信号导纳为
+    \begin{Equation}
+        Y=\frac{e}{\kB T}(I_{p0}+I_{n0})+\j\omega\frac{e}{2\kB T}\qty(I_{p0}\tau_{p0}+I_{n0}\tau_{n0})
+    \end{Equation}
+    导纳可以表示为
+    \begin{Equation}
+        Y=g_d+\j\omega C_d
+    \end{Equation}
+    其中$g_d$是扩散电阻
+    \begin{Equation}
+        g_d=\frac{e}{\kB T}(I_{p0}+I_{n0})=\frac{e}{\kB T}I_{DQ}
+    \end{Equation}
+    其中$C_d$是扩散电容
+    \begin{Equation}
+        C_d=\frac{e}{2\kB T}\qty(I_{p0}\tau_{p0}+I_{n0}\tau_{n0})
+    \end{Equation}
+    其中$I_{p0}$和$I_{n0}$分别是
+    \begin{Gather}[12pt]
+        I_{p0}=\frac{eAD_pp_{n0}}{L_p}\exp(\frac{eV_0}{\kB T})\\
+        I_{n0}=\frac{eAD_nn_{p0}}{L_n}\exp(\frac{eV_0}{\kB T})
+    \end{Gather}
+\end{BoxFormula}
+
+\begin{Proof}
+    如\xref{fig:扩散电容的来源}所示，我们在直流电压$V_0$上叠加了交流电压$v_1(t)=\hat{V_1}\e^{\j\omega t}$，总电压$V_a$为
+    \begin{Equation}&[1]
+        V_a=V_0+v_1(t)
+    \end{Equation}
+    我们以空穴在N区的扩散为例分析，简洁起见，临时指定边界$x_n$处为$x=0$，故
+    \begin{Equation}&[2]
+        p_n(0,t)=p_{n0}\exp[\frac{e[V_0+v_1(t)]}{\kB T}]
+    \end{Equation}
+    将其常量和变量部分分离
+    \begin{Equation}&[3]
+        p_n(0,t)=p_{n0}\exp(\frac{eV_0}{\kB T})\exp(\frac{ev_1(t)}{\kB T})
+    \end{Equation}
+    或
+    \begin{Equation}&[4]
+        p_n(0,t)=p_\te{dc}\exp\qty(\frac{ev_1(t)}{\kB T})
+    \end{Equation}
+    这里$p_\te{dc}$为
+    \begin{Equation}&[5]
+        p_\te{dc}=p_{n0}\exp(\frac{eV_0}{\kB T})
+    \end{Equation}
+    让我们回到\xrefpeq{4}，假定$|v_1(t)|\ll \kB T/e$，那么可以作一阶泰勒展开
+    \begin{Equation}&[6]
+        p_n(0,t)=p_\te{dc}\qty[1+\frac{ev_1(t)}{\kB T}]
+    \end{Equation}
+    我们已知$v_1(t)=\hat{V_1}\e^{\j\omega t}$，代入上式
+    \begin{Equation}&[7]
+        p_n(0,t)=p_\te{dc}\qty[1+\frac{e\hat{V_1}}{\kB T}\e^{\j\omega t}]
+    \end{Equation}
+    或者
+    \begin{Equation}&[7.5]
+        \fdd{p_n(0,t)}=p_\te{dc}\qty[1+\frac{e\hat{V_1}}{\kB T}\e^{\j\omega t}]-p_{n0}
+    \end{Equation}
+    \xrefpeq{7.5}将作为接下来求解微分方程时的边界条件。
+
+    在N型区中电场为零，故根据\fancyref{eqt:连续性方程}，过剩空穴服从以下方程
+    \begin{Equation}&[8]
+        D_p\pdv[2]{\fdd{p_n}}{x}-\frac{\fdd{p_n}}{\tau_{p0}}=\pdv{\fdd{p_n}}{t}
+    \end{Equation}
+    在这里，我们期望$\fdd{p_n}(x)$将会是正弦解$\fdd{p_1}(x)\e^{\j\omega t}$叠加在稳态解$\fdd{p_0}(x)$上的形态
+    \begin{Equation}&[9]
+        \fdd{p_n(x,t)}=\fdd{p_0(x)}+\fdd{p_1(x)}\e^{\j\omega t}
+    \end{Equation}
+    将\xrefpeq{9}代入\xrefpeq{8}
+    \begin{Equation}&[10]
+        \qquad\qquad
+        \qty[D_p\pdv[2]{\fdd{p_0(x)}}{x}+D_p\pdv[2]{\fdd{p_1(x)}}{x}\e^{\j\omega t}]-
+        \qty[\frac{\fdd{p_0(x)}}{\tau_{p0}}+\frac{\fdd{p_1(x)}}{\tau_{p0}}\e^{\j\omega t}]=\j\omega\fdd{p_1(x)}\e^{\j\omega t}
+        \qquad\qquad
+    \end{Equation}
+    将其重新按$\fdd{p_0}(x), \fdd{p_1}(x)$整理
+    \begin{Equation}&[11]
+        \qquad\qquad
+        \qty[D_p\pdv[2]{\fdd{p_0(x)}}{x}-\frac{\fdd{p_0(x)}}{\tau_{p0}}]+\qty[D_p\pdv[2]{\fdd{p_1(x)}}{x}-\frac{\fdd{p_1(x)}}{\tau_{p0}}-\j\omega\fdd{p_1}(x)]\e^{\j\omega t}=0
+        \qquad\qquad
+    \end{Equation}
+    \xrefpeq{11}的第一项就是\xrefpeq{8}中代入$\fdd{p_0(x)}$，而$\fdd{p_0(x)}$是稳态解，对时间的导数为零，故
+    \begin{Equation}&[12]
+        D_p\dv[2]{\fdd{p_1(x)}}{x}-\frac{\fdd{p_1(x)}}{\tau_{p0}}-\j\omega\fdd{p_1}(x)=0
+    \end{Equation}
+    整理
+    \begin{Equation}&[13]
+        D_p\dv[2]{\fdd{p_1(x)}}{x}-\frac{[1+\j\omega\tau_{p0}]\fdd{p_1(x)}}{\tau_{p0}}=0
+    \end{Equation}
+    两端同除$D_p$
+    \begin{Equation}&[14]
+        \dv[2]{\fdd{p_1(x)}}{x}-\frac{[1+\j\omega\tau_{p0}]\fdd{p_1(x)}}{D_p\tau_{p0}}=0
+    \end{Equation}
+    代入$L_p^2=D_p\tau_{p0}$
+    \begin{Equation}&[15]
+        \dv[2]{\fdd{p_1(x)}}{x}-\frac{[1+\j\omega\tau_{p0}]\fdd{p_1(x)}}{L_p^2}=0
+    \end{Equation}
+    引入代换变量$C_p^2$
+    \begin{Equation}&[16]
+        C_p^2=\frac{1+\j\omega\tau_{p0}}{L_p^2}
+    \end{Equation}
+    这样\xrefpeq{15}就可以表示为
+    \begin{Equation}&[17]
+        \dv[2]{\fdd{p_1(x)}}{x}-C_p^2\fdd{p_1(x)}=0
+    \end{Equation}
+    它的通解是
+    \begin{Equation}&[18]
+        \fdd{p_1(x)}=K_1\e^{-C_px}+K_2\e^{+C_px}
+    \end{Equation}
+    由于$\fdd{p_1(\infty)=0}$，因此$K_2=0$，故
+    \begin{Equation}&[19]
+        \fdd{p_1(x)}=K_1\e^{-C_px}
+    \end{Equation}
+    比较\xrefpeq{7.5}和\xrefpeq{9}
+    \begin{Equation}&[20]
+        \fdd{p_n(0,t)}=p_\te{dc}\qty[1+\frac{e\hat{V_1}}{\kB T}\e^{\j\omega t}]-p_{n0}\qquad
+        \fdd{p_n(0,t)}=\fdd{p_0(0)}+\fdd{p_1(0)\e^{\j\omega t}}
+    \end{Equation}
+    依据对应系数相等的原则，容易得到
+    \begin{Equation}&[21]
+        \fdd{p_1(0)}=p_\te{dc}\frac{e\hat{V_1}}{\kB T}
+    \end{Equation}
+    这样就定出$K_1=p_\text{dc}(e\hat{V_1}/\kB T)$
+    \begin{Equation}&[22]
+        \fdd{p_1(x)}=p_\te{dc}\frac{e\hat{V_1}}{\kB T}\e^{-C_px}
+    \end{Equation}
+    而$\fdd{p_0(x)}$我们已经在\fancyref{fml:PN结的载流子分布}中求过一遍了
+    \begin{Equation}&[23]
+        \fdd{p_0(x)}=p_{n0}\qty[\exp(\frac{eV_0}{\kB T})-1]\e^{-x/L_p}
+    \end{Equation}
+    现在让我们来计算边界$x=0$处的空穴扩散电流
+    \begin{Equation}&[24]
+        J_p=-eD_p\eval{\pdv{\fdd{p_n}}{x}}_{x=0}=-eD_p\eval{\pdv{\fdd{p_0}}{x}}_{x=0}-eD_p\eval{\pdv{\fdd{p_1}}{x}}_{x=0}\e^{\j\omega t}
+    \end{Equation}
+    或者也可以记为
+    \begin{Equation}&[25]
+        J_{p}=J_{p0}+j_p(t)=J_{p0}+\hat{J_p}\e^{\j\omega t}
+    \end{Equation}
+    即$J_{p0}$给出稳态空穴分布的扩散电流，而$j_{p0}=\hat{J_p}\e^{\j\omega t}$给出时变空穴分布的扩散电流。需要指出的是，由于我们在研究小信号模型，这里其实并不关心总电流，只关心相量$\hat{J_p}$的表达式。
+
+    此处的$J_{p0}$已经在\fancyref{eqt:PN结的理想电流--电压关系}计算过了
+    \begin{Equation}&[26]
+        J_{p0}=-eD_p\eval{\pdv{\fdd{p_0}}{x}}_{x=0}=\frac{eD_pp_{n0}}{L_p}\qty[\exp(\frac{eV_0}{\kB T})-1]
+    \end{Equation}
+    此处的$\hat{J_p}$则对\xrefpeq{22}求导得到
+    \begin{Equation}&[27]
+        \hat{J_p}=-eD_p\eval{\pdv{\fdd{p_1}}{x}}_{x=0}=eD_pC_pp_\te{dc}\frac{e\hat{V_1}}{\kB T}
+    \end{Equation}
+    将\xrefpeq{27}转换为电流的形式
+    \begin{Equation}&[29]
+        \hat{I_p}=eAD_pC_pp_\te{dc}\frac{e\hat{V_1}}{\kB T}
+    \end{Equation}
+    在\xrefpeq{29}中代入\xrefpeq{16}中关于$C_p$的表达式
+    \begin{Equation}&[30]
+        \hat{I_p}=\frac{eAD_pp_\te{dc}}{L_p}\sqrt{1+\j\omega\tau_{p0}}\frac{e\hat{V_1}}{\kB T}
+    \end{Equation}
+    在\xrefpeq{30}中代入\xrefpeq{5}中关于$p_\te{dc}$的表达式
+    \begin{Equation}&[31]
+        \hat{I_p}=\frac{eAD_pp_\te{n0}}{L_p}\exp(\frac{eV_0}{\kB T})\sqrt{1+\j\omega\tau_{p0}}\frac{e\hat{V_1}}{\kB T}
+    \end{Equation}
+    这样$\hat{I_p}$就可以最终简化为（此处$I_{p0}$可以认为是$J_{p0}$忽略$-1$后对应的电流）
+    \begin{Equation}&[32]
+        \hat{I_p}=I_{p0}\sqrt{1+\j\omega\tau_{p0}}\frac{e\hat{V_1}}{\kB T}\qquad
+        I_{p0}=\frac{eAD_pp_{n0}}{L_p}\exp(\frac{eV_0}{\kB T})
+    \end{Equation}
+    这里类似可以导出$\hat{I_n}$的表达式
+    \begin{Equation}&[33]
+        \hat{I_n}=I_{n0}\sqrt{1+\j\omega\tau_{n0}}\frac{e\hat{V_1}}{\kB T}\qquad
+        I_{n0}=\frac{eAD_nn_{p0}}{L_n}\exp(\frac{eV_0}{\kB T})
+    \end{Equation}
+    而总的交流电流相量$\hat{I}$是$\hat{I_p}$和$\hat{I_n}$的和，基于此，我们可以计算PN结的导纳$Y$
+    \begin{Equation}&[34]
+        Y=\frac{\hat{I}}{\hat{V_1}}=\frac{\hat{I_p}+\hat{I_n}}{\hat{V_1}}
+    \end{Equation}
+    代入\xrefpeq{32}和\xrefpeq{33}
+    \begin{Equation}&[35]
+        Y=\frac{e}{\kB T}\qty[I_{p0}\sqrt{1+\j\omega\tau_{p0}}+I_{n0}\sqrt{1+\j\omega\tau_{n0}}]
+    \end{Equation}
+    然而，任何线性的（Linear）、集中的（Lumped）、有限的（Finite）、无源的（Passive）、对称的（Bilateral）的电路网络，都无法描述上述\xrefpeq{35}的导纳函数表达式，它实在是太复杂了！
+
+    但是，如果交流信号的频率不是很高，即假设有
+    \begin{Equation}&[36]
+        \omega\tau_{p0}\ll 1\qquad
+        \omega\tau_{n0}\ll 1
+    \end{Equation}
+    那么可以取平方根的近似
+    \begin{Equation}&[37]
+        \sqrt{1+\j\omega\tau_{p0}}=1+\frac{\j\omega\tau_{p0}}{2}\qquad
+        \sqrt{1+\j\omega\tau_{n0}}=1+\frac{\j\omega\tau_{n0}}{2}
+    \end{Equation}
+    将\xrefpeq{37}代入\xrefpeq{35}
+    \begin{Equation}
+        Y=\frac{e}{\kB T}\qty[I_{p0}\qty(1+\frac{\j\omega\tau_{p0}}{2})+I_{n0}\qty(1+\frac{\j\omega\tau_{n0}}{2})]
+    \end{Equation}
+    这样就可以分离实部和虚部了
+    \begin{Equation}
+        Y=\frac{e}{\kB T}(I_{p0}+I_{n0})+\j\omega\frac{e}{2\kB T}\qty(I_{p0}\tau_{p0}+I_{n0}\tau_{n0})
+    \end{Equation}
+    或写为
+    \begin{Equation}
+        Y=g_d+\j\omega C_d
+    \end{Equation}
+    这里$g_d$就是扩散电导，其与\fancyref{fml:二极管的扩散电导}的结果是一致的
+    \begin{Equation}
+        g_d=\frac{e}{\kB T}(I_{p0}+I_{n0})=\frac{eI_{DQ}}{\kB T}
+    \end{Equation}
+    这里$C_d$就是我们最终想要求得的扩散电容
+    \begin{Equation}
+        C_d=\frac{e}{2\kB T}\qty(I_{p0}\tau_{p0}+I_{n0}\tau_{n0})
+    \end{Equation}
+    至此，我们就完成了整个计算过程。
+\end{Proof}
+
+根据\fancyref{fml:PN结的小信号导纳}，我们可以绘制出二极管的小信号等效电路
+\begin{Figure}[二极管的简化小信号等效电路]
+    \includegraphics{build/Chapter02C_02.fig.pdf}
+\end{Figure}
+即二极管在小信号下，可以等效为其扩散电阻$r_d$和扩散电容$C_d$的并联。
+
+若要更为完善一些，那么除了扩散电阻$r_d$和扩散电容$C_d$，势垒电容$C_j$也需要被考虑，势垒电容$C_j$应当与扩散电容$C_d$并联。除此之外，实际上PN结在空间电荷区外的中性区域也是有一定的电阻的，称为体电阻$r_s$，因此，PN结的小信号模型还要包含一个串联的体电阻。
+
+\begin{Figure}[二极管的完整小信号等效电路]
+    \includegraphics{build/Chapter02C_03.fig.pdf}
+\end{Figure}
+
+应指出，当考虑体电阻$r_s$时，需要区分二极管上的总电压$V_\te{app}$和势垒上的电压$V_a$
+\begin{Equation}
+    V_\te{app}=V_a+I_Dr_s
+\end{Equation}
+由此可见，当考虑体电阻$r_s$时，维持相同的电流需要更大的外加电压。

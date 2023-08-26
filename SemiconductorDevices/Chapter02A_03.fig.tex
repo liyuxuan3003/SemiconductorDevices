@@ -1,0 +1,40 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}[scale=1.5]
+
+\draw[gray,ultra thin] (-4,0) -- (4,0);
+
+\draw[gray,ultra thin]
+    (-1,0) coordinate (xp) node[below] {$-x_p$}
+    -- ++(0,4) coordinate (xp');
+
+\draw[gray,ultra thin]
+    (+1,0) coordinate (xn) node[below] {$+x_n$}
+    -- ++(0,4) coordinate (xn');
+
+\draw[gray,ultra thin,dashed]
+    (0,0) coordinate (O)
+    -- ++(0,4) coordinate (O');
+
+\def\ncc{0.75}
+\def\pcc{1.10}
+\def\VA{0.50}
+\def\Vbi{1.2}
+
+\draw[red,thick] (-4,{\pcc*exp(\Vbi)}) coordinate (pp) -- (pp-|xp) node[point=red] {} node[above left] {\small $p_{n0}\exp(eV_{bi}/\kB T)$} node[right] {\small $p_{p0}$};
+
+\draw[red,thick] (1,{\pcc*exp(\VA)}) node[point=red] {} node[above right] {\small $p_{n0}\exp(eV_{a}/\kB T)$} node[left] {\small $p_{n}(+x_n)$} -- plot[domain=1:4] (\x,{\pcc+\pcc*(exp(\VA)-1)*exp(1-\x)});
+
+\draw[red,thin,dotted] (+4,\pcc) coordinate (pn0) -- (pn0-|xn) node[point=red] {} node[left] {\small $p_{n0}$};
+
+\draw[blue,thick] (+4,{\ncc*exp(\Vbi)}) coordinate (nn) -- (nn-|xn) node[point=blue] {} node[above right] {\small $n_{p0}\exp(eV_{bi}/\kB T)$} node[left] {\small $n_{n0}$};
+
+\draw[blue,thick] (-1,{\ncc*exp(\VA)}) node[point=blue] {} node[above left] {\small $n_{p0}\exp(eV_{a}/\kB T)$} node[right] {\small $n_p(-x_p)$} -- plot[domain=-1:-4] (\x,{\ncc+\ncc*(exp(\VA)-1)*exp(1+\x)});
+
+\draw[blue,thin,dotted] (-4,\ncc) coordinate (np0) -- (np0-|xp) node[point=blue] {} node[right] {\small $n_{p0}$};
+
+\draw[ultra thin] (-4.1,-0.4) rectangle (4.1,4.1);
+
+\end{tikzpicture}
+\end{document}

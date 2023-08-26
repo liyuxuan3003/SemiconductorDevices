@@ -1,231 +1,279 @@
-\section{PN结的产生--复合电流和大注入}
-在\xref{sec:PN结电流}，推导理想电流--电压关系时，我们假定了小注入并忽略了耗尽区的影响，然而
-\begin{itemize}
-    \item 在耗尽区中实际会发生载流子的产生与复合，这并不影响载流子分布，后者是由能带决定的。但是，为了抵消其带来的影响，将有额外电流产生。这就是产生电流和复合电流。
-    \item 在过去，我们总是假定PN结是满足\uwave{小注入}（Low-Level Injection）近似的，耗尽区边界处的非平衡载流子，对于少子而言很显著，对于多子而言则可以忽略。但是随着PN结两端的电压增大，非平衡载流子的浓度将同时高于平衡少子浓度和平衡多子浓度，非平衡少子和非平衡多子都需要被充分考虑，这就是所谓的\uwave{大注入}（High-Level Injection）。
-\end{itemize}
+\section{零偏PN结}
+在\xref{sec:PN结的基本结构}中，我们已经考虑了PN结的结构，并简要的讨论了空间电荷区是如何形成的。而在本节，我们主要讨论在无外加激励和无电流存在的热平衡状态下突变结的格子特性。我们将会推导空间电荷区的宽度、电场强度、电势。本节的分析基于以下两个假设
+\begin{enumerate}
+    \item 第一个假设为玻尔兹曼分布，即每一个半导体区域均为非简并半导体。
+    \item 第二个假设为完全电离，即温度对PN结影响可以忽略。
+\end{enumerate}
 
-这些非理想因素会导致PN结的电流--电压关系偏离其理想表达式。
-
-\subsection{间接复合理论}
-在开始前，我们简要回顾一下\uwave{间接复合}，亦称为\uwave{肖克利--里德--霍尔复合}（Shockley-Read-Hall Recombination, SRH）的理论。在间接复合理论中，电子和空穴的净复合率$R$可以表示为
-\begin{BoxFormula}[间接复合率]
-    间接复合率可以表示为
-    \begin{Equation}
-        R=\frac{C_nC_pN_t(np-n_i^2)}{C_n(n+n')+C_p(p+p')}
-    \end{Equation}
-    其中，$N_t$是掺杂的复合中心的浓度，$C_n,C_p$是电子和空穴的俘获系数。
-\end{BoxFormula}
-
-在这里需要说明的$n',p'$的含义，我们知道，$n$和$p$是电子和空穴浓度，可以表示为
-\begin{Equation}
-    n=N_c\exp(\frac{E_{Fn}-E_c}{\kB T})\qquad
-    p=N_v\exp(\frac{E_v-E_{Fp}}{\kB T})
-\end{Equation}\goodbreak
-而$n',p'$的意义是，当费米能级$E_F$置于复合中心能级$E_t$时对应的“浓度”
-\begin{Equation}
-    n'=N_c\exp(\frac{E_t-E_c}{\kB T})\qquad
-    p'=N_v\exp(\frac{E_v-E_t}{\kB T})
-\end{Equation}
-而很多时候，近似认为复合中心能级$E_t$位于$E_{Fi}$附近，因此
-\begin{Equation}
-    n_i=N_c\exp(\frac{E_{Fi}-E_c}{\kB T})=N_v\exp(\frac{E_v-E_{Fi}}{\kB T})=n'=p'
-\end{Equation}
-该近似是本节推导的一个重要工具。
-
-另外，在间接复合中定义有电子寿命$\tau_{n0}$和空穴寿命$\tau_{p0}$，它们反映了过剩载流子的存在时间。
-\begin{BoxDefinition}[载流子的寿命]
-    电子寿命$\tau_{n0}$被定义为
-    \begin{Equation}
-        \tau_{n0}=\frac{1}{N_tC_n}
-    \end{Equation}
-    空穴寿命$\tau_{p0}$被定义为
-    \begin{Equation}
-        \tau_{p0}=\frac{1}{N_tC_p}
-    \end{Equation}
-\end{BoxDefinition}
-
-另还常定义有平均寿命
-\begin{BoxDefinition}[载流子的平均寿命]
-    过剩载流子的平均寿命$\tau_0$被定义为
-    \begin{Equation}
-        \tau_0=\frac{\tau_{p0}+\tau_{n0}}{2}
-    \end{Equation}
-\end{BoxDefinition}
-
-\subsection{反偏产生电流}\setpeq{反偏产生电流}
-对于一个反偏状态下的PN结，我们认为其在空间电荷区不存在可以移动的电子和空穴。换言之，在空间电荷区中，可以取$n=p=0$，因此，\fancyref{fml:间接复合率}可以简化为
-\begin{Equation}&[1]
-    R=\frac{-C_nC_pN_tn_i^2}{C_nn'+C_pp'}
-\end{Equation}
-这里的负号表明负的净复合率，这意味着，在反偏的空间电荷区中，电子--空穴对实际是在产生而非复合。这很容易理解，因为，在反偏时空间电荷区中电子和空穴的浓度几乎是零，因此电子--空穴对被产生以试图重新建立热平衡。当电子和空穴产生后，它们被电场扫出空间电荷区，它们在扫出的运动过程中就形成了\uwave{反偏产生电流}（Reverse-Biased Generation Current）。由于反偏电压是由N区指向P区的，产生的空穴向P区移动，产生的电子向N区移动，故反偏产生电流$J_{gen}$和原先理想的反偏饱和电流$J_{s}$的方向是相同的，均是由N区指向P区。
-
-我们下面来计算反偏产生电流$J_{gen}$，在\xrefpeq{1}中取$n_i=n'=p'$的近似
-\begin{Equation}&[2]
-    R=\frac{-C_nC_pN_tn_i^2}{C_nn'+C_pp'}
-\end{Equation}
-上下同除以$C_nC_pN_tn_i$
-\begin{Equation}&[3]
-    R=\frac{-n_i}{(1/N_tC_p)+(1/N_tC_n)}
-\end{Equation}
-应用\fancyref{def:载流子的寿命}代换
-\begin{Equation}
-    R=\frac{-n_i}{\tau_{p0}+\tau_{n0}}
-\end{Equation}
-应用\fancyref{def:载流子的平均寿命}代换
-\begin{Equation}
-    R=-\frac{n_i}{2\tau_0}
-\end{Equation}
-这是一个负的净复合率，我们将其转用净产生率来表示。
-\begin{BoxFormula}[反偏PN结的耗尽区产生率]
-    对于一个反偏的PN结，其耗尽区的产生率为
-    \begin{Equation}
-        G=\frac{n_i}{2\tau_0}
-    \end{Equation}
-\end{BoxFormula}
-那么，产生电流该如何计算呢？显然，单位时间内在空间电荷区产生多少电子--空穴对，产生电流就将有多大，因此，产电流$J_{gen}$即净产生率$G$在空间电荷区上的积分，而$G$又是常数
-\begin{Equation}
-    J_{gen}=\Int[0][W]eG\dx=\Int[0][W]\frac{en_i}{2\tau_0}\dx=\frac{en_iW}{2\tau_0}
-\end{Equation}
-这就有
-\begin{BoxFormula}[反偏产生电流]
-    反偏产生电流$J_{gen}$为
-    \begin{Equation}
-        J_{gen}=\frac{en_iW}{2\tau_0}
-    \end{Equation}
-\end{BoxFormula}
-而完整的反偏电流是由反偏饱和电流$J_s$和反偏产生电流$J_{gen}$两部分组成
-\begin{Equation}
-    J_R=J_s+J_{gen}
-\end{Equation}
-而其中
-\begin{Equation}
-    J_s=\frac{eD_pp_{n0}}{L_p}+\frac{eD_nn_{p0}}{L_n}\qquad
-    J_{gen}=\frac{en_iW}{2\tau_0}
-\end{Equation}
-形式上$J_s$和$J_{gen}$都是常量，但是应当注意到$J_{gen}$关于耗尽区长度$W$而后者随着反偏电压的增大而增大。因此，实际上PN结的反偏电流并不趋于饱和，而是会随反偏电压略微增大。\goodbreak
-
-\subsection{正偏复合电流}
-对于一个正偏状态下的PN结，相反，电子和空穴被注入空间电荷区，因此，空间电荷区存在过剩的载流子。电子和空穴通过空间电荷区的过程中，有一定概率会在空间电荷区内发生复合而无法到达空间电荷区边界参与少子扩散。为此，额外的电子和空穴将被注入以弥补这种损耗，额外注入的这些载流子就形成了\uwave{正偏复合电流}（Forward-Biased Recombination Current）。
-
-和前面的思路一样，我们先来计算复合率，随后计算复合电流的大小。
-
-根据\fancyref{fml:间接复合率}
-\begin{Equation}&[1]
-    R=\frac{C_nC_pN_t(np-n_i^2)}{C_n(n+n')+C_p(p+p')}
-\end{Equation}
-上下同除$C_nC_pN_t$
-\begin{Equation}&[2]
-    R=\frac{np-n_i^2}{(1/C_pN_t)(n+n')+(1/C_nN_t)(p+p')}
-\end{Equation}
-代入\fancyref{def:载流子的寿命}
-\begin{Equation}&[3]
-    R=\frac{np-n_i^2}{\tau_{p0}(n+n')+\tau_{n0}(p+p')}
-\end{Equation}
-作$n_i=n'=p'$的近似
-\begin{Equation}&[4]
-    R=\frac{np-n_i^2}{\tau_{p0}(n+n_i)+\tau_{n0}(p+n_i)}
-\end{Equation}
-作$\tau_0=\tau_{p0}=\tau_{n0}$的近似
-\begin{Equation}
-    R=\frac{np-n_i^2}{\tau_0\qty(2n_i+n+p)}
-\end{Equation}
-
-而我们知道，$n,p$可以很容易的用$n_i$表示
-\begin{Equation}
-    n=n_i\exp(\frac{E_{Fn}-E_{Fi}}{\kB T})
-    \qquad
-    p=n_i\exp(\frac{E_{Fi}-E_{Fp}}{\kB T})
-\end{Equation}
-而两者的乘积则可以表示为（参照\xref{fig:PN结能带图}，有$E_{Fn}-E_{Fp}=eV_a$）
-\begin{Equation}
-    np=n_i^2\exp(\frac{E_{Fn}-E_{Fp}}{\kB T})=n_i^2\exp(\frac{eV_a}{\kB T})
-\end{Equation}
-换言之，$np$是定值。而由\xref{fig:PN结能带图}注意到，$E_{Fp},E_{Fn}$在空间电荷区内是定值，而$E_{Fi}$随着$x$增加而减小，由接近$E_{Fp}$减小至接近$E_{Fn}$，而在该过程中，$p$逐渐减小，$n$逐渐增大。而可以证明的是复合率$R$关于$x$的函数是一个在$x=0$取极值$R_{\max}$的尖峰，因为$x=0$处$p,n$都能取一个较适中的值，使复合率最大。而由于$x=0$处$E_{Fn}-E_{Fi}=E_{Fi}-E_{Fp}=eV_a/2$
-\begin{Equation}
-    n=p=n_i\exp(\frac{eV_a}{2\kB T})
-\end{Equation}
-
-因此$x=0$处的最大复合率$R_{max}$就可以表示为
-\begin{Equation}
-    R_{\max}=\frac{n_i^2\qty[\exp(eV_a/\kB T)-1]}{2n_i\tau_0[\exp(eV_{a}/2\kB T)+1]}
-\end{Equation}
-当$V_a$较大时，上式中的$\pm 1$都可以忽略，故
-\begin{BoxFormula}[正偏PN结的耗尽区复合率]
-    对于一个正偏的PN结，其耗尽区中心的最大复合率为
-    \begin{Equation}
-        R_{\max}=\frac{n_i}{2\tau_0}\exp(\frac{eV_a}{2\kB T})
-    \end{Equation}
-\end{BoxFormula}
-尽管，我们只计算出了$R$在$x=0$处的最大值$R_{\max}$，但考虑到空间电荷区很窄，我们可以近似认为在空间电荷区中$R=R_{\max}$为常数。这样，计算正偏复合电流$J_{rec}$就同样简单了
-\begin{Equation}
-    J_{rec}=\Int[0][W]eR\dx=\Int[0][W]eR_{\max}\dx=\Int[0][W]\frac{en_i}{2\tau_0}\exp(\frac{eV_a}{2\kB T})\dx=\frac{en_iW}{2\tau_0}\exp(\frac{eV_a}{2\kB T})
-\end{Equation}
-这就有
-\begin{BoxFormula}[正偏复合电流]
-    正偏复合电流$J_{rec}$为
-    \begin{Equation}
-        J_{rec}=\frac{en_iW}{2\tau_0}\exp(\frac{eV_a}{2\kB T})
-    \end{Equation}
-    或记为
-    \begin{Equation}
-        J_{rec}=J_{r0}\exp(\frac{eV_a}{2\kB T})
-    \end{Equation}
-\end{BoxFormula}
-而完整的正偏电流是由扩散电流$J_D$和复合电流两部分组成
-\begin{Equation}
-    J=J_D+J_{rec}
-\end{Equation}
-而这两项分别等于（这里省略$J_D$表达式中的$-1$项）
-\begin{Equation}&[x]
-    J_D=J_s\exp(\frac{eV_a}{\kB T})\qquad J_{rec}=J_{r0}\exp(\frac{eV_a}{2\kB T})
-\end{Equation}
-事实是系数$J_{r0}>J_D$，这就意味着尽管$J_{rec}\propto\exp(eV_a/2\kB T)$相较$J_{D}\propto\exp(eV_a/\kB T)$增长较慢，理应被忽略，但由于$J_{rec}$前的系数大于$J_D$，电压较小时，复合电流仍将占主导地位
-\begin{itemize}
-    \item 当电压$V_a$较小时，$J$将主要由复合电流$J_s$决定，正比于$\exp(eV_a/2\kB T)$增长。
-    \item 当电压$V_a$较大时，$J$将主要由扩散电流$J_D$决定，正比于$\exp(eV_a/\kB T)$增长。
-\end{itemize}
-如果在\xrefpeq{x}两端取对数
-\begin{Equation}
-    \ln J_D=\ln J_s+\frac{eV_a}{\kB T}\qquad
-    \ln J_{rec}=\ln J_{r0}+\frac{eV_a}{2\kB T}
-\end{Equation}
-并将这种关系在对数图上呈现，如\xref{fig:实际PN结的电流--电压关系}所示，上述这种主导关系会显得更为清晰。
-
-\begin{Figure}[实际PN结的电流--电压关系]
-    \includegraphics{build/Chapter01B_01.fig.pdf}
+\subsection{内建电势差}
+若假设PN结两端没有外加电压偏执，那PN就就处于热平衡状态，这意味着在整个PN结中费米能级唯一定值。\xref{fig:零偏PN结}展示了零偏PN结的能带图。由于P区与N区之间的导带与价带的相对位置随费米能级的变化而变化，所以，在空间电荷区中，导带和价带将发生弯曲。
+\begin{Figure}[零偏PN结的能带图]
+    \includegraphics[scale=0.8]{build/Chapter01B_01.fig.pdf}
 \end{Figure}
 
-\subsection{大注入}
-在推导PN结的理想电流--电压关系时，假设小注入是成立的
-\begin{itemize}
-    \item 小注入，非平衡载流子浓度低，远小于平衡多子。仅考虑非平衡少子。
-    \item 大注入，非平衡载流子浓度高，远大于平衡多子。需考虑非平衡少子和非平衡多子。
-\end{itemize}
-当正偏电压增大，非平衡载流子浓度增加，就需要充分考虑大注入带来的非理想因素了。
+电子从N区导带进入P区导带时将遇到一个势垒，这个势垒称为\uwave{内建电势差}（Built-In Potenial），记为$V_{bi}$，而应当指出的是，由于内建电势差$V_{bi}$在N区和P区间维持了多子和少子的平衡，因此内建电势差$V_{bi}$本身并不产生电流。现在的问题是，内建电势差$V_{bi}$等于什么？
 
-我们已经很熟悉，对于PN结
-\begin{Equation}
-    np=n_i^2\exp(\frac{V_a}{\kB T})
-\end{Equation}
-而$n,p$可以分别表示为$n_0+\fdd{n}$和$p_0+\fdd{p}$
-\begin{Equation}
-    (n_0+\fdd{n})(p_0+\fdd{p})=n_i^2\exp(\frac{V_a}{\kB T})
-\end{Equation}
-由于在大注入情况下，$\fdd{n}\gg n_0, \fdd{p}\gg p_0$
-\begin{Equation}
-    (\fdd{n})(\fdd{p})=n_i^2\exp(\frac{V_a}{\kB T})
-\end{Equation}
-而又考虑到$\fdd{n}=\fdd{n}$
-\begin{Equation}
-    \fdd{n}=\fdd{p}=n_i\exp(\frac{V_a}{\kB T})
-\end{Equation}
-电流密度又正比于非平衡载流子的浓度，因此，在大注入情形下
-\begin{Equation}
-    J\propto \exp(\frac{V_a}{2\kB T})
-\end{Equation}
-我们可以将PN结的电流--电压关系统一记为
-\begin{Equation}
-    J\propto\exp(\frac{V_a}{n\kB T})
-\end{Equation}
-如\xref{fig:实际PN结的电流--电压关系}所示，随电压增加，复合电流阶段$n=2$，扩散电流阶段$n=1$，大注入阶段$n=2$。
+\begin{BoxFormula}[内建电势差]
+    内建电势差$V_{bi}$可以被表示为
+    \begin{Equation}
+        V_{bi}=\frac{\kB T}{e}\ln(\frac{N_aN_d}{n_i^2})
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    在PN结中，本征费米能级至导带和价带的距离是相同的。因此，内建电势差$V_{bi}$可以由本征费米能级$E_{Fi}$在P区和N区间的差确定。这里，我们可以分别定义$\phi_{Fn}$和$\phi_{Fp}$为本征费米能级$E_{Fi}$与费米能级$E_F$在P区和N区内的电势差$(E_{Fi-E_F})/e$，故有
+    \begin{Equation}&[1]
+        V_{bi}=|\phi_{Fn}|+|\phi_{Fp}|
+    \end{Equation}
+    在N型区，导带电子浓度由下式给出
+    \begin{Equation}&[2]
+        n_0=N_c\exp(\frac{E_F-E_c}{\kB T})
+    \end{Equation}
+    重写为（这里有$n_0=N_d$成立）
+    \begin{Equation}&[3]
+        n_0=n_i\exp(\frac{E_F-E_{Fi}}{\kB T})=N_d\qquad E_F-E_{Fi}=\kB T\ln\frac{N_d}{n_i}
+    \end{Equation}
+    在P型区，价带空穴浓度由下式给出
+    \begin{Equation}&[4]
+        p_0=N_v\exp(\frac{E_v-E_F}{\kB T})
+    \end{Equation}
+    重写为（这里有$p_0=N_a$成立）
+    \begin{Equation}&[5]
+        p_0=n_i\exp(\frac{E_{Fi}-E_F}{\kB T})=N_a\qquad E_{Fi}-E_{F}=\kB T\ln\frac{N_a}{n_i}
+    \end{Equation}
+
+    根据$\phi_{Fn}$的定义和\xrefpeq{3}，在N型区
+    \begin{Equation}&[6]
+        \phi_{Fn}=\frac{E_{Fi}-E_F}{e}=-\frac{\kB T}{e}\ln\frac{N_d}{n_i}
+    \end{Equation}
+    根据$\phi_{Fn}$的定义和\xrefpeq{5}，在P型区
+    \begin{Equation}&[7]
+        \phi_{Fp}=\frac{E_{Fi}-E_F}{e}=+\frac{\kB T}{e}\ln\frac{N_a}{n_i}
+    \end{Equation}
+    将\xrefpeq{6}和\xrefpeq{7}代入\xrefpeq{1}，得到
+    \begin{Equation}&[8]
+        V_{bi}=|\phi_{Fn}|+|\phi_{Fp}|=\frac{\kB T}{e}\qty(\ln\frac{N_d}{n_i}+\ln\frac{N_a}{n_i})
+    \end{Equation}
+    或
+    \begin{Equation}*
+        V_{bi}=\frac{\kB T}{e}\ln(\frac{N_aN_d}{n_i^2})\qedhere
+    \end{Equation}
+\end{Proof}
+
+应指出，若P区或N区是补偿材料，则$N_a$和$N_d$应代表净受主浓度和净施主浓度。
+
+\subsection{空间电荷区的电场和电势}
+空间电荷区电场的产生，是由于正负空间电荷的相互分离。\xref{fig:PN结的电场、电势、电荷密度分布}展示了在均匀掺杂及突变近似的情况下电荷密度的分布，我们假设空间电荷区在$x=+x_n$和$x=-x_p$处突然终止。
+
+\begin{Figure}[PN结的电场、电势、电荷密度分布]
+    \begin{FigureSub}[电荷密度分布]
+        \includegraphics[width=4.8cm]{build/Chapter01B_02.fig.pdf}
+    \end{FigureSub}
+    \begin{FigureSub}[电场分布]
+        \includegraphics[width=4.8cm]{build/Chapter01B_03.fig.pdf}
+    \end{FigureSub}
+    \begin{FigureSub}[电势分布]
+        \includegraphics[width=4.8cm]{build/Chapter01B_04.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+显然，在这种情况下，空间电荷区的电荷密度服从以下公式。
+\begin{BoxFormula}[空间电荷密度]
+    均匀掺杂的PN结的空间电荷密度$\rho(x)$为
+    \begin{Equation}
+        \rho(x)=\begin{cases}
+            -eN_a,& -x_p\leq x\leq 0\\[1ex]
+            +eN_d,& 0\leq x\leq +x_n
+        \end{cases}
+    \end{Equation}
+\end{BoxFormula}
+
+现在我们的任务是，通过\xref{fml:空间电荷密度}给出的空间电荷密度$\rho(x)$推导电场$\E(x)$和电势$\phi(x)$的公式。推导的关键是，应用泊松方程$\dv*[2]{\phi}{x}=-\rho/\varepsilon_s$和电场是电势负梯度$\E=-\dv*{\phi}{x}$。
+
+\begin{BoxFormula}[空间电荷区的电场]
+    空间电荷区的电场$\E(x)$为
+    \begin{Equation}
+        \E(x)=
+        \begin{cases}
+            \mal{-\frac{eN_a}{\epsilon_s}(x+x_p)},&-x_p\leq x\leq 0\\[4ex]
+            \mal{-\frac{eN_d}{\epsilon_s}(x_n-x)},&0\leq x\leq +x_n
+        \end{cases}
+    \end{Equation}
+    其中$\epsilon_s$是半导体的\uwave{电容率}（Permittivity），同时，应有
+    \begin{Equation}&[A]
+        N_ax_p=N_dx_n
+    \end{Equation}
+    这表明P区的负电荷与N区域的正电荷的电荷量相同。
+\end{BoxFormula}\goodbreak
+
+\begin{Proof}
+    半导体内的电场由泊松方程确定
+    \begin{Equation}&[1]
+        \dv[2]{\phi(x)}{x}=-\frac{\rho(x)}{\epsilon_s}
+    \end{Equation}
+    考虑到电场是电势的负梯度$\E(x)=-\dv*{\phi(x)}{x}$
+    \begin{Equation}&[2]
+        \dv{\E(x)}{x}=\frac{\rho(x)}{\epsilon_s}
+    \end{Equation}
+    在P型区，$\E(x)$由\xrefpeq{2}的积分给出，代入\fancyref{fml:空间电荷密度}
+    \begin{Equation}&[3]
+        \E(x)=\Int\frac{\rho(x)}{\epsilon_s}\dx=-\Int\frac{eN_a}{\epsilon_s}\dx=-\frac{eN_a}{\epsilon_s}x+C_1
+    \end{Equation}
+    在N型区，类似的
+    \begin{Equation}&[4]
+        \E(x)=\Int\frac{\rho(x)}{\epsilon_s}\dx=+\Int\frac{eN_d}{\epsilon_s}\dx=+\frac{eN_d}{\epsilon_s}x+C_2
+    \end{Equation}
+    电场被假定在空间电荷区外为零，故
+    \begin{Equation}&[5]
+        \E(-x_p)=0\qquad \E(+x_n)=0
+    \end{Equation}
+    通过\xrefpeq{5}，我们可以确定\xrefpeq{3}和\xrefpeq{4}中的待定常数
+    \begin{Equation}
+        \qquad\qquad
+        \E(x)=-\frac{eN_a}{\epsilon_s}(x+x_p),\ -x_p\leq x\leq 0\qquad
+        \E(x)=-\frac{eN_d}{\epsilon_s}(x_n-x),\ 0\leq x\leq +x_n
+        \qquad\qquad
+    \end{Equation}
+    并考虑到电场$\E(x)$在$x=0$处的连续性
+    \begin{Equation}
+        \E(0_{-})=\E(0_{+})
+    \end{Equation}
+    这将给出
+    \begin{Equation}
+        -\frac{eN_a}{\epsilon_s}x_p=-\frac{eN_d}{\epsilon_s}x_n
+    \end{Equation}
+    或
+    \begin{Equation}*
+        N_ax_p=N_dx_n\qedhere
+    \end{Equation}
+\end{Proof}
+
+\begin{BoxFormula}[空间电荷区的电势]
+    空间电荷区的电势$\phi(x)$为
+    \begin{Equation}
+        \phi(x)=\begin{cases}
+            \mal{\frac{eN_\text{a}}{2\epsilon_s}(x+x_\text{p})^2},&-x_\text{p}<x<0\\[4mm]
+            \mal{V_{bi}-\frac{eN_\text{d}}{2\epsilon_s}(x-x_\text{n})^2},&0<x<+x_\text{n}
+        \end{cases}
+    \end{Equation}
+    其中$V_{bi}$可以被表示为
+    \begin{Equation}&[A]
+        V_{bi}=\frac{e}{2\epsilon_s}\qty(N_dx_n^2+N_ax_p^2)
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    继续\xref{fml:空间电荷区的电场}的证明
+    \begin{Equation}&[1]
+        \dv{\phi}{x}=-\E(x)=
+        \begin{cases}
+            \mal{\frac{eN_a}{\epsilon_s}(x+x_p)},&-x_p\leq x\leq 0\\[4ex]
+            \mal{\frac{eN_d}{\epsilon_s}(x_n-x)},&0\leq x\leq +x_n
+        \end{cases}
+    \end{Equation}
+    在P型区域
+    \begin{Equation}&[2]
+        \phi(x)=\Int-\E(x)\dx=\Int\frac{eN_a}{\epsilon_s}(x+x_p)\dx=\frac{eN_a}{2\epsilon_s}(x+x_p)^2+C_1'
+    \end{Equation}
+    在N型区域
+    \begin{Equation}&[3]
+        \phi(x)=\Int-\E(x)\dx=\Int\frac{eN_d}{\epsilon_s}(x_n-x)=-\frac{eN_d}{2\epsilon_s}(x-x_n)^2+C_2'
+    \end{Equation}
+    我们不妨将电势参考点选在$x=-x_p$，这样，就有
+    \begin{Equation}&[4]
+        \phi(-x_p)=0\qquad
+        \phi(x_n)=V_{bi}
+    \end{Equation}
+    
+    \xrefpeq{2}的常量$C_1'$被确定为
+    \begin{Equation}&[5]
+        C_1'=0
+    \end{Equation}
+    \xrefpeq{3}的常量$C_2'$被确定为
+    \begin{Equation}&[6]
+        C_2'=V_{bi}
+    \end{Equation}
+    这样一来我们，就有
+    \begin{Equation}
+        \phi(x)=\begin{cases}
+            \mal{\frac{eN_\text{a}}{2\epsilon_s}(x+x_\text{p})^2},&-x_\text{p}<x<0\\[4mm]
+            \mal{V_{bi}-\frac{eN_\text{d}}{2\epsilon_s}(x-x_\text{n})^2},&0<x<+x_\text{n}
+        \end{cases}
+    \end{Equation}
+    电势$\phi(x)$在$x=0$处连续
+    \begin{Equation}
+        \phi(0_{-})=\phi(0_{+})
+    \end{Equation}
+    即得
+    \begin{Equation}
+        \frac{eN_a}{2\epsilon_s}x_p^2=V_{bi}-\frac{eN_d}{2\epsilon_s}x_n^2
+    \end{Equation}
+    由此得到$V_{bi}$是
+    \begin{Equation}*
+        V_{bi}=\frac{e}{2\epsilon_s}(N_ax_p^2+N_dx_n^2)\qedhere
+    \end{Equation}
+\end{Proof}
+
+\xref{fig:电场分布}是空间电荷区的电场分布图像。电场方向是从N区指向P区，或者说沿着$x$轴的负方向。对于均匀掺杂的PN结而言，其电场是距离的线性函数，并且在交界面处达到最大。
+
+\xref{fig:电势分布}是空间电荷区的电势分布图像。电子的电势能由$E(x)=-e\phi(x)$给出，这表明电子的电势能$E(x)$在空间电荷区内也是关于$x$的二次函数。实际上，这种$E(x)$的二次方关系之前在\xref{fig:零偏PN结的能带图}中已经展现了，尽管那时，我们还尚不清楚能带在空间电荷区中具体是如何弯曲的\footnote{能带中的能量，实际上就是电子的电势能}。
+
+\subsection{空间电荷区宽度}
+我们可以计算空间电荷区从交界面处延伸入P区与N区内的总距离，这被称为\uwave{空间电荷区宽度}（Space Charge Width）。空间电荷区宽度常记为$W$，很明显，应有$W=x_n+x_p$成立。
+
+\begin{BoxFormula}[空间电荷区长度]
+    空间电荷区长度$W$可以被写作
+    \begin{Equation}
+        W=x_n+x_p=\qty[\frac{2\epsilon_sV_{bi}}{e}\qty(\frac{N_a+N_d}{N_aN_d})]^{1/2}
+    \end{Equation}
+    其中，$x_n$和$x_p$等于
+    \begin{Gather}[10pt]
+        x_n=\qty[\frac{2\epsilon_sV_{bi}}{e}\qty(\frac{N_a}{N_d})\qty(\frac{1}{N_a+N_d})]^{1/2}\\
+        x_p=\qty[\frac{2\epsilon_sV_{bi}}{e}\qty(\frac{N_d}{N_a})\qty(\frac{1}{N_a+N_d})]^{1/2}
+    \end{Gather}
+\end{BoxFormula}
+ 
+\begin{Proof}
+    根据\fancyref{fml:空间电荷区的电场}中的\xrefpeq[空间电荷区的电场]{A}
+    \begin{Equation}&[1]
+        N_ax_p=N_dx_n
+    \end{Equation}
+    这就得到
+    \begin{Equation}&[2]
+        x_p=\frac{N_d}{N_a}x_n\qquad
+        x_n=\frac{N_a}{N_d}x_p
+    \end{Equation}
+    根据\xrefpeq[空间电荷区的电势]{A}的\fancyref{fml:空间电荷区的电势}
+    \begin{Equation}&[3]
+        V_{bi}=\frac{e}{2\epsilon_s}(N_ax_p^2+N_dx_n^2)
+    \end{Equation}
+
+    将\xrefpeq{2}代入\xrefpeq{3}
+    \begin{Equation}&[4]
+        V_{bi}=\frac{e}{2\epsilon_s}\qty(N_dx_n^2+\frac{N_d^2}{N_a}x_n^2)=\frac{e}{2\epsilon_s}\qty(\frac{N_d}{N_a})\qty(N_a+N_d)x_n^2
+    \end{Equation}
+    解出$x_n$，得到
+    \begin{Equation}&[5]
+        x_n=\qty[\frac{2\epsilon_sV_{bi}}{e}\qty(\frac{N_a}{N_d})\qty(\frac{1}{N_a+N_d})]^{1/2}
+    \end{Equation}
+    将\xrefpeq{2}的左半部分代入\xrefpeq{3}
+    \begin{Equation}&[6]
+        V_{bi}=\frac{e}{2\epsilon_s}\qty(N_ax_p^2+\frac{N_a^2}{N_d}x_p^2)=\frac{e}{2\epsilon_s}\qty(\frac{N_a}{N_d})\qty(N_a+N_d)x_p^2
+    \end{Equation}
+    解出$x_p$，得到
+    \begin{Equation}&[7]
+        x_p=\qty[\frac{2\epsilon_sV_{bi}}{e}\qty(\frac{N_d}{N_a})\qty(\frac{1}{N_a+N_d})]^{1/2}
+    \end{Equation}
+    空间电荷区的总长度$W$是$x_n$和$x_p$的和
+    \begin{Equation}&[8]
+        W=x_n+x_p=\qty[(x_n^2+x_p^2)+2x_nx_p]^{1/2}
+    \end{Equation}  
+    将\xrefpeq{5}和\xrefpeq{7}代入\xrefpeq{8}，得到
+    \begin{Equation}
+        W=\qty[\frac{2\epsilon_sV_{bi}}{e}\qty(\frac{N_a^2+N_d^2}{N_aN_d})\qty(\frac{1}{N_a+N_d})+2\frac{2\epsilon_sV_{bi}}{e}\qty(\frac{1}{N_a+N_d})]^{1/2}
+    \end{Equation}
+    或
+    \begin{Equation}*
+        W=\qty[\frac{2\epsilon_sV_{bi}}{e}\qty(\frac{N_a+N_d}{N_aN_d})]^{1/2}\qedhere
+    \end{Equation}
+\end{Proof}

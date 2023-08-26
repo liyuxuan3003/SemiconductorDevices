@@ -1,122 +1,174 @@
 \documentclass{xStandalone}
 
 \begin{document}
-\begin{tikzpicture}[scale=1.1]
+\begin{tikzpicture}
+    
+\draw[thick,fill=red!30!white]
+    (-2*1.2247,0) coordinate (P1) 
+    rectangle
+    node[black] {P}
+    (-6,1) coordinate (P2);
 
-\draw[gray,ultra thin] (-7,0) -- (7,0);
+\draw[thick,fill=blue!30!white]
+    (+2*1.2247,0) coordinate (N1) 
+    rectangle
+    node[black] {N}
+    (+6,1) coordinate (N2);
 
-\draw[gray,ultra thin]
-    (-1,0) coordinate (xp) node[below] {$-x_n$}
-    -- ++(0,6) coordinate (xp');
-
-\draw[gray,ultra thin]
-    (+1,0) coordinate (xn) node[below] {$+x_p$}
-    -- ++(0,6) coordinate (xn');
-
-\draw[gray,ultra thin,dashed]
-    (0,0) coordinate (O)
-    -- ++(0,6) coordinate (O');
-
-\draw[dashed] (+1,0.5) -- ++(+6,0) node[right] {$p_{n0}$};
-
-\draw[dashed] (-1,0.5) -- ++(-6,0) node[left]  {$n_{p0}$};
-
-\draw[thick,dotted] plot[domain=1:7,smooth,samples=200] (\x,{3*exp(-(\x-1))+0.5});
-
-\draw[red,thick] plot[domain=1:7,smooth,samples=200] (\x,{5*exp(-(\x-1))+0.5});
-
-\draw[blue,thick] plot[domain=1:7,smooth,samples=200] (\x,{1*exp(-(\x-1))+0.5});
-
-\fill[red,fill opacity=0.1]
-plot[domain=1:7,smooth,samples=200] 
-(\x,{5*exp(-(\x-1))+0.5})
---
-plot[domain=7:1,smooth,samples=200] 
-(\x,{3*exp(-(\x-1))+0.5})
--- cycle;
-
-\fill[blue,fill opacity=0.1]
-plot[domain=1:7,smooth,samples=200] 
-(\x,{3*exp(-(\x-1))+0.5})
---
-plot[domain=7:1,smooth,samples=200] 
-(\x,{1*exp(-(\x-1))+0.5})
--- cycle;
-
-\draw[thick,dotted] plot[domain=-1:-7,smooth,samples=200] (\x,{3*exp(+(\x+1))+0.5});
-
-\draw[red,thick] plot[domain=-1:-7,smooth,samples=200] (\x,{5*exp(+(\x+1))+0.5});
-
-\draw[blue,thick] plot[domain=-1:-7,smooth,samples=200] (\x,{1*exp(+(\x+1))+0.5});
-
-\fill[red,fill opacity=0.1]
-plot[domain=-1:-7,smooth,samples=200] 
-(\x,{5*exp(+(\x+1))+0.5})
---
-plot[domain=-7:-1,smooth,samples=200] 
-(\x,{3*exp(+(\x+1))+0.5})
--- cycle;
-
-\fill[blue,fill opacity=0.1]
-plot[domain=-1:-7,smooth,samples=200] 
-(\x,{3*exp(+(\x+1))+0.5})
---
-plot[domain=-7:-1,smooth,samples=200] 
-(\x,{1*exp(+(\x+1))+0.5})
--- cycle;
+\draw[thick,fill=gray]
+    (P1) coordinate (M1) rectangle (N1|-N2) coordinate (Q2);
 
 \path 
-(+1,5+0.5) node[point=red] {}
-(-1,5+0.5) node[point=red] {}
-(+1,3+0.5) node[point=black] {}
-node[left=0.35cm] {$t_0$}
-(-1,3+0.5) node[point=black] {}
-node[right=0.35cm] {$t_0$}
-(+1,1+0.5) node[point=blue] {}
-+(0,-0.15)
-node[above right] {\small $+\delt{Q}$}
-(-1,1+0.5) node[point=blue] {}
-+(0,-0.15)
-node[above left] {\small $-\delt{Q}$};
+    (M1-|Q2) coordinate (M2)
+    (M1|-Q2) coordinate (Q1);
 
-\path
-(+2.5,+3) node {$p_n(x,t)$};
+\draw[thin,dashed]
+    ($(M1)!0.5!(M2)$) -- ($(Q1)!0.5!(Q2)$);
 
-\path
-(-2.5,+3) node {$n_p(x,t)$};
+\foreach \x in {0.15,0.35}
+{
+    \foreach \y in {0.33,0.67}
+    {
+        \path
+            ($(M1)!\y!(Q1)$) coordinate (Y)
+            ($(M1)!\x!(M2)$) coordinate (X)
+            (X|-Y) node[white] {$-$};
+    }
+}
 
-\path
-(+4,+2) node {储存空穴--正电荷};
+\foreach \x in {0.65,0.85}
+{
+    \foreach \y in {0.33,0.67}
+    {
+        \path
+            ($(M1)!\y!(Q1)$) coordinate (Y)
+            ($(M1)!\x!(M2)$) coordinate (X)
+            (X|-Y) node[white] {$+$};
+    }
+}
 
-\path
-(-4,+2) node {储存电子--负电荷};
+\draw[thick] 
+(-6,-1) 
+coordinate (Ecp)
+node[left] {$E_{c}$} --
+(Ecp-|P1);
 
-\draw[-latex]
-(+0.75,3.1+0.5) -- ++(0,+0.5) node[above] {$t_{+}$};
-\draw[-latex]
-(+0.75,2.9+0.5) -- ++(0,-0.5) node[below] {$t_{-}$};
+\draw[thick] 
+(-6,-5) 
+coordinate (Evp)
+node[left] {$E_{v}$} --
+(Evp-|P1);
 
-\draw[-latex]
-(-0.75,3.1+0.5) -- ++(0,+0.5) node[above] {$t_{+}$};
-\draw[-latex]
-(-0.75,2.9+0.5) -- ++(0,-0.5) node[below] {$t_{-}$};
+\draw[thick,red] 
+(-6,-4.5) 
+coordinate (EFp)
+node[left] {$E_{Fp}$} --
+++(2,0)
+coordinate (EFp');
 
-\path (-4,0) node[below] {P型区};
-\path (+4,0) node[below] {N型区};
+\draw[thick,dotted,blue]
+(EFp)--(EFp');
 
-\path (1,6) node[above,gray] {$x=0$};
+\draw[dashed,gray]
+(-6,-3)
+coordinate (Eip)
+node[left] {$E_{Fi}$} --
+(Eip-|P1);
 
-\draw[ultra thin] (-8,-0.75) rectangle (8,7.5);
+%-----------------------------
 
-\draw (-7.5,7)
-coordinate (P1)
-to[D,v=$V_a$] ++(6,0)
-coordinate (P2)
-to[short] ++(0,-2)
-coordinate (P3)
-to[vsource={$v_1(t)=\hat{V_1}\e^{\j\omega t}$}] ($(P3)!0.5!(P3-|P1)$)
-to[battery1=$V_0$] (P3-|P1)
-to[short] (P1);
+\draw[thick] 
+(+6,-5.5) 
+coordinate (Ecn)
+node[right] {$E_{c}$} --
+(Ecn-|N1);
+
+\draw[thick] 
+(+6,-9.5) 
+coordinate (Evn)
+node[right] {$E_{v}$} --
+(Evn-|N1);
+
+\draw[thick,blue] 
+(+6,-6.0) 
+coordinate (EFn)
+node[right] {$E_{F}$} --
+++(-2,0)
+coordinate (EFn');
+
+\draw[thick,dotted,red]
+(EFn)--(EFn');
+
+\draw[dashed,gray]
+(+6,-7.5)
+coordinate (Ein)
+node[right] {$E_{Fi}$} --
+(Ein-|N1);
+
+%-----------------------------
+
+\draw[thick,blue]
+(EFp')--
+node[below left,pos=0.75] {$E_{Fn}$}
+(EFn-|P1)--
+node[below,pos=0.9] {$E_{Fn}$}
+(EFn');
+
+\draw[thick,red]
+(EFn')--
+node[above right,pos=0.75] {$E_{Fp}$}
+(EFp-|N1)--
+node[above,pos=0.9] {$E_{Fp}$}
+(EFp');
+
+\draw[dashed,gray]
+plot[domain=-2*1.2247:0,smooth,samples=200]
+(\x,{-3-0.375*(2.4494+\x)^2})--
+plot[domain=0:+2*1.2247,smooth,samples=200]
+(\x,{-7.5+0.375*(-2.4494+\x)^2});
+
+\draw[thick,black]
+plot[domain=-2*1.2247:0,smooth,samples=200]
+(\x,{-1-0.375*(2.4494+\x)^2})--
+plot[domain=0:+2*1.2247,smooth,samples=200]
+(\x,{-5.5+0.375*(-2.4494+\x)^2});
+
+\draw[thick,black]
+plot[domain=-2*1.2247:0,smooth,samples=200]
+(\x,{-5-0.375*(2.4494+\x)^2})--
+plot[domain=0:+2*1.2247,smooth,samples=200]
+(\x,{-9.5+0.375*(-2.4494+\x)^2});
+
+%-----------------------------
+
+\draw[thick,black,dotted] 
+(-2,-1) -- (+6,-1);
+
+\draw[thick,black,dotted] 
+(+2,-9.5) -- (-6,-9.5);
+
+\draw[<->] (-5,-5) -- 
+node[right] {$eV_\te{total}$}  (-5,-9.5);
+
+\draw[->] (-5,-4.5) -- node[right] {$e\phi_{Fp}$} (-5,-3);
+
+\draw[<->] (+5,-1) -- 
+node[left] {$eV_\te{total}$}  (+5,-5.5);
+
+\draw[->] (+5,-6) -- node[right] {$e\phi_{Fn}$} (+5,-7.5);
+
+%-----------------------------
+
+\foreach \x in {-6,-2*1.2247,0,+2*1.2247,+6}
+{
+    \draw[dotted,gray,thin]
+    (\x,0) -- (\x,-10.5);
+}
+\path (0,-10.5) node[below] {$0$};
+\path (-2*1.2247,-10.5) node[below] {$x_{p}$};
+\path (+2*1.2247,-10.5) node[below] {$x_{n}$};
+
+\draw[<->] (0,-4.5) -- node[right] {$eV_R$} (0,-6);
 
 \end{tikzpicture}
 \end{document}

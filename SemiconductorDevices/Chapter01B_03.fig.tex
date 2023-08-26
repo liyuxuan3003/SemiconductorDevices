@@ -1,0 +1,25 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+    
+\draw[gray,ultra thin,->]
+(-3,0) -- (3,0) node[above] {$x$};
+
+\draw[gray,ultra thin,->]
+
+(0,-1.5) -- (0,1.5) node[right] {$\E(x)=-\dv*{\phi}{x}$};
+
+\draw[fill=black,fill opacity=0.1] (-2.5,0) -- (0,-1) -- (2.5,0);
+
+\path (-2.5,0) node[above] {$-x_p$} node[point] {};
+\path (+2.5,0) node[above] {$+x_n$} node[point] {};
+
+\draw (0,-1) node[point] {} node[below right] {$\E_m$};
+
+\draw[gray,ultra thin] (-3.25,-1.85) rectangle (+3.25,1.85);
+
+\path (0,-0.4) node {$-V_{bi}$};
+
+\end{tikzpicture}
+\end{document}

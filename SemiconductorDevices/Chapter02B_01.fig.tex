@@ -1,0 +1,34 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}[yscale=1.25,xscale=1.5]
+
+\draw (0,0) coordinate (O)
+    -- ++(6,0) coordinate (X)
+    node[above left] {$V_a$};
+
+\draw (O)
+    -- ++(0,6) coordinate (Y)
+    node[below right] {$\ln J$};
+
+\draw[blue,dotted,thin] (0,1) coordinate (Js) node[point=blue] {} node[left] {$\ln J_s$} -- ++(4.5,4.5) coordinate (Js');
+
+\draw[red,dotted,thin] (0,2) coordinate (JR0) node[point=red] {} node[left] {$\ln J_{R0}$} -- ++(2,1) coordinate(JR0');
+
+\draw[red,thick] ($(JR0)!0.25!(JR0')$) coordinate (P1) -- node[above=0.15cm] {$J_{rec}$} (JR0') coordinate (P2);
+\draw[blue,thick] (P2) -- node[above=0.25cm] {$J_D$} ($(Js)!0.8!(Js')$) coordinate (P3);
+\draw[green,thick] (P3) -- ++(1.5,0.75) coordinate (P4);
+
+\foreach \pt in {P1,P2,P3,P4} 
+{
+    \draw[dashed,ultra thin] (\pt) node[point] {} -- (\pt|-X) node[point] {} coordinate (\pt');
+}
+
+\path ($(P1')!0.5!(P2')$) node[above,red] {\small 复合电流} node[above=0.5cm,red] {\small $n=2$};
+\path ($(P2')!0.5!(P3')$) node[above,blue] {\small 扩散电流} node[above=1.5cm,blue] {\footnotesize [理想特性]} node[above=0.5cm,blue] {\small $n=1$};
+\path ($(P3')!0.5!(P4')$) node[above,green] {\small 大注入} node[above=0.5cm,green] {\small $n=2$};
+
+\draw[ultra thin] (-1,-0.25) rectangle (6.25,6.25);
+
+\end{tikzpicture}
+\end{document}

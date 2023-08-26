@@ -1,125 +1,23 @@
 \documentclass{xStandalone}
 
-\tikzset{PRegion/.style={fill=red!50!white}}
-\tikzset{NRegion/.style={fill=blue!50!white}}
-\tikzset{DZone/.style={fill=gray}}
-
 \begin{document}
 \begin{tikzpicture}
 
-\draw[thick] 
-(-3,0) coordinate(A) 
-rectangle 
-(+3,2) coordinate(B);
+\draw
+(-3,0) -- node[below] {$x=0$} (3,0);
 
-\fill[PRegion] 
-($(A|-B)!0.3!(B)$) coordinate (Px)
-rectangle node[white] {\LARGE P} (A);
+\draw [->]
+(0,0) -- (0,4);
 
-\fill[NRegion] 
-($(A)!0.7!(B|-A)$) coordinate (Nx)
-rectangle node[white] {\LARGE N} (B);
+\draw[very thick] 
+(-2.5,3.5) node[left] {$N_a$} -- (0,3.5);
 
-\fill[DZone] (Px) rectangle (Nx);
+\draw[very thick]
+(+2.5,2.5) node[right] {$N_d$} -- (0,2.5);
 
-\draw[dashed]
-(Px)--(Px|-A);
+\draw[-latex] (-1.5,1.5) node[above] {空穴扩散} -- (1.5,1.5);
 
-\draw[dashed]
-(Nx)--(Nx|-B);
-
-\draw[thin]
-($(A|-B)!0.5!(B)$) coordinate (MU)
---
-($(A)!0.5!(A-|B)$) coordinate (MD);
-
-\draw[ultra thin]
-(Px) -- ++(0,0.4) coordinate (Px');
-
-\draw[ultra thin]
-(Nx|-Px) -- ++(0,0.4) coordinate (Nx');
-
-\draw[ultra thin,<->] 
-($(Px)!0.5!(Px')$)
--- node[above] {$W$}
-($(Nx|-Px)!0.5!(Nx')$);
-
-\draw[-latex]
-($(MD)+(+1,-0.5)$) --
-node[below] {$\E$} 
-($(MD)+(-1,-0.5)$);
-
-\path
-($(A)!0.5!(A|-B)$) coordinate (ML)
-++(-0.75,0) coordinate (ML')
-($(B)!0.5!(B|-A)$) coordinate (MR)
-++(+0.75,0) coordinate (MR');
-
-\draw (ML)
--- (ML')
--- ++(0,2.5)
-coordinate (ML'')
-to[short] (ML''-|MR')
-coordinate (MR'')
--- (MR')
--- (MR);
-
-\path
-(0,-8.0) coordinate (MIN)
-(0,-1.0) coordinate (MAX)
-++(0,-0.5) coordinate (Ecp)
-++(0,-2.0) coordinate (Ecn)
-++(0,-1.0) coordinate (EF)
-++(0,-1.0) coordinate (Evp)
-++(0,-2.0) coordinate (Evn);
-
-\path 
-($(Ecp)!0.5!(Evp)$) coordinate (EFip)
-($(Ecn)!0.5!(Evn)$) coordinate (EFin);
-
-\foreach \y in {MIN,MAX,Ecp,Ecn,EF,Evp,Evn,EFip,EFin}
-{
-    \foreach \x in {A,Px,Nx,B,MD}
-    {
-        \path (\x|-\y) coordinate (\y\x);
-    }
-}
-
-\foreach \x in {A,Px,Nx,B}
-{
-    \draw[dotted,thin,gray] 
-    (MIN\x)--(MAX\x);
-}
-
-\draw[thick] 
-(EcpA) node[left] {$E_c$}
---(EcpPx) 
-parabola ($(EcpPx)!0.5!(EcnNx)$) 
-parabola[bend at end] (EcnNx)--(EcnB) node[right] {$E_c$};
-
-\draw[thick] 
-(EvpA) node[left] {$E_v$}
---(EvpPx) 
-parabola ($(EvpPx)!0.5!(EvnNx)$) 
-parabola[bend at end] (EvnNx)--(EvnB) node[right] {$E_v$};
-
-\draw[gray,dashed] 
-(EFipA) node[left] {$E_{Fi}$}
---(EFipPx) 
-parabola ($(EFipPx)!0.5!(EFinNx)$) 
-parabola[bend at end] (EFinNx)--(EFinB) node[right] {$E_{Fi}$};
-
-\draw[green]
-(EFA) node[left]  {$E_{Fp}$}--
-(EFB) node[right] {$E_{Fn}$};
-
-\draw[ultra thin]
-(EcpMD)--(EcpB);
-
-\draw[ultra thin,<->]
-($(EcpNx)!0.2!(EcpB)$) --
-node[right] {$eV_{bi}$}
-($(EcnNx)!0.2!(EcnB)$);
+\draw[-latex] (1.5,0.75) node[above] {电子扩散} -- (-1.5,0.75);
 
 \end{tikzpicture}
 \end{document}

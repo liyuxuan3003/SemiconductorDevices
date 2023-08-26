@@ -1,0 +1,42 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\draw (0,0) to[short,-*,i=$I_D$] ++(2,0)
+coordinate (A)
+to[short] ++(0,0.75)
+to[R=$r_d$] ++(4,0)
+to[short] ++(0,-0.75);
+
+\draw (A)
+to[short] ++(0,-0.75) coordinate (B)
+to[cC=$C_d$,v={~}] ++(4,0)
+to[short] ++(0,+0.75)
+to[R=$r_s$,*-] ++(2,0) coordinate(E);
+
+\draw (B)
+to[short] ++(0,-1.5) coordinate (C)
+to[cC=$C_j$,v={~}] ++(4,0) coordinate (D)
+to[short] (D|-B);
+
+
+\draw[ultra thin] (C) ++(0,-0.2) coordinate (C')
+    -- ++(0,-2.5) coordinate (C'');
+
+\draw[ultra thin] (D) ++(0,-0.2) coordinate (D')
+    -- ++(0,-1) coordinate (D'');
+
+\draw[ultra thin] (E) ++(0,-0.2) coordinate (E')
+    -- (E|-C'') coordinate (E'');
+
+\draw[ultra thin,latex-latex] ($(D')!0.6!(D'')$) coordinate (Dx) -- node[below] {$V_a$} (Dx-|C);
+
+\draw[ultra thin,latex-latex] ($(E')!0.85!(E'')$) coordinate (Ex) -- node[below] {$V_\te{app}$} (Ex-|C);
+
+
+\draw (0,2.5) to[D] ++(8,0);
+
+
+\end{tikzpicture}
+\end{document}

@@ -2,23 +2,71 @@
 
 \begin{document}
 \begin{tikzpicture}
+    
+\path 
+    (0,0) coordinate (A1) 
+    (12,2) coordinate (B2)
+    (A1-|B2) coordinate (A2)
+    (A1|-B2) coordinate (B1);
 
-\draw (0,0) to[short,-*] ++(2,0)
-coordinate (A)
-to[short] ++(0,0.75)
-to[R=$r_d$] ++(4,0)
-to[short] ++(0,-0.75)
-to[short,*-] ++(2,0);
-
-\draw (A)
-to[short] ++(0,-0.75)
-to[cC=$C_d$,v={~}] ++(4,0)
-to[short] ++(0,+0.75)
-to[short,*-] ++(2,0);
+\path 
+    ($(B1)!0.2!(B2)$) coordinate (M1)
+    ($(B1)!0.5!(B2)$) coordinate (M2)
+    ($(B1)!0.8!(B2)$) coordinate (M3)
+    (M1|-A1) coordinate (Q1)
+    (M2|-A1) coordinate (Q2)
+    (M3|-A1) coordinate (Q3);
 
 
-\draw (0,2.5) to[D] ++(8,0);
+\fill[red!50!white]  (A1) rectangle node[black]{\Large P} (M1);
+\fill[blue!50!white] (A2) rectangle node[black]{\Large N} (M3);
+\fill[black!50!white] (Q1) rectangle (M3);
 
+\draw[dashed,thick] (M1) -- (Q1);
+\draw[dotted,thin] (M2) -- (Q2);
+\draw[dashed,thick] (M3) -- (Q3);
+\draw[ultra thick] (A1) rectangle (B2);
+
+\foreach \y in {0.2,0.4,0.6,0.8}
+{
+    \foreach \x in {0.33,0.67}
+    {
+        \path[white]
+            ($(Q1)!\x!(Q2)$) coordinate (Q)
+            ($(A1)!\y!(B1)$) coordinate (C)
+            (Q|-C) node {\small $-$};
+    }
+}
+
+\foreach \y in {0.2,0.4,0.6,0.8}
+{
+    \foreach \x in {0.33,0.67}
+    {
+        \path[white]
+            ($(Q2)!\x!(Q3)$) coordinate (Q)
+            ($(A1)!\y!(B1)$) coordinate (C)
+            (Q|-C) node {\small $+$};
+    }
+}
+
+\path 
+($(A1)!0.5!(B2)$) coordinate (C)
+++(0,1.5) coordinate (C');
+
+\draw[-latex,thick] ($(C)+(1,0)$) -- node[above] {$\E$} ($(C)+(-1,0)$);
+
+\draw[-latex,thick] ($(C')+(1.5,0)$) -- node[above] {$\E_\te{app}$} ($(C')+(-1.5,0)$);
+
+\draw[dotted] (Q1) -- ++(0,-1) coordinate(Q1');
+\draw[dotted] (Q3) -- ++(0,-1) coordinate(Q3');
+
+\draw[<->,ultra thin] ($(Q1)!0.7!(Q1')$) -- node[above] {$W$} ($(Q3)!0.7!(Q3')$); 
+
+\path ($(A2)!0.5!(B2)$) ++(1,0) coordinate(AB2');
+
+\draw ($(A1)!0.5!(B1)$) to[short,*-] ++(-1,0) to[short] ++(0,-3) to[short,-o] (\tikztostart-|Q1) coordinate (Q1') node[right] {$-$} to[open] (\tikztostart-|Q3) coordinate (Q3') node[left] {$+$} to[short,o-] (\tikztostart-|AB2') |- ($(A2)!0.5!(B2)$) node[circ] {};
+
+\path ($(Q1')!0.5!(Q3')$) node {$V_R$};
 
 \end{tikzpicture}
 \end{document}
