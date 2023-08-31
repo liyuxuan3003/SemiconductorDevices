@@ -95,7 +95,7 @@
     \begin{Equation}
         \E(x)=
         \begin{cases}
-            \mal{-\frac{eN_a}{\epsilon_s}(x+x_p)},&-x_p\leq x\leq 0\\[4ex]
+            \mal{-\frac{eN_a}{\epsilon_s}(x_p+x)},&-x_p\leq x\leq 0\\[4ex]
             \mal{-\frac{eN_d}{\epsilon_s}(x_n-x)},&0\leq x\leq +x_n
         \end{cases}
     \end{Equation}
@@ -129,10 +129,10 @@
     \end{Equation}
     通过\xrefpeq{5}，我们可以确定\xrefpeq{3}和\xrefpeq{4}中的待定常数
     \begin{Equation}
-        \qquad\qquad
-        \E(x)=-\frac{eN_a}{\epsilon_s}(x+x_p),\ -x_p\leq x\leq 0\qquad
+        \qquad
+        \E(x)=-\frac{eN_a}{\epsilon_s}(x_p+x),\ -x_p\leq x\leq 0\qquad
         \E(x)=-\frac{eN_d}{\epsilon_s}(x_n-x),\ 0\leq x\leq +x_n
-        \qquad\qquad
+        \qquad
     \end{Equation}
     并考虑到电场$\E(x)$在$x=0$处的连续性
     \begin{Equation}
@@ -152,8 +152,8 @@
     空间电荷区的电势$\phi(x)$为
     \begin{Equation}
         \phi(x)=\begin{cases}
-            \mal{\frac{eN_\text{a}}{2\epsilon_s}(x+x_\text{p})^2},&-x_\text{p}<x<0\\[4mm]
-            \mal{V_{bi}-\frac{eN_\text{d}}{2\epsilon_s}(x-x_\text{n})^2},&0<x<+x_\text{n}
+            \mal{\frac{eN_a}{2\epsilon_s}(x_p+x)^2},&-x_p<x<0\\[4mm]
+            \mal{V_{bi}-\frac{eN_d}{2\epsilon_s}(x_n-x)^2},&0<x<+x_n
         \end{cases}
     \end{Equation}
     其中$V_{bi}$可以被表示为
@@ -167,22 +167,22 @@
     \begin{Equation}&[1]
         \dv{\phi}{x}=-\E(x)=
         \begin{cases}
-            \mal{\frac{eN_a}{\epsilon_s}(x+x_p)},&-x_p\leq x\leq 0\\[4ex]
+            \mal{\frac{eN_a}{\epsilon_s}(x_p+x)},&-x_p\leq x\leq 0\\[4ex]
             \mal{\frac{eN_d}{\epsilon_s}(x_n-x)},&0\leq x\leq +x_n
         \end{cases}
     \end{Equation}
     在P型区域
     \begin{Equation}&[2]
-        \phi(x)=\Int-\E(x)\dx=\Int\frac{eN_a}{\epsilon_s}(x+x_p)\dx=\frac{eN_a}{2\epsilon_s}(x+x_p)^2+C_1'
+        \phi(x)=\Int-\E(x)\dx=\Int\frac{eN_a}{\epsilon_s}(x_p+x)\dx=\frac{eN_a}{2\epsilon_s}(x_p+x)^2+C_1'
     \end{Equation}
     在N型区域
     \begin{Equation}&[3]
-        \phi(x)=\Int-\E(x)\dx=\Int\frac{eN_d}{\epsilon_s}(x_n-x)=-\frac{eN_d}{2\epsilon_s}(x-x_n)^2+C_2'
+        \phi(x)=\Int-\E(x)\dx=\Int\frac{eN_d}{\epsilon_s}(x_n-x)=-\frac{eN_d}{2\epsilon_s}(x_n-x)^2+C_2'
     \end{Equation}
     我们不妨将电势参考点选在$x=-x_p$，这样，就有
     \begin{Equation}&[4]
         \phi(-x_p)=0\qquad
-        \phi(x_n)=V_{bi}
+        \phi(+x_n)=V_{bi}
     \end{Equation}
     
     \xrefpeq{2}的常量$C_1'$被确定为
@@ -196,8 +196,8 @@
     这样一来我们，就有
     \begin{Equation}
         \phi(x)=\begin{cases}
-            \mal{\frac{eN_\text{a}}{2\epsilon_s}(x+x_\text{p})^2},&-x_\text{p}<x<0\\[4mm]
-            \mal{V_{bi}-\frac{eN_\text{d}}{2\epsilon_s}(x-x_\text{n})^2},&0<x<+x_\text{n}
+            \mal{\frac{eN_a}{2\epsilon_s}(x_p+x)^2},&-x_p<x<0\\[4mm]
+            \mal{V_{bi}-\frac{eN_d}{2\epsilon_s}(x_n-x)^2},&0<x<+x_n
         \end{cases}
     \end{Equation}
     电势$\phi(x)$在$x=0$处连续
@@ -221,8 +221,8 @@
 \subsection{空间电荷区宽度}
 我们可以计算空间电荷区从交界面处延伸入P区与N区内的总距离，这被称为\uwave{空间电荷区宽度}（Space Charge Width）。空间电荷区宽度常记为$W$，很明显，应有$W=x_n+x_p$成立。
 
-\begin{BoxFormula}[空间电荷区长度]
-    空间电荷区长度$W$可以被写作
+\begin{BoxFormula}[零偏时的空间电荷区宽度]
+    在热平衡状态下，空间电荷区宽度$W$可以被写作
     \begin{Equation}
         W=x_n+x_p=\qty[\frac{2\epsilon_sV_{bi}}{e}\qty(\frac{N_a+N_d}{N_aN_d})]^{1/2}
     \end{Equation}

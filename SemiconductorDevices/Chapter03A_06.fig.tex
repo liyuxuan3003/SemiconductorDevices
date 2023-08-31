@@ -1,0 +1,61 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}[scale=5.5]
+
+\def\xn{1.1}
+\def\Vbi{\fpeval{\xn*\xn/2}}
+\def\xMax{1.5}
+\def\yMax{1.5}
+\def\xmax{\fpeval{1/(4*sqrt(pi*\xn))}}
+
+\tikzset{axi/.style={ultra thin,->}}
+\tikzset{phi0/.style={blue,thin}}
+\tikzset{phim/.style={red,thin}}
+\tikzset{phi/.style={thick}}
+\tikzset{aux/.style={gray,dashed,very thin}}
+\tikzset{disaux/.style={gray,ultra thin}}
+\tikzset{dis/.style={gray,ultra thin,latex-latex}}
+
+\draw[axi] (0,0) coordinate (O)
+-- ++(\xMax+0.1,0) coordinate (X) node[right] {$x$};
+
+\draw[axi] (O) -- ++(0,\yMax+0.1) coordinate (Y) node[right] {$\phi(x)$};
+
+\begin{scope}
+    \clip (O) rectangle (\xMax,\yMax);
+    \draw[phi] plot[domain=0.001:\xn,smooth,samples=1000] (\x,{(1/(16*pi))*(1/\x)+\Vbi-(1/2)*(\xn-\x)*(\xn-\x)}) -- plot[domain=\xn:\xMax] (\x,{\Vbi+(1/(16*pi))*(1/\x)});
+    \draw[phim] plot[domain=0.001:\xMax,smooth,samples=2000] (\x,{(1/(16*pi))*(1/\x)}) node[above left] {$\phi_M(x)$};
+\end{scope}
+
+\draw[phi0] plot[domain=0:\xn,smooth,samples=200] (\x,{\Vbi-(1/2)*(\xn-\x)*(\xn-\x)})
+-- plot[domain=\xn:\xMax] (\x,\Vbi) node[right] {$V_{bi}$} node[below left] {$\phi_0(x)$};
+
+\path (\xmax,{(1/(16*pi))*(1/\xmax)+\Vbi-(1/2)*(\xn-\xmax)*(\xn-\xmax)}) node[point,name=A] {};
+
+\path (\xmax,{\Vbi-(1/2)*(\xn-\xmax)*(\xn-\xmax)}) node[point=blue,name=B] {};
+
+\path (\xn,{(1/(16*pi))*(1/\xn)+\Vbi-(1/2)*(\xn-\xn)*(\xn-\xn)}) node[point,name=An] {};
+
+\path (\xn,{\Vbi-(1/2)*(\xn-\xn)*(\xn-\xn)}) node[point=blue,name=Bn] {};
+
+\draw[aux] (A)--(B)--(B|-X) node[below,black] {$x_{m}$};
+
+\draw[aux] (A)--(A-|Y) coordinate (A') ++(-0.45,0) coordinate (A'');
+\draw[aux] (B)--(B-|Y) coordinate (B') ++(-0.125,0) coordinate (B'');
+
+\draw[disaux] (A')--(A'');
+\draw[disaux] (B')--(B'');
+\draw[disaux] (O)--(O-|A'') coordinate (OA);
+\path (O-|B'') coordinate (OB);
+
+\draw[dis] ($(O)!0.3!(OB)$) -- node[left,blue] {$\approx \delt{\phi}$} ($(B')!0.3!(B'')$);
+
+\draw[dis] ($(O)!0.7!(OA)$) -- node[left,black] {$\delt{\phi}$} ($(A')!0.7!(A'')$);
+
+\draw[aux] (An)--(Bn)--(Bn|-X) node[below,black] {$x_n$};
+
+\draw[gray,ultra thin] ($(OA)+(-0.04,-0.1)$) rectangle ($(X|-Y)+(0.1,0.07)$);
+
+\end{tikzpicture}
+\end{document}

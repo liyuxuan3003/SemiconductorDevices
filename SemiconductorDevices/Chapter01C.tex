@@ -26,7 +26,7 @@
 实际上，这只需要将前述所有公式的$V_{bi}$换成$V_{bi}+V_R$即可，故$W$可被重写为
 
 \begin{BoxFormula}[反偏时的空间电荷区宽度]
-    在反偏电压$V_R$下的空间电荷区宽度$W$为
+    在反偏电压$V_R$下，空间电荷区宽度$W$为
     \begin{Equation}
         W=\qty[\frac{2\epsilon_s(V_{bi}+V_R)}{e}\qty(\frac{N_a+N_d}{N_aN_d})]^{1/2}
     \end{Equation}
@@ -40,6 +40,21 @@
 \subsection{势垒电容}
 由于空间电荷区中正负电荷是分离的，所以PN结就具有了电容的充放电效应，这就是\uwave{势垒电容}（Junction Capacitance）。反偏电压增量$\dd{V_R}$会在N区和P区产生额外的正负电荷$\dd{Q}$。
 
+\begin{BoxDefinition}[二极管的势垒电容]
+    二极管的势垒电容定义为
+    \begin{Equation}
+        C_j=\dv{Q}{V_R}
+    \end{Equation}
+    其中
+    \begin{Equation}
+        \dd{Q}=eAN_d\dd{x_n}=eAN_a\dd{x_p}
+    \end{Equation}
+\end{BoxDefinition}
+
+应当指出的是，这里我们讨论的电容都是小信号意义下的微分电容。
+
+% 由于半导体器件物理中更常用的是电流密度$J$，而电流密度$J$本质是单位面积上的电流，因此，当我们提到“电阻$R$、电容$C$、电荷$Q$”等电路量时，实际上，我们都是指单位面积上的“电阻$R'$、电容$C'$，电荷$Q'$\;”，加撇以示区分。之后将默认这一点，不再强调单位面积。
+
 \begin{BoxFormula}[二极管的势垒电容]
     二极管的势垒电容可以被表示为
     \begin{Equation}
@@ -48,15 +63,11 @@
 \end{BoxFormula}
 
 \begin{Proof}
-    势垒电容是微分电容，因此
+    根据\fancyref{def:二极管的势垒电容}
     \begin{Equation}&[1]
         C_j=\dv{Q}{V_R}
     \end{Equation}
-    这里$\dd{Q}$应当为（其中$A$是PN结的截面积）
-    \begin{Equation}
-        \dd{Q}=eAN_d\dd{x_n}=eAN_a\dd{x_p}
-    \end{Equation}
-    将上式给出的$\dd{Q}=eAN_d\dd{x_n}$代入\xrefpeq{1}
+    将$\dd{Q}=eAN_d\dd{x_n}$代入\xrefpeq{1}
     \begin{Equation}&[2]
         C_j=eAN_d\dv{x_n}{V_R}
     \end{Equation}

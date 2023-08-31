@@ -2,18 +2,14 @@
 前面我们一直在讨论PN结二极管的直流特性。当包含PN结的半导体器件用于线性放大电路中时，交变的正弦信号就会叠加在直流上。因此PN结的小信号特性就显得尤为重要了。
 
 \subsection{扩散电阻}
-PN结的理想电流--电压关系已经在\fancyref{eqt:PN结的理想电流--电压关系}给出
+PN结的理想电流--电压关系已经在\fancyref{fml:PN结的理想电流--电压关系}给出
 \begin{Equation}
-    J=J_s\qty[\exp(\frac{eV_a}{\kB T})-1]
+    J_D=J_s\qty[\exp(\frac{eV_a}{\kB T})-1]
 \end{Equation}
 但作为器件，我们更希望采用电流而不是电流密度，故两端同乘以PN结的面积$A$
-\begin{BoxFormula}[二极管的特性方程]
-    二极管的电流和电压间的关系是
-    \begin{Equation}
-        I_D=I_s\qty[\exp(\frac{eV_a}{\kB T})-1]
-    \end{Equation}
-    其中$I_D$是\uwave{二极管}（Diode）电流，而$I_s$是二极管的反向饱和电流。
-\end{BoxFormula}
+\begin{Equation}
+    I_D=I_s\qty[\exp(\frac{eV_a}{\kB T})-1]
+\end{Equation}
 
 假定二极管正偏，直流电压$V_0$，直流电流$I_{DQ}$，如果我们在$V_0$上叠加一个幅度很小频率不太高的正弦电压$v_1(t)=\hat{V_1}\e^{\j\omega t}$，那么将产生一个小的正弦电流叠加在$I_{DQ}$上。我们将正弦电流和正弦电压间的比定义为增量电导，由于小信号的幅度很小，因此小信号增量电导事实上就是直流电流$I_{DQ}$对直流电压$V_a$在$V_0$处的导数值。这就是二极管的扩散电导（电阻）的含义。
 
@@ -28,6 +24,8 @@ PN结的理想电流--电压关系已经在\fancyref{eqt:PN结的理想电流--�
     \end{Equation}
 \end{BoxDefinition}
 
+接下来，我们来具体计算二极管的扩散电导。
+
 \begin{BoxFormula}[二极管的扩散电导]
     二极管的扩散电导可以表示为
     \begin{Equation}
@@ -36,7 +34,7 @@ PN结的理想电流--电压关系已经在\fancyref{eqt:PN结的理想电流--�
 \end{BoxFormula}
 
 \begin{Proof}
-    根据\fancyref{fml:二极管的特性方程}
+    根据\fancyref{fml:PN结的理想电流--电压关系}
     \begin{Equation}&[1]
         I_D=I_s\qty[\exp(\frac{eV_a}{\kB T})-1]
     \end{Equation}
@@ -56,8 +54,17 @@ PN结的理想电流--电压关系已经在\fancyref{eqt:PN结的理想电流--�
 
 根据\fancyref{fml:二极管的扩散电导}，随着二极管的电流增大，其扩散电阻逐渐减小。
 
-\subsection{扩散电容和小信号导纳}
+\subsection{扩散电容}
 我们或许会很难理解，为什么PN结二极管会有什么扩散电容呢？在定量计算扩散电容前，我们先定性分析一下扩散电容的来源。如\xref{fig:扩散电容的来源}所示，在直流电压下$V_0$下，PN结在两侧分别保持了一定的电荷分布，P区为带负电的过剩电子$-\delt{Q}$，N区为带正电的过剩空穴$+\delt{Q}$，此时边界处的载流子浓度正比于$\exp(e V_0/\kB T)$。在交流电压$v_1(t)=\hat{V_1}\e^{\j\omega t}$的作用下，PN结两端的电压将在$V_0-\hat{V_1}$和$V_0+\hat{V_1}$之间变化，该过程中，耗尽区边界处的载流子浓度也将相应在正比于${\exp}[e(V_0-\hat{V_1})/\kB T]$和正比于${\exp}[e(V_0+\hat{V_1})/\kB T]$间变化，即N区和P区内“存储”的正负电荷，将随交流电压$v_1(t)$的变化而增减，这就是\uwave{扩散电容}（Diffusion Capacitance）。
+
+\begin{BoxDefinition}[二极管的扩散电容]
+    二极管的扩散电容定义为
+    \begin{Equation}
+        C_d=\eval{\dv{Q}{V_a}}_{V_a=V_0}
+    \end{Equation}
+\end{BoxDefinition}
+
+接下来，我们将定量计算二极管的扩散电容（实际将直接计算小信号下的导纳）。
 \begin{BoxFormula}[二极管的扩散电容]
     二极管的扩散电容可以表示为
     \begin{Equation}
@@ -66,10 +73,8 @@ PN结的理想电流--电压关系已经在\fancyref{eqt:PN结的理想电流--�
 \end{BoxFormula}
 
 \begin{Figure}[扩散电容的来源]
-    \includegraphics[width=0.95\linewidth]{build/Chapter02C_01.fig.pdf}
-\end{Figure}
-
-我们下面将定量计算PN结的扩散电容$C_d$（实际我们将直接计算小信号下的导纳）。
+    \includegraphics[width=1.00\linewidth]{build/Chapter02C_01.fig.pdf}
+\end{Figure}\vspace{0.0cm}
 
 \begin{BoxFormula}[PN结的小信号导纳]
     PN结的小信号导纳为
@@ -210,7 +215,7 @@ PN结的理想电流--电压关系已经在\fancyref{eqt:PN结的理想电流--�
     \end{Equation}
     即$J_{p0}$给出稳态空穴分布的扩散电流，而$j_{p0}=\hat{J_p}\e^{\j\omega t}$给出时变空穴分布的扩散电流。需要指出的是，由于我们在研究小信号模型，这里其实并不关心总电流，只关心相量$\hat{J_p}$的表达式。
 
-    此处的$J_{p0}$已经在\fancyref{eqt:PN结的理想电流--电压关系}计算过了
+    此处的$J_{p0}$已经在\fancyref{fml:PN结的理想电流--电压关系}计算过了
     \begin{Equation}&[26]
         J_{p0}=-eD_p\eval{\pdv{\fdd{p_0}}{x}}_{x=0}=\frac{eD_pp_{n0}}{L_p}\qty[\exp(\frac{eV_0}{\kB T})-1]
     \end{Equation}
