@@ -1,0 +1,171 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\tikzset{E0/.style={very thick}}
+\tikzset{EF/.style={green,thick}}
+\tikzset{EX/.style={thick}}
+\tikzset{L/.style={gray,latex-latex,very thin}}
+\tikzset{LW/.style={L,green!50!black}}
+\tikzset{B/.style={gray,dashed}}
+\tikzset{A/.style={gray,dotted,thin}}
+    
+\path
+    (0,0) coordinate (A)
+    ++(2.5,0) coordinate (B)
+    ++(1.5,0) coordinate (C)
+    ++(2.5,0) coordinate (D)
+    ++(0.7,0) coordinate (E)
+    ++(0.4,0) coordinate (F);
+
+\path
+    (0,0)     coordinate (E0m)
+    (0,-5)    coordinate (EFm)
+    (0,-1)    coordinate (E0s)
+    (0,-3)    coordinate (Ecx)
+    (0,-4)    coordinate (Ec)
+    (0,-5)    coordinate (EFs)
+    (0,-5.5)  coordinate (p0)
+    (0,-7.0)  coordinate (Dx)
+    (0,-6.5)  coordinate (Evx)
+    (0,-7.5)  coordinate (Ev)
+    (0,-8.0)  coordinate (Bk1)
+    (0,-8.5)  coordinate (Bk)
+    (0,-9.0)  coordinate (Bk2)
+    (0,-9.2)  coordinate (Bk3);
+
+\foreach \x in {E0m,EFm,E0s,Ecx,Ec,EFs,Dx,Evx,Ev,Bk1,Bk,Bk2,Bk3,p0}
+{
+    \foreach \y in {A,B,C,D,E,F}
+    {
+        \path (\x-|\y) coordinate (\x\y);
+    }
+}
+
+\draw[B] (B) -- (Bk2B);
+\draw[B] (C) -- (Bk2C);
+
+\draw[E0]
+(E0sD) 
+node[right] {$E_0$}
+-- 
+(E0sC)
+--
+(E0mB)
+--
+(E0mA)
+node[left] {$E_0$};
+
+\draw[A] (E0mB)--(E0mD);
+
+\draw[EF] (EFmB) -- (EFmA)
+node[left] {$E_F$};
+
+\draw[EF] (EFsC) -- (EFsD)
+node[right] {$E_F$};
+
+\draw[A,green] (EFmB)--(EFsC);
+
+\draw[EX] (EcxC) 
+to[out=-70,in=180] ($(EcC)+(0.75,0)$)
+coordinate (EcC')
+-- (EcD)
+node[right] {$E_c$};
+
+\draw[A] (EcC') -- (EcC);
+\draw[A] (EcxA)--(EcxC) -- (EcxD);
+
+\draw[EX] (EvxC) 
+to[out=-70,in=180] ($(EvC)+(0.75,0)$) 
+coordinate (EvC')
+-- (EvD)
+node[right] {$E_v$};
+
+\draw[A] (EvC') -- (EvC);
+\draw[A] (EvxC) -- (EvxD);
+
+\draw[LW]
+($(E0mA)!0.25!(E0mB)$)--
+node[left] {$e\phi_m$}
+($(EFmA)!0.25!(EFmB)$);
+
+\draw[LW,latex-]
+($(E0sD)!0.25!(E0sC)$)--
+node[right] {$e\phi_s$}
+($(EcxD)!0.25!(EcxC)$)
+node[point=black!50!green]{};
+
+\draw[LW,-latex]
+($(EcD)!0.25!(EcC)$)
+node[point=black!50!green]{}
+--
+($(EFsD)!0.25!(EFsC)$);
+
+\draw[L]
+($(EcxC)!0.5!(EcxD)$)--
+node[right] {$e(V_{bi}-\delt{V_\te{ox}})$}
+($(EcC)!0.5!(EcD)$);
+
+\draw[L]
+($(E0sD)!0.75!(E0sC)$)--
+node[right] {$e\chi$}
+($(EcxD)!0.75!(EcxC)$);
+
+\draw[L]
+($(EcD)!0.75!(EcC)$)--
+node[right] {$e\phi_n$}
+($(EFsD)!0.75!(EFsC)$);
+
+\draw[L]
+($(E0mD)!0.5!(E0mC)$)--
+node[right] {$e\delt{V_\te{ox}}$}
+($(E0sD)!0.5!(E0sC)$);
+
+\draw[L]
+($(EcxA)!0.75!(EcxB)$)--
+node[left] {$e\phi_{Bn}$}
+($(EFmA)!0.75!(EFmB)$);
+
+\draw[L]
+(DxB) -- node[above] {$\delta$} (DxC);
+
+\draw[black,dashed] (p0C) node[above right,red] {\tiny 受主表面能级} node[below right,blue] {\tiny 施主表面能级} -- (p0D);
+
+\draw[L] ($(p0C)!0.75!(p0D)$) -- node[right] {$e\phi_0$} ($(EvxC)!0.75!(EvxD)$);
+
+\foreach \y in {-3,-3.15,...,-5.5}
+{
+    \draw[red] (3.75,\y) -- (4.1,\y);
+}
+
+\foreach \y in {-5.55,-5.70,...,-6.5}
+{
+    \draw[blue] (3.75,\y) -- (4.1,\y);
+}
+
+\foreach \y in {-3,-3.15,...,-5}
+{
+    \draw[black,very thin] (3.8,\y) ++(0,0.045) circle (0.02);
+}
+
+\foreach \y in {-5.1,-5.25,...,-6.5}
+{
+    \draw[fill=black] (3.8,\y) ++(0,0.045) circle (0.02);
+}
+
+\draw[dashed] (p0C) -- ($(p0C)!1.3!(p0B)$);
+\draw[L,red] ($(EFmC)!0.40!(EFmB)$) -- node[left] {$Q_{SS}$} node[right] {\tiny $\ominus$} ($(p0C)!0.40!(p0B)$);
+
+\draw[L,-latex] ($(EFmC)!0.6!(EFmB)$) --  ++(0,1) node[above] {\tiny 电中性};
+\draw[L,-latex] ($(p0C)!0.6!(p0B)$) --  ++(0,-0.5) node[below] {\tiny 电中性};
+
+\draw[ultra thin] (EcE)--(EcF);
+\draw[ultra thin] (EvE)--(EvF);
+\draw[L] ($(EcE)!0.5!(EcF)$) -- node[left] {$E_g$} ($(EvE)!0.5!(EvF)$);
+
+\draw[gray,ultra thin]
+($(Bk2A)+(-1,-0.8)$) rectangle ($(E0mD)+(1.5,0.5)$);
+
+\end{tikzpicture}
+\end{document}
