@@ -1,0 +1,189 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\tikzset{E0/.style={very thick}}
+\tikzset{EF/.style={green,thick}}
+\tikzset{EX/.style={thick}}
+\tikzset{L/.style={gray,latex-latex,very thin}}
+\tikzset{LW/.style={L,green!50!black}}
+\tikzset{B/.style={gray,dashed}}
+\tikzset{A/.style={gray,dotted,thin}}
+
+\def\ostn{2/3}
+\def\ostp{4/3}
+    
+\path
+    (0,0) coordinate (A)
+    ++(2.5,0) coordinate (B)
+    ++(0,0) coordinate (C)
+    ++(2.5,0) coordinate (D)
+    ($(B)+(-\ostn,0)$) coordinate (B')
+    ($(C)+(+\ostp,0)$) coordinate (C');
+
+\path
+    (0,0)     coordinate (E0p)
+    (0,-2.2)  coordinate (Ecp)
+    (0,-5.5)  coordinate (EFp)
+    (0,-6.5)  coordinate (Evp)
+    (0,-2)    coordinate (E0n)
+    (0,-5.0)  coordinate (Ecn)
+    (0,-5.5)  coordinate (EFn)
+    (0,-7.0)  coordinate (Evn)
+    (0,-8.0)  coordinate (Bk1)
+    (0,-9.0)  coordinate (Bk2)
+    ($(E0n)+(0,\ostn)$) coordinate (E0x)
+    ($(Ecp)+(0,-\ostp)$) coordinate (Ecp')
+    ($(Evp)+(0,-\ostp)$) coordinate (Evp')
+    ($(Ecn)+(0,+\ostn)$) coordinate (Ecn')
+    ($(Evn)+(0,+\ostn)$) coordinate (Evn');
+
+\foreach \x in {E0p,Ecp,EFp,Evp,E0n,Ecn,EFn,Evn,Ecp',Evp',Ecn',Evn',E0x,Bk1,Bk2}
+{
+    \foreach \y in {A,B,C,D,B',C'}
+    {
+        \path (\x-|\y) coordinate (\x\y);
+    }
+}
+
+\draw[B] (B) -- (Bk2B);
+\draw[B] (C) -- (Bk2C);
+
+\draw[E0] (E0nA) 
+node[left] {$E_0$}
+-- ($(E0nB)-(2/3,0)$)
+parabola ($(E0pC)!0.66!(E0nB)$)
+parabola[bend at end] ($(E0pC)+(4/3,0)$)
+-- (E0pD)
+node[right] {$E_0$};
+
+
+% \draw[E0] (E0nB) -- (E0nA) 
+% node[left] {$E_0$};
+
+% \draw[E0] (E0pC) -- (E0pD) 
+% node[right] {$E_0$};
+
+%---
+
+\draw[EF] (EFpC) -- (EFpD)
+node[right] {$E_{Fp}$};
+
+\draw[EX] (EcpD)
+node[right] {$E_{cp}$}
+-- (EcpC')
+parabola (Ecp'C);
+
+\draw[EX] (EvpD)
+node[right] {$E_{vp}$}
+-- (EvpC')
+parabola (Evp'C);
+
+%---
+
+\draw[EF] (EFnB) -- (EFnA)
+node[left] {$E_{Fn}$};
+
+\draw[EX] (EcnA)
+node[left] {$E_{cn}$}
+-- (EcnB')
+parabola (Ecn'B);
+
+\draw[EX] (EvnA)
+node[left] {$E_{vn}$}
+-- (EvnB')
+parabola (Evn'B);
+
+%---
+
+\draw[A] (E0pC') -- (E0pA);
+
+\draw[fill=blue!80!white]
+($(Bk1A)+(-0.75,0)$) rectangle 
+node[white]{窄禁带半导体} 
+node[below=0.5cm] {\small N型}
+(Bk2B);
+
+\draw[fill=red!80!white]
+($(Bk1D)+(+0.75,0)$) rectangle 
+node[white]{宽禁带半导体}
+node[below=0.5cm] {\small P型}
+(Bk2C);
+
+\path ($(Bk2B)!0.5!(Bk2C)$) node[below=0.2cm] {\small $\<\te{nP结}>$};
+
+\draw[LW]
+($(E0nA)!0.1!(E0nB)$)--
+node[left] {$e\phi_{sn}$}
+($(EFnA)!0.1!(EFnB)$);
+
+\draw[LW]
+($(E0pD)!0.1!(E0pC)$)--
+node[right] {$e\phi_{sp}$}
+($(EFpD)!0.1!(EFpC)$);
+
+\draw[L]
+($(E0nA)!0.45!(E0nB)$)--
+node[left] {$e\chi_{n}$}
+($(EcnA)!0.45!(EcnB)$);
+
+\draw[L]
+($(E0pD)!0.45!(E0pC)$)--
+node[right] {$e\chi_p$}
+($(EcpD)!0.45!(EcpC)$);
+
+\draw[L]
+($(EcnA)!0.45!(EcnB)$)--
+node[left] {$E_{gn}$}
+($(EvnA)!0.45!(EvnB)$);
+
+\draw[L]
+($(EcpD)!0.45!(EcpC)$)--
+node[right] {$E_{gp}$}
+($(EvpD)!0.45!(EvpC)$);
+
+\draw[A] (Ecp'B') -- ($(Ecp'C')+(-0.2,0)$);
+\draw[A] (Ecn'B') -- ($(Ecn'C')+(-0.2,0)$);
+
+\draw[A] (Evp'B') -- ($(Evp'C')+(-0.2,0)$);
+\draw[A] (Evn'B') -- ($(Evn'C')+(-0.2,0)$);
+
+\draw[L]
+($(Ecp'B')!0.25!(Ecp'C')$)--
+node[left] {$\delt{E_c}$}
+($(Ecn'B')!0.25!(Ecn'C')$);
+
+\draw[L]
+($(Evp'B')!0.25!(Evp'C')$)--
+node[left,pos=0.3] {$\delt{E_v}$}
+($(Evn'B')!0.25!(Evn'C')$);
+
+\draw[L]
+($(E0pA)!0.1!(E0pB)$)
+-- node[left] {$V_{bi}$}
+($(E0nA)!0.1!(E0nB)$);
+
+\draw[A]
+(E0xB) -- ($(E0xB)!0.75!(E0xA)$);
+
+\draw[L]
+($(E0pA)!0.75!(E0pB)$)
+-- node[left] {$V_{bip}$}
+($(E0xA)!0.75!(E0xB)$);
+
+\draw[L]
+($(E0nA)!0.75!(E0nB)$)
+-- node[left] {$V_{bin}$}
+($(E0xA)!0.75!(E0xB)$);
+
+\draw[L]
+($(E0pA)!0.1!(E0pB)$)
+-- node[left] {$V_{bi}$}
+($(E0nA)!0.1!(E0nB)$);
+
+\draw[gray,ultra thin]
+($(Bk2A)+(-1,-0.8)$) rectangle ($(E0pD)+(1,0.5)$);
+
+\end{tikzpicture}
+\end{document}
