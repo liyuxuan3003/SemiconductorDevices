@@ -1,0 +1,42 @@
+\documentclass{xStandalone}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+\path
+(0,0) coordinate (A)
+++(1.5,0) coordinate (B)
+++(0.5,0) coordinate (C)
+++(1.5,0) coordinate (D);
+
+\path 
+(0,0) coordinate (E0)
+(0,-1) coordinate (Ec1)
+(0,-2) coordinate (Ev1)
+(0,-1.5) coordinate (Ec2)
+(0,-3.5) coordinate (Ev2)
+(0,-5.5) coordinate (Bd);
+
+\foreach \x in {A,B,C,D}
+{
+    \foreach \y in {E0,Ec1,Ev1,Ec2,Ev2,Bd}
+    {
+        \path (\x|-\y) coordinate (\y\x);
+    }
+}
+
+\draw (Ec1A) node[left] {$E_{c1}$} --(Ec1B);
+\draw (Ev1A) node[left] {$E_{v1}$} --(Ev1B);
+\draw (Ec2D) node[right] {$E_{c2}$} --(Ec2C);
+\draw (Ev2D) node[right] {$E_{v2}$} --(Ev2C);
+
+\draw[gray,ultra thin] ($(E0A)+(-0.9,0.2)$) rectangle ($(BdD)+(0.9,-0.2)$);
+
+\draw[gray,thin,dashed] (E0B)--(BdB);
+\draw[gray,thin,dashed] (E0C)--(BdC);
+
+
+\end{tikzpicture}
+
+\end{document}

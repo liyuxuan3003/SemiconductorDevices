@@ -1,4 +1,52 @@
 \section{异质结}
+在前面讨论PN结时，我们假定半导体材料在整个结构中是同一种材料，只不过掺杂的类型和浓度不同，这被称为同质结。但实际上，两种不同的半导体也可以形成结，这被称为异质结。
+
+\subsection{异质结的材料}
+异质结由两种不同的半导体材料构成，两者具有不同的能带结构和禁带宽度，因此，能带在结的表面是不连续的。我们将半导体由一个窄禁带宽度材料突变到宽禁带材料形成的结称为突变结，常见的异质突变结包含锗--砷化镓（\ce{Ge}--\ce{As}）和砷化镓--铝镓砷（\ce{GaAs}--\ce{AlGaAs}）等。
+
+异质结也可以是缓变的，例如\ce{GaAs}--\ce{Al_xGa_{1-x}As}中的$x$可以在几纳米的距离上连续变化。
+
+而为了获得一个有用的异质结，两种材料的晶格常数必须严格匹配，因为晶格的任何不匹配都会在界面引入表面断层并最终导致表面态的产生，因此晶格常数的匹配非常重要。
+\begin{itemize}
+    \item 锗和砷化镓（\ce{Ge}--\ce{As}）的晶格常数的匹配程度，约为$0.13\%$。
+    \item 砷化镓和铝镓砷（\ce{GaAs}--\ce{AlGaAs}）的晶格常数的匹配程度，约为$0.14\%$。
+\end{itemize}
+
+\subsection{异质结的能带图}
+
+异质结是由一种窄带隙材料和一种宽带隙材料构成，两者的带隙的位置关系将对结的性质起重要作用。\xref{fig:异质结的三种能带关系}列出了三种可能的带隙相对位置关系，它们分别是
+\begin{itemize}
+    \item 宽带隙完全覆盖窄带隙，称为\uwave{跨骑}（Straddling）。
+    \item 宽带隙部分覆盖窄带隙，称为\uwave{交错}（Staggered）。
+    \item 宽带隙和窄带隙上下逐层排列，不重合，称为\uwave{错层}（Broken Gap）。
+\end{itemize}
+其中，存在于大多数异质结中的情况是跨骑，在这里我们也只讨论跨骑的情形。
+
+\begin{Figure}[异质结的三种能带关系]
+    \begin{FigureSub}[跨骑（Straddling）;跨骑]
+        \includegraphics[width=4.7cm]{build/Chapter03C_03.fig.pdf}
+    \end{FigureSub}
+    \begin{FigureSub}[交错（Staggered）;交错]
+        \includegraphics[width=4.7cm]{build/Chapter03C_04.fig.pdf}
+    \end{FigureSub}
+    \begin{FigureSub}[错层（Broken Gap）;错层]
+        \includegraphics[width=4.7cm]{build/Chapter03C_05.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+异质结还可以在另一个维度上分为四类
+\begin{itemize}
+    \item 若两端为异型掺杂，称为\uwave{反型异质结}（Anisotype Heterojunction），有nP和pN两类。
+    \item 若两端为同型掺杂，称为\uwave{同型异质结}（Isotype Heterojunction），有nN和pP两类。
+\end{itemize}
+这里的小写字母和大写字母分别代表“窄禁带”和“宽禁带”。以下仅以nP结为例进行讨论。\goodbreak
+
+\xref{fig:异质结的能带图}展示了一个nP异质结接触前后的能带变化。\xref{fig:异质结接触前}展示了接触前的能带，我们可以清楚的看到，左侧是窄禁带的N型半导体，右侧是宽禁带的P型半导体，显然，左侧的费米能级高于右侧。\xref{fig:异质结接触后}展示了接触后的能带。那么，我们如何理解异质结的能带图呢\nopagebreak
+\begin{itemize}
+    \item 异质结的能带图的核心逻辑是，接触后，$E_{Fn}$下移$\phi_{sp}-\phi_{sn}$与另一侧的$E_{Fp}$平齐，产生$V_{bi}=\phi_{sp}-\phi_{sn}$的势垒，两侧半导体的价带底、导带底、真空能级随之发生弯曲。
+    \item 相较PN结，异质结的能带图比较“怪异”的点在于，两侧的导带底和价带顶在能带弯曲后，在交界面并不连续，分别存在$\delt{E_c}$和$\delt{E_v}$的能量差，其中$\delt{E_c}$和$\delt{E_v}$分别是接触前，两侧半导体的导带能量差和价带能量差。只有真空能级$E_0$是连续变化的。
+    \item 相较金半结，异质结的能带图比较“怪异”的点在于，异质结的真空能级也会发生弯曲。
+\end{itemize}
 
 \begin{Figure}[异质结的能带图]
     \begin{FigureSub}[接触前;异质结接触前]
@@ -9,3 +57,149 @@
         \includegraphics[scale=0.8]{build/Chapter03C_02.fig.pdf}
     \end{FigureSub}
 \end{Figure}
+
+我们注意到
+\begin{Equation}
+    \delt{E_c}=e\chi_n-e\chi_p
+\end{Equation}
+以及
+\begin{Equation}
+    \delt{E_c}+\delt{E_v}=\delt{E_g}=E_{gp}-E_{gn}
+\end{Equation}
+
+简而言之，真空能级与价带和导带平行的发生弯曲，价带和导带存在$\delt{E_v}$和$\delt{E_c}$的不连续。
+
+\subsection{异质结的静电特性}
+
+\begin{BoxFormula}[异质结的内建电势差]
+    异质结的内建电势差可以表示为
+    \begin{Align}[10pt]
+        V_{bi}&=\frac{\kB T}{e}\ln(\frac{p{p_0}}{p_{n0}}\cdot\frac{N_{vn}}{N_{vp}})+\frac{\delt{E_v}}{e}\\
+        V_{bi}&=\frac{\kB T}{e}\ln(\frac{n_{n0}}{n_{p0}}\cdot\frac{N_{cp}}{N_{cn}})-\frac{\delt{E_c}}{e}
+    \end{Align}
+\end{BoxFormula}
+\begin{Proof}
+    如\xref{fig:异质结的能带图}所示，内建电势差$V_{bi}$应当是两侧功函数的差值
+    \begin{Equation}&[1]
+        V_{bi}=\phi_{sp}-\phi_{sn}
+    \end{Equation}
+    或者
+    \begin{Equation}&[2]
+        eV_{bi}=e\phi_{sp}-e\phi_{sn}
+    \end{Equation}
+    将功函数$e\phi_{s}$改写为电子亲合能$e\chi$与导带至费米能级的间距$E_{c}-E_{F}$的和
+    \begin{Equation}&[3]
+        eV_{bi}=[e\chi_p+(E_{cp}-E_{Fp})]-[e\chi_n-(E_{cn}-E_{Fn})]
+    \end{Equation}
+    将导带至费米能级的间距，用禁带宽度和价带至费米能级重新表示
+    \begin{Equation}&[4]
+        eV_{bi}=[e\chi_p+E_{gp}-(E_{Fp}-E_{vp})]-[e\chi_n+E_{gn}-(E_{Fn}-E_{vn})]
+    \end{Equation}
+    整理为
+    \begin{Equation}&[5]
+        eV_{bi}=e(\chi_p-\chi_n)+(E_{gp}-E_{gn})+(E_{Fn}-E_{vn})-(E_{Fp}-E_{vp})
+    \end{Equation}
+    进而得到
+    \begin{Equation}&[6]
+        eV_{bi}=-\delt{E_c}+\delt{E_g}+(E_{Fn}-E_{vn})-(E_{Fp}-E_{vp})
+    \end{Equation}
+    或
+    \begin{Equation}&[7]
+        eV_{bi}=\delt{E_v}+(E_{Fn}-E_{vn})-(E_{Fp}-E_{vp})
+    \end{Equation}
+    在半导体物理中，我们知道
+    \begin{Equation}&[8]
+        p_{n0}=N_{vn}\exp(\frac{E_{vn}-E_{Fn}}{\kB T})\qquad
+        p_{p0}=N_{vp}\exp(\frac{E_{vp}-E_{Fp}}{\kB T})
+    \end{Equation}
+    这就有
+    \begin{Equation}&[9]
+        E_{vn}-E_{Fn}=\kB T\ln(\frac{p_{n0}}{N_{vn}})\qquad
+        E_{vp}-E_{Fp}=\kB T\ln(\frac{p_{p0}}{N_{vp}})
+    \end{Equation}
+    或者
+    \begin{Equation}&[10]
+        E_{Fn}-E_{vn}=\kB T\ln(\frac{N_{vn}}{p_{n0}})\qquad
+        E_{Fp}-E_{vp}=\kB T\ln(\frac{N_{vp}}{p_{p0}})
+    \end{Equation}
+    将\xrefpeq{10}代入\xrefpeq{7}
+    \begin{Equation}&[11]
+        eV_{bi}=\delt{E_v}+\kB T\ln(\frac{N_{vn}}{p_{n0}})-\kB T\ln(\frac{N_{vp}}{p_{p0}})
+    \end{Equation}
+    合并对数项，这就得到了内建电势差价带表示的形式
+    \begin{Equation}*
+        eV_{bi}=\kB T\ln(\frac{p_{p0}}{p_{n0}}\cdot\frac{N_{vn}}{N_{vp}})+\delt{E_v}
+    \end{Equation}
+    而类似的，如果直接从\xrefpeq{3}而不是\xrefpeq{4}出发，还可以得到导带表示的形式
+    \begin{Equation}*
+        eV_{bi}=\kB T\ln(\frac{n_{p0}}{n_{n0}}\cdot\frac{N_{cn}}{N_{cp}})-\delt{E_c}\qedhere
+    \end{Equation}
+\end{Proof}
+异质结包括“电场、电势、空间电荷区宽度、势垒电容”的静电特性基本都可以效仿PN结的相关结论（\xref{fml:空间电荷区的电场}、\xref{fml:空间电荷区的电势}、\xref{fml:反偏时的空间电荷区宽度}、\xref{fml:二极管的势垒电容}）得到，唯一的两项区别是：第一，异质结两侧具有不同的介电常数$\epsilon_n$和$\epsilon_p$，因此部分公式需要做出调整，不过这些调整都是容易理解的，第二，异质结在我们的例子中是nP型，P区和N区位置对调，电场方向也相反。
+
+\begin{BoxFormula}[异质结的电场]
+    异质结（nP型）的电场$\E(x)$为
+    \begin{Equation}
+        \E(x)=
+        \begin{cases}
+            \mal{\frac{eN_{dn}}{\epsilon_n}(x_n+x)},&-x_n\leq x\leq 0\\[4ex]
+            \mal{\frac{eN_{ap}}{\epsilon_p}(x_p-x)},&0\leq x\leq +x_p
+        \end{cases}
+    \end{Equation}
+    其中$\epsilon_n,\epsilon_p$是N型和P型区域的介电常数，同时，应有
+    \begin{Equation}&[A]
+        N_{dn}x_n=N_{ap}x_p
+    \end{Equation}
+\end{BoxFormula}
+这里值得说明的是电中性条件\xrefpeq{A}是如何得来的，因为这和过去PN结的过程有些不同。
+
+我们或许会理所当然的觉得，电场在$x=0$处应当连续
+\begin{Equation}
+    \E(0^{-})=\E(0^{+})
+\end{Equation}
+我们过去在PN结中正是这么做的。但很明显，如果这里我们也这样假设，我们得到的结论会是$N_{dn}x_n\epsilon_p=N_{ap}x_p\epsilon_n$而不是$N_{dn}x_n=N_{ap}x_p$。问题出在，电磁场告诉我们，在两种电介质的界面，电位移矢量$D=\epsilon E$才是连续的那个矢量，电场强度$E$未必连续。过去PN结是同一种半导体材料，电位移和电场强度的区别无关紧要，但异质结中就要充分考虑这一点了。
+
+所以，\empx{异质结的电场在界面处并不连续}，正确的连续性条件应该是
+\begin{Equation}
+    \E(0^{-})\epsilon_n=\E(0^{+})\epsilon_p
+\end{Equation}
+由此即可得到正确的电中性条件$N_{dn}x_n=N_{ap}x_p$了。
+
+\begin{BoxFormula}[异质结的电势]
+    异质结的电势$\phi(x)$为
+    \begin{Equation}
+        \phi(x)=\begin{cases}
+            \mal{\frac{eN_{dn}}{2\epsilon_n}(x_n+x)^2},&-x_n<x<0\\[4mm]
+            \mal{V_{bi}-\frac{eN_{ap}}{2\epsilon_p}(x_p-x)^2},&0<x<+x_p
+        \end{cases}
+    \end{Equation}
+    其中$V_{bi}$可以被表示为
+    \begin{Equation}&[A]
+        V_{bi}=V_{bin}+V_{bip}=\frac{e}{2\epsilon_nN_{dn}x_n^2}+\frac{e}{2\epsilon_pN_{ap}x_p^2}
+    \end{Equation}
+\end{BoxFormula}
+
+在下面两个公式中，涉及到将$\epsilon_s$变为$\epsilon_n,\epsilon_p$的问题，可以用以下方法辅助记忆
+\begin{Equation}
+    \frac{\epsilon_s}{N_a+N_d}\quad\xlarr\quad
+    \frac{\epsilon_n\epsilon_p}{\epsilon_nN_{dn}+\epsilon_pN_{ap}}
+\end{Equation}
+即只要将PN结的相关公式按上方规则进行替换，得到的就是异质结的相应公式。
+\begin{BoxFormula}[异质结的空间电荷区宽度]
+    异质结在反偏电压$V_R$下，空间电荷区宽度$W$为
+    \begin{Equation}
+        W=\qty[\frac{2(V_{bi}+V_R)}{e}\qty(\frac{N_{dn}+N_{ap}}{N_{dn}N_{ap}})\qty(\frac{\epsilon_n\epsilon_p(N_{dn}+N_{ap})}{\epsilon_nN_{dn}+\epsilon_pN_{ap}})]^{1/2}
+    \end{Equation}
+    其中，$x_n$和$x_p$等于
+    \begin{Gather}[10pt]
+        x_n=\qty[\frac{2(V_{bi}+V_R)}{e}\qty(\frac{N_{ap}}{N_{dn}})\qty(\frac{\epsilon_n\epsilon_p}{\epsilon_nN_{dn}+\epsilon_pN_{ap}})]^{1/2}\\
+        x_p=\qty[\frac{2(V_{bi}+V_R)}{e}\qty(\frac{N_{dn}}{N_{ap}})\qty(\frac{\epsilon_n\epsilon_p}{\epsilon_nN_{dn}+\epsilon_pN_{ap}})]^{1/2}
+    \end{Gather}
+\end{BoxFormula}
+
+\begin{BoxFormula}[异质结的势垒电容]
+    异质结的势垒电容可以被表示为
+    \begin{Equation}
+        C_j=A\qty[\frac{e\epsilon_n\epsilon_pN_aN_d}{2(V_{bi}+V_R)(\epsilon_nN_{dn}+\epsilon_pN_{ap})}]^{1/2}
+    \end{Equation}
+\end{BoxFormula}

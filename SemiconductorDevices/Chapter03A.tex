@@ -134,28 +134,28 @@
 \begin{BoxFormula}[金半整流接触的电场分布]
     金半接触的电场分布满足
     \begin{Equation}
-        \E(x)=-\frac{eN_d}{\varepsilon_s}(x_n-x)
+        \E(x)=-\frac{eN_d}{\epsilon_s}(x_n-x)
     \end{Equation}
 \end{BoxFormula}
 
 \begin{BoxFormula}[金半整流接触的电势分布]
     金半接触的电势分布满足
     \begin{Equation}
-        \phi(x)=V_{bi}-\frac{eN_d}{2\varepsilon_s}(x_n-x)^2
+        \phi(x)=V_{bi}-\frac{eN_d}{2\epsilon_s}(x_n-x)^2
     \end{Equation}
 \end{BoxFormula}
 
 \begin{BoxFormula}[金半整流接触的空间电荷区宽度]
     金半整流接触的空间电荷区宽度满足
     \begin{Equation}
-        W=x_n=\qty[\frac{2\varepsilon_s(V_{bi}+V_R)}{eN_d}]^{1/2}
+        W=x_n=\qty[\frac{2\epsilon_s(V_{bi}+V_R)}{eN_d}]^{1/2}
     \end{Equation}
 \end{BoxFormula}
 
 \begin{BoxFormula}[金半整流接触的势垒电容]
     金半整流接触的势垒电容满足
     \begin{Equation}
-        C_j=A\qty[\frac{e\varepsilon_sN_d}{2(V_{bi}+V_R)}]^{1/2}
+        C_j=A\qty[\frac{e\epsilon_sN_d}{2(V_{bi}+V_R)}]^{1/2}
     \end{Equation}
 \end{BoxFormula}
 
@@ -172,7 +172,7 @@
 
     势垒的降低量为（对于电势而言是增加量）
     \begin{Equation}
-        \delt{\phi}=\frac{1}{4}\sqrt[\uproot{16}\leftroot{-2}4]{\frac{2e^3N_d(V_{bi}+V_R)}{\pi^2\varepsilon_s^3}}
+        \delt{\phi}=\frac{1}{4}\sqrt[\uproot{16}\leftroot{-2}4]{\frac{2e^3N_d(V_{bi}+V_R)}{\pi^2\epsilon_s^3}}
     \end{Equation}
     势垒的最高点内偏，现在位于（原先位于$x=0$处）
     \begin{Equation}
@@ -183,7 +183,7 @@
 \begin{Proof}
     设电子位于$x$处，那么镜像电荷将位于$-x$处，依照库伦作用，吸引力为
     \begin{Equation}&[1]
-        F=-\frac{1}{4\pi\varepsilon_s}\frac{e^2}{(2x)^2}=-\frac{e^2}{16\pi\varepsilon_s}\frac{1}{x^2}
+        F=-\frac{1}{4\pi\epsilon_s}\frac{e^2}{(2x)^2}=-\frac{e^2}{16\pi\epsilon_s}\frac{1}{x^2}
     \end{Equation}
     而另外一方面，电场力和电场的关系是
     \begin{Equation}&[2]
@@ -191,46 +191,46 @@
     \end{Equation}
     镜像电荷产生的电场$\E_M(x)$就为
     \begin{Equation}&[3]
-        \E_M(x)=\frac{e}{16\pi\varepsilon_s}\frac{1}{x^2}
+        \E_M(x)=\frac{e}{16\pi\epsilon_s}\frac{1}{x^2}
     \end{Equation}
     镜像电荷产生的电势$\phi_M(x)$可通过对$\E_M(x)$积分得到
     \begin{Equation}&[4]
-        \phi_M(x)=-\Int\E(x)\dx=\frac{e}{16\pi\varepsilon_s}\Int\frac{1}{x^2}\dx=\frac{e}{16\pi\varepsilon_s}\frac{1}{x}+C
+        \phi_M(x)=-\Int\E(x)\dx=\frac{e}{16\pi\epsilon_s}\Int\frac{1}{x^2}\dx=\frac{e}{16\pi\epsilon_s}\frac{1}{x}+C
     \end{Equation}
     此处定$\phi_M(x)$在无穷远处的电势为零，故
     \begin{Equation}&[5]
-        \phi_M(x)=\frac{e}{16\pi\varepsilon_s}\frac{1}{x}
+        \phi_M(x)=\frac{e}{16\pi\epsilon_s}\frac{1}{x}
     \end{Equation}
     原先的电势改记为$\phi_0(x)$，根据\fancyref{fml:金半整流接触的电势分布}
     \begin{Equation}&[6]
         \phi_0(x)=\begin{cases}
-            \mal{V_{bi}-\frac{eN_d}{2\varepsilon_s}(x_n-x)^2}, &0<x<x_n\\
+            \mal{V_{bi}-\frac{eN_d}{2\epsilon_s}(x_n-x)^2}, &0<x<x_n\\
             \mal{V_{bi}}, &x\geq x_n
         \end{cases}
     \end{Equation}
     将\xrefpeq{5}和\xrefpeq{6}相加，得到总电势$\phi(x)$
     \begin{Equation}&[7]
         \phi(x)=\phi_0(x)+\phi_M(x)=\begin{cases}
-            \mal{V_{bi}+\frac{e}{16\pi\varepsilon_s}\frac{1}{x}-\frac{eN_d}{2\varepsilon_s}(x_n-x)^2}, &0<x<x_n\\[5mm]
-            \mal{V_{bi}+\frac{e}{16\pi\varepsilon_s}\frac{1}{x}}, &x\geq x_n
+            \mal{V_{bi}+\frac{e}{16\pi\epsilon_s}\frac{1}{x}-\frac{eN_d}{2\epsilon_s}(x_n-x)^2}, &0<x<x_n\\[5mm]
+            \mal{V_{bi}+\frac{e}{16\pi\epsilon_s}\frac{1}{x}}, &x\geq x_n
         \end{cases}
         \hspace{-0.2cm}
     \end{Equation}
     原先的电场改记为$\E_0(x)$，根据\fancyref{fml:金半整流接触的电场分布}
     \begin{Equation}&[8]
-        \E_0(x)=-\frac{eN_d}{\varepsilon_s}(x_n-x)
+        \E_0(x)=-\frac{eN_d}{\epsilon_s}(x_n-x)
     \end{Equation}
     镜像电荷的电场$\E_M(x)$已经在\xrefpeq{3}中求出来了
     \begin{Equation}&[9]
-        \E_M(x)=\frac{e}{16\pi\varepsilon_s}\frac{1}{x^2}
+        \E_M(x)=\frac{e}{16\pi\epsilon_s}\frac{1}{x^2}
     \end{Equation}
     镜像电荷对电势的影响，关键在于求出\xrefpeq{7}中电势函数$\phi(x)$的极小值的出现位置$x_m$和极小电势$\delt{\phi}$（这里$\delt{\phi}$是相较$\phi_0(x)$的极小值点而言的，而$\phi_0(x)$的极小值为零），我们愿意相信$x_m\ll x_n$，因此，确定电势的极小值点的位置$x_m$，只需要分析电场$\E_0(x), \E_M(x)$在何处相等即可，因此，我们联立\xrefpeq{8}和\xrefpeq{9}，构成方程$\E_0(x_m)=\E_M(x_m)$
     \begin{Equation}&[10]
-        \frac{e}{16\pi\varepsilon_s}\frac{1}{x_m^2}=-\frac{eN_d}{\varepsilon_s}(x_n-x_m)
+        \frac{e}{16\pi\epsilon_s}\frac{1}{x_m^2}=-\frac{eN_d}{\epsilon_s}(x_n-x_m)
     \end{Equation}
     这是一个关于$x_m$的三次方程，并不好解，援引$x_m\ll x_n$的近似
     \begin{Equation}&[11]
-        \frac{e}{16\pi\varepsilon_s}\frac{1}{x_m^2}=-\frac{eN_d}{\varepsilon_s}x_n
+        \frac{e}{16\pi\epsilon_s}\frac{1}{x_m^2}=-\frac{eN_d}{\epsilon_s}x_n
     \end{Equation}
     容易得出
     \begin{Equation}&[12]
@@ -242,47 +242,47 @@
     \end{Equation}
     现在代入计算$\delt{\phi}=\phi(x_m)$，由于我们确信$x_m\ll x_n$，故\xrefpeq{7}的$\phi(x)$可以仅取第一部分
     \begin{Equation}&[14]
-        \phi(x)=V_{bi}+\frac{e}{16\pi\varepsilon_s}\frac{1}{x}-\frac{eN_d}{2\varepsilon_s}(x_n-x)^2
+        \phi(x)=V_{bi}+\frac{e}{16\pi\epsilon_s}\frac{1}{x}-\frac{eN_d}{2\epsilon_s}(x_n-x)^2
     \end{Equation}
     但为了简化结果，这里代入时忽略$\phi(x)$有关镜像力的项，即回归$\phi_0(x)$
     \begin{Equation}&[15]
-        \phi(x)=V_{bi}-\frac{eN_d}{2\varepsilon_s}(x_n-x)^2
+        \phi(x)=V_{bi}-\frac{eN_d}{2\epsilon_s}(x_n-x)^2
     \end{Equation}
     这就得到
     \begin{Equation}&[16]
-        \delt{\phi}=V_{bi}-\frac{eN_d}{2\varepsilon_s}(x_n-x_m)^2
+        \delt{\phi}=V_{bi}-\frac{eN_d}{2\epsilon_s}(x_n-x_m)^2
     \end{Equation}
     展开
     \begin{Equation}&[17]
-        \delt{\phi}=V_{bi}-\frac{eN_d}{2\varepsilon_s}(x_n^2-2xnx_m+x_m^2)
+        \delt{\phi}=V_{bi}-\frac{eN_d}{2\epsilon_s}(x_n^2-2xnx_m+x_m^2)
     \end{Equation}
     依据\fancyref{fml:空间电荷区的电势}
     \begin{Equation}&[18]
-        V_{bi}=\frac{e}{2\varepsilon_s}x_n^2
+        V_{bi}=\frac{e}{2\epsilon_s}x_n^2
     \end{Equation}
     运用\xrefpeq{18}就可以将\xrefpeq{17}简化为
     \begin{Equation}&[19]
-        \delt{\phi}=\frac{eN_d}{2\varepsilon_s}\qty(2x_nx_m-x_m^2)
+        \delt{\phi}=\frac{eN_d}{2\epsilon_s}\qty(2x_nx_m-x_m^2)
     \end{Equation}
     运用$x_m\ll x_n$忽略二次项$x_m^2$
     \begin{Equation}
-        \delt{\phi}=\frac{eN_d}{\varepsilon_s}x_nx_m
+        \delt{\phi}=\frac{eN_d}{\epsilon_s}x_nx_m
     \end{Equation}
     代入\xrefpeq{13}给出的$x_m$
     \begin{Equation}
-        \delt{\phi}=\frac{1}{4}\frac{eN_d}{\varepsilon_s}x_n\sqrt{\frac{1}{\pi N_dx_n}}
+        \delt{\phi}=\frac{1}{4}\frac{eN_d}{\epsilon_s}x_n\sqrt{\frac{1}{\pi N_dx_n}}
     \end{Equation}
     将各项整合到根号下
     \begin{Equation}
-        \delt{\phi}=\frac{1}{4}\sqrt{\frac{e^2N_dx_n}{\pi\varepsilon_s^2}}
+        \delt{\phi}=\frac{1}{4}\sqrt{\frac{e^2N_dx_n}{\pi\epsilon_s^2}}
     \end{Equation}
     有趣的是我们还可以将$x_n$代入，根据\fancyref{fml:金半整流接触的空间电荷区宽度}
     \begin{Equation}
-        \delt{\phi}=\frac{1}{4}\sqrt{\frac{e^2N_d}{\pi\varepsilon_s^2}\sqrt{\frac{2\varepsilon_s(V_{bi}+V_R)}{eN_d}}}
+        \delt{\phi}=\frac{1}{4}\sqrt{\frac{e^2N_d}{\pi\epsilon_s^2}\sqrt{\frac{2\epsilon_s(V_{bi}+V_R)}{eN_d}}}
     \end{Equation}
     将各项整合到内层根号，并合并内外层根号
     \begin{Equation}
-        \delt{\phi}=\sqrt[\uproot{16}\leftroot{-2}4]{\frac{2e^4N_d(V_{bi}+V_R)}{\pi^2\varepsilon_s^3}}
+        \delt{\phi}=\sqrt[\uproot{16}\leftroot{-2}4]{\frac{2e^4N_d(V_{bi}+V_R)}{\pi^2\epsilon_s^3}}
     \end{Equation}
     至此，我们就完成了所有的计算。
 \end{Proof}
@@ -330,7 +330,7 @@
 
 这里也可以做一些定量的分析，有公式指出以下的参数的关系
 \begin{Equation}
-    (E_g-e\phi_0-e\phi_{Bn})=\frac{1}{eD_\te{it}}\sqrt{2e\varepsilon_sN_d(\phi_{Bn}-\phi_n)}-\frac{\varepsilon_i}{eD_\te{it}\delta}[\phi_m-(\chi+\phi_{Bn})]
+    (E_g-e\phi_0-e\phi_{Bn})=\frac{1}{eD_\te{it}}\sqrt{2e\epsilon_sN_d(\phi_{Bn}-\phi_n)}-\frac{\epsilon_i}{eD_\te{it}\delta}[\phi_m-(\chi+\phi_{Bn})]
 \end{Equation}
 1. 第一种情况，若$D_\te{it}\to\infty$，则右侧两项均可以忽略，有
 \begin{Equation}
