@@ -1,0 +1,92 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+    
+\xValDefine{xL}[-3]
+\xValDefine{xR}[+3]
+\xValOffset{xBorL}{xL}[-0.75]
+\xValOffset{xBorR}{xR}[+0.75]
+\xValProportion{xBEL}{xL}{xR}[0.22]
+\xValProportion{xBER}{xL}{xR}[0.37]
+\xValProportion{xBCL}{xL}{xR}[0.50]
+\xValProportion{xBCR}{xL}{xR}[0.73]
+\xValMiddle{xBE}{xBEL}{xBER}
+\xValMiddle{xBC}{xBCL}{xBCR}
+\xValMiddle{xEp}{xL}{xBEL}
+\xValMiddle{xBp}{xBER}{xBCL}
+\xValMiddle{xCp}{xBCR}{xR}
+
+\xValDefine{yA}[1]
+\xValDefine{yB}[0]
+\xValOffset{yEBA}{yB}[-0.75]
+\xValOffset{yEBB}{yEBA}[-5]
+\xValOffset{yBorB}{yEBB}[-0.25]
+\xValOffset{yBorA}{yA}[+0.25]
+
+\xValDefine{disCFa}[-0.7]
+\xValDefine{disCFb}[-1.5]
+
+\xValOffset{yEcE}{yEBA}[-1.2]
+\xValOffset{yEfE}{yEcE}[\disCFa]
+\xValOffset{yEvE}{yEfE}[\disCFb]
+
+\xValOffset{yEcB}{yEBA}[-0.5]
+\xValOffset{yEfB}{yEcB}[\disCFb]
+\xValOffset{yEvB}{yEfB}[\disCFa]
+
+\xValOffset{yEcC}{yEBA}[-1.2]
+\xValOffset{yEfC}{yEcC}[\disCFa]
+\xValOffset{yEvC}{yEfC}[\disCFb]
+
+\xValMiddle{yEcBE}{yEcB}{yEcE}
+\xValMiddle{yEvBE}{yEvB}{yEvE}
+\xValMiddle{yEcBC}{yEcB}{yEcC}
+\xValMiddle{yEvBC}{yEvB}{yEvC}
+
+\xGeneratePoints{xL,xR,xBorL,xBorR,xBEL,xBER,xBCL,xBCR,xBE,xBC,xEp,xBp,xCp}{yA,yB,yEBA,yEBB,yEcE,yEfE,yEvE,yEcB,yEfB,yEvB,yEcC,yEfC,yEvC,yBorA,yBorB,yEcBE,yEvBE,yEcBC,yEvBC}
+
+\fill[mnmN0] (xL/yB) rectangle node[white] {$n^{++}\vphantom{n^{+}p^{+}}$} (xBEL/yA);
+\fill[mnmDepletion] (xBEL/yB) rectangle (xBER/yA);
+\fill[mnmP1] (xBER/yB) rectangle node[white] {$p^{+}\vphantom{n^{+}p^{+}}$}  (xBCL/yA);
+\fill[mnmDepletion] (xBCL/yB) rectangle (xBCR/yA);
+\fill[mnmN2] (xBCR/yB) rectangle node[white] {$n\vphantom{n^{+}p^{+}}$}  (xR/yA);
+
+\draw (xL/yB) rectangle (xR/yA);
+\foreach \x in {xBEL,xBER,xBCL,xBCR}
+{
+    \draw (\x/yB) -- (\x/yA);
+}
+
+\foreach \x in {xL,xR,xBEL,xBER,xBCL,xBCR}
+{
+    \draw[dotted,thin,gray] (\x/yEBA) -- (\x/yEBB);
+}
+
+\foreach \x/\n in {xEp/E,xBp/B,xCp/C}
+{
+    \path (\x/yB) node[below] {\n};
+}
+
+\draw[thick] (xL/yEcE) node[left] {$E_c$}
+    -- (xBEL/yEcE)
+    parabola (xBE/yEcBE) 
+    parabola[bend at end] (xBER/yEcB)
+    -- (xBCL/yEcB)
+    parabola (xBC/yEcBC) 
+    parabola[bend at end] (xBCR/yEcC)
+    -- (xR/yEcC) node[right] {$E_c$};
+
+\draw[thick] (xL/yEvE) node[left] {$E_v$}
+    -- (xBEL/yEvE)
+    parabola (xBE/yEvBE) 
+    parabola[bend at end] (xBER/yEvB)
+    -- (xBCL/yEvB)
+    parabola (xBC/yEvBC) 
+    parabola[bend at end] (xBCR/yEvC)
+    -- (xR/yEvC) node[right] {$E_v$};
+
+\draw[green] (xL/yEfE) node[left] {$E_F$} -- (xR/yEfC) node[right] {$E_F$};
+
+\end{tikzpicture}
+\end{document}

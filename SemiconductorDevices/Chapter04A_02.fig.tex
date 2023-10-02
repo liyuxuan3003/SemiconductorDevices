@@ -1,0 +1,46 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-3.5]
+\xValDefine{xR}[+3.5]
+\xValMiddle{xC}{xL}{xR}
+\xValOffset{xBorL}{xL}[-0.6]
+\xValOffset{xBorR}{xR}[+0.6]
+\xValProportion{xEL}{xL}{xR}[0.2]
+\xValMirror{xCR}{xEL}{xC}
+\xValProportion{xBL}{xEL}{xCR}[0.3]
+\xValProportion{xBR}{xEL}{xCR}[0.5]
+\xValOffset{xER}{xBL}
+\xValOffset{xCL}{xBR}
+\xValMiddle{xEc}{xEL}{xBL}
+\xValMiddle{xBc}{xBL}{xBR}
+\xValMiddle{xCc}{xBR}{xCR}
+
+\xValDefine{yA}[+0.7]
+\xValDefine{yB}[-0.7]
+\xValMiddle{yC}{yA}{yB}
+\xValOffset{yBB}{yB}[-1]
+\xValOffset{yBorB}{yBB}[-0.7]
+\xValOffset{yBorA}{yA}[+0.2]
+
+\xGeneratePoints{xL,xR,xC,xBorL,xBorR,xEL,xER,xCL,xCR,xBL,xBR,xEc,xBc,xCc}{yA,yB,yC,yBB,yBorB,yBorA}
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\fill[mnmP0] (xEL/yB) rectangle node[white] {$p^{++}\vphantom{p^{+}n^{+}}$} (xER/yA);
+\fill[mnmN1] (xBL/yB) rectangle node[white] {$n^{+}\vphantom{p^{+}n^{+}}$} (xBR/yA);
+\fill[mnmP2] (xCL/yB) rectangle node[white] {$p\vphantom{p^{+}n^{+}}$} (xCR/yA);
+
+\draw[rectangle] (xEL/yB) rectangle (xCR/yA);
+\draw (xBL/yB) -- (xBL/yA);
+\draw (xBR/yB) -- (xBR/yA);
+
+\draw (xEL/yC) -- node[above] {\footnotesize 发射极} node[below] {\footnotesize Emitter} (xL/yC) node[ocirc] {} node[left] {E};
+\draw (xCR/yC) -- node[above] {\footnotesize 集电极} node[below] {\footnotesize Collector} (xR/yC) node[ocirc] {} node[right] {C};
+
+\draw (xBc/yB) -- node[right] {\footnotesize Base} node[left] {\footnotesize 基极} (xBc/yBB) node[ocirc] {} node[below] {B};
+
+\end{tikzpicture}
+\end{document}

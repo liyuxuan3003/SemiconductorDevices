@@ -1,0 +1,56 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-3.5]
+\xValDefine{xR}[+3.5]
+\xValMiddle{xC}{xL}{xR}
+\xValOffset{xBorL}{xL}[-0.6]
+\xValOffset{xBorR}{xR}[+0.6]
+\xValProportion{xEL}{xL}{xR}[0.2]
+\xValMirror{xCR}{xEL}{xC}
+\xValProportion{xBL}{xEL}{xCR}[0.3]
+\xValProportion{xBR}{xEL}{xCR}[0.5]
+\xValOffset{xER}{xBL}
+\xValOffset{xCL}{xBR}
+\xValMiddle{xEc}{xEL}{xBL}
+\xValMiddle{xBc}{xBL}{xBR}
+\xValMiddle{xCc}{xBR}{xCR}
+
+\xValDefine{yA}[+0.7]
+\xValDefine{yB}[-0.7]
+\xValProportion{yBA}{yA}{yB}[0.75]
+\xValMiddle{yC}{yA}{yB}
+\xValOffset{yBB}{yB}[-1]
+\xValOffset{yBorB}{yBB}[-1.2]
+\xValOffset{yBorA}{yA}[+0.5]
+
+\xGeneratePoints{xL,xR,xC,xBorL,xBorR,xEL,xER,xCL,xCR,xBL,xBR,xEc,xBc,xCc}{yA,yB,yC,yBB,yBorB,yBorA,yBA}
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\fill[mnmN0] (xEL/yB) rectangle node[white] {$n^{++}\vphantom{p^{+}n^{+}}$} (xER/yA);
+\fill[mnmP1] (xBL/yB) rectangle node[white] {$p^{+}\vphantom{p^{+}n^{+}}$} (xBR/yA);
+\fill[mnmN2] (xCL/yB) rectangle node[white] {$n\vphantom{p^{+}n^{+}}$} (xCR/yA);
+
+\draw[rectangle] (xEL/yB) rectangle (xCR/yA);
+\draw (xBL/yB) -- (xBL/yA);
+\draw (xBR/yB) -- (xBR/yA);
+
+\draw (xEL/yC) to[short,i=$I_E$] (xL/yC) -- (xL/yBB) 
+to[battery1=~,l_=$+V_{BE}$] (xC/yBB) 
+to[battery1=~,l_=$-V_{BC}$] (xR/yBB)
+-- (xR/yC) to[short,i=$I_C$] (xCR/yC);
+
+\draw (xBc/yBB) to[short,i=$I_B$,*-] (xBc/yB);
+
+\path
+(xEc/yA) node[above] {E}
+(xBc/yA) node[above] {B}
+(xCc/yA) node[above] {C};
+
+\draw[-latex,thick,white] (xEc/yBA) -- node[above,pos=0.4] {\footnotesize $e^{-}$} (xBc/yBA);
+
+\end{tikzpicture}
+\end{document}

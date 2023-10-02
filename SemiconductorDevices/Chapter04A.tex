@@ -1,0 +1,111 @@
+\section{BJT的基本结构}
+
+\subsection{BJT的结构}
+
+BJT的结构如\xref{fig:BJT的结构简图}所示，其具有三个性质不同的掺杂区，包含两个PN结。
+
+
+
+\begin{Figure}[BJT的结构简图]
+    \begin{FigureSub}[NPN的结构简图]
+        \includegraphics[scale=0.87]{build/Chapter04A_01.fig.pdf}
+    \end{FigureSub}
+    \hspace{0.2cm}
+    \begin{FigureSub}[PNP的结构简图]
+        \includegraphics[scale=0.87]{build/Chapter04A_02.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+BJT可以分为NPN和PNP两种类型，我们主要以NPN型为例研究
+
+\begin{itemize}
+    \item 对于NPN型，三个掺杂区依次为N型、P型、N型，即两个共阳极的PN结。
+    \item 对于PNP\hspace{0.4em}型，三个掺杂区依次为P型、N型、P型，\hspace{0.1em}即两个共阴极的PN结。
+\end{itemize}
+
+BJT的三个区域依次为：\uwave{发射极}（Emitter, E）、\uwave{基极}（Base, B）、\uwave{集电极}（Collector, C）。但是，由于原理上的需要，这三个区域的性质是不对称的，这包含区域的掺杂浓度和宽度两方面
+\begin{itemize}
+    \item 就掺杂浓度而言，有$\te{E}>\te{B}>\te{C}$，如\xref{fig:NPN的结构简图}，三者用$n^{++}, p^{+},n$表示。通常而言，三者的典型掺杂浓度是$\si{10^{19} cm^{-3}}$、$\si{10^{17} cm^{-3}}$、$\si{10^{15} cm^{-3}}$，其中尤为重要的是发射区重掺。
+    \item 就区域宽度而言，有$\te{C}>\te{E}>\te{B}$，其中尤为重要的是基区的宽度必须非常窄。
+\end{itemize}
+由此可见，BJT在结构上并不对称，发射极和集电极是不对等的，不可以交换。
+
+BJT中，BE结称为\uwave{发射结}（Emitter Junction），BC结称为\uwave{集电结}（Collector Junction）。我们后面会看到，取决于这两个结是正偏和反偏，将最终给出BJT的四种工作状态。但眼下我们不需要了解这么多，我们只需要知道，在BJT最常用的工作区，即正向放大区下，两个结的工作状态是：\empx{发射结正偏，集电结反偏}。发射结发挥了重要的作用，因此，如\xref{fig:BJT的电路符号}中，我们用箭头标识发射结的正偏方向，有箭头一侧的为E，无箭头的一侧为B，而箭头的方向能帮助我们区分该BJT到底是NPN还是PNP，由E至B即为NPN，由B至E即为PNP。
+
+\begin{Figure}[BJT的电路符号]
+    \begin{FigureSub}[NPN的电路符号]
+        \includegraphics{build/Chapter04A_09.fig.pdf}
+    \end{FigureSub}
+    \hspace{1cm}
+    \begin{FigureSub}[PNP的电路符号]
+        \includegraphics{build/Chapter04A_10.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+然而，我们要说明的是，\xref{fig:BJT的结构简图}只是一个简化示意图。实际的结构要复杂很多。如\xref{fig:BJT的结构}所示，首先，为了将BJT作在平面上，各区域并不是简单的线性排列。其次，集电极的主体尽管是轻掺的$n$型，但是，和金属接触处仍需要$n^{++}$重掺以构成欧姆接触。最后，底部为降低半导体的电阻，还需添加$n^{++}$重掺的掩埋层。不过\xref{fig:BJT的结构简图}对于的简图理论学习仍然是很有帮助的。
+
+\begin{Figure}[BJT的结构]
+    \begin{FigureSub}[NPN的结构]
+        \includegraphics[scale=0.87]{build/Chapter04A_03.fig.pdf}
+    \end{FigureSub}
+    \hspace{0.2cm}
+    \begin{FigureSub}[PNP的结构]
+        \includegraphics[scale=0.87]{build/Chapter04A_04.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+\subsection{BJT的原理}
+现在的问题是，人们总是声称BJT可以放大，然而BJT到底如何工作？这里先来做一个简要的讨论。如\xref{fig:BJT的核心原理}所示，其中，$V_{BE}$和$V_{BC}$表示发射结和集电结的偏压，但由于我们更关心放大区，故用$+V_{BE}$和$-V_{BC}$标识“发射结正偏压”和“集电结负偏压”。$I_{E},I_{B},I_C$则是各极的电流。好！现在让我们先忘掉集电区的存在，只考虑发射结，很明显发射结不过是一个我们很熟悉的正偏PN结，从基区至发射区将有较大的正偏电流，且显然有$I_E=I_B$成立。由于发射结中，相对而言，发射区是$n^{++}$重掺的，因此，发射结的电流中主要以发射区至基区的电子电流为主。而引入集电区的存在后，一切都改变了。从表面上看，集电结不过是一个简单的反偏PN结，照道理基区和集电区之间应该是“不导通”的。问题是，反偏电流很小的原因仅仅在于少子很少，并没有什么实际阻碍，只要能补充少子，那么反偏电流同样可以很大。
+
+现在让我们联合起来考虑NPN的特性：\empx{发射结被设计为重掺}，发射结正偏时向基区输送了巨量电子，这些电子原本应通过基极被导出，然而，\empx{基区被设计的很窄}，电子中只有很少的一部分会从基极流出，电子大部分都迅速穿过了整个基极到达了边界，这为反偏集电结提供了大量电子。在边界上，集电结反偏产生的强电场将这些电子扫入集电区，产生很大的反偏电流。
+
+\begin{Figure}[BJT的核心原理]
+    \includegraphics{build/Chapter04A_11.fig.pdf}
+\end{Figure}
+
+总结起来，在BJT中，正偏发射结的正偏电流$I_E$的电子只有很少的部分流向$I_B$，大部分都继续流向了集电区形成$I_C$，原因是，反偏集电结的强电场从基区中“窃取”了大部分电子流。
+\begin{Equation}
+    I_{E}\gg I_{B}\qquad I_{E}\approx I_C
+\end{Equation}
+这个比例是相当悬殊的，通常我们记
+\begin{Equation}
+    I_C=\beta I_B
+\end{Equation}
+这里的$\beta$通常可以达到50至200，是一个相当大的电流增益，这就是BJT的放大原理！简而言之，BJT可以将基极电流$I_B$放大将近百倍形成集电极电流$I_C$，以小电流控制大电流。
+
+这里我们看到，“发射结”和“集电结”这两个名称是非常恰当的
+\begin{itemize}
+    \item 发射结向基区“发射”电子，形成正偏电流$I_E$。
+    \item 集电结从基区“收集”电子，形成反偏电流$I_C$。
+\end{itemize}
+有关电流的朝向可能会让我们困惑，在\xref{fig:BJT的核心原理}中，我们可能会觉得是$I_E$是由$I_C$和$I_B$汇聚而成的。但通过上述讨论我们知道，电子流在这里发挥主要作用，电子流的方向与电流相反，因此从电子流的观点看，实质上是$I_E$的电子流分散为$I_C$和$I_B$。这种矛盾并不是特别要紧，我们可以“谁产生谁”或“谁导致谁”的因果思维直观理解物理过程，但是，这之后，我们要始终牢记物理的本质是数量关系而非因果。这里唯一真实的是$I_E=I_{B}+I_C$而不是汇聚或分散。
+
+
+% 最后，让我们讨论一些一般性的东西。实际上，包括BJT、JFET、MOSFET在内的任何晶体管，从形式上而言都是两个方向相反的PN结，但由于这两个相反的PN结在结构上通过某种方式“紧密联系”起来，其所连接的两端（BJT称射集E,C，FET称源漏S,D）可以在第三端（BJT称基B，FET称栅G）的控制下导通，具有完全不同于孤立相反PN结的性质。
+
+% 而所谓晶体管的类型，无非就是这种“紧密联系”的方式方法不同，
+
+% \begin{Figure}[晶体管的一般结构]
+%     \begin{FigureSub}[N型器件]
+%         \includegraphics[scale=0.87]{build/Chapter04A_05.fig.pdf}
+%     \end{FigureSub}
+%     \hspace{0.2cm}
+%     \begin{FigureSub}[N型器件]
+%         \includegraphics[scale=0.87]{build/Chapter04A_06.fig.pdf}
+%     \end{FigureSub}
+% \end{Figure}
+
+\subsection{BJT的能带}
+令人惊讶的是，尽管BJT的原理比较费解，但是BJT的能带图却非常简单。
+
+\begin{Figure}[BJT的能带]
+    \begin{FigureSub}[截止区]
+        \includegraphics[scale=0.9]{build/Chapter04A_07.fig.pdf}
+    \end{FigureSub}
+    \begin{FigureSub}[放大区]
+        \includegraphics[scale=0.9]{build/Chapter04A_08.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+在\xref{fig:截止区}和\xref{fig:放大区}中，分别展示了BJT在零偏和处于正向放大区（发射结正偏，集电结反偏）时的图像，我们看到，两者不过就是两个处于相应偏置的PN结的能带图的拼接罢了。
+

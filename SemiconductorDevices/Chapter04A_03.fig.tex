@@ -1,0 +1,50 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-3.5]
+\xValDefine{xR}[+3.5]
+\xValMiddle{xC}{xL}{xR}
+\xValProportion{xBL}{xL}{xR}[0.05]
+\xValProportion{xBR}{xL}{xR}[0.60]
+\xValProportion{xBp}{xL}{xR}[0.50]
+\xValProportion{xBpx}{xBL}{xBR}
+\xValProportion{xEL}{xL}{xR}[0.10]
+\xValProportion{xER}{xL}{xR}[0.25]
+\xValMiddle{xEp}{xEL}{xER}
+\xValMirror{xCL}{xER}{xC}
+\xValMirror{xCR}{xEL}{xC}
+\xValMiddle{xCp}{xCL}{xCR}
+\xValProportion{xBuL}{xL}{xR}[0.1]
+\xValMirror{xBuR}{xBuL}{xC}
+\xValOffset{xBorL}{xL}[-0.6]
+\xValOffset{xBorR}{xR}[+0.6]
+
+\xValDefine{yB}[0.0]
+\xValDefine{yA}[2.0]
+\xValOffset{yPin}{yA}[1.0]
+\xValProportion{yDopeA}{yA}{yB}[0.25]
+\xValProportion{yDopeB}{yA}{yB}[0.4]
+\xValProportion{yDopeC}{yA}{yB}[0.8]
+\xValOffset{yBorB}{yB}[-0.5]
+\xValOffset{yBorA}{yPin}[+0.6]
+
+\xGeneratePoints{xL,xR,xBL,xBR,xBp,xBpx,xEL,xER,xEp,xCL,xCR,xCp,xBuL,xBuR,xBorL,xBorR}{yB,yA,yPin,yDopeA,yDopeB,yDopeC,yBorB,yBorA}
+
+\draw[fill=mnmN2] (xL/yB) rectangle node[white,below] {$n$}  (xR/yA);
+\draw[fill=mnmP1] (xBL/yDopeB) rectangle node[white,right] {$p^{+}$} (xBR/yA);
+\draw[fill=mnmN0] (xEL/yDopeA) rectangle node[white] {$n^{++}$} (xER/yA);
+\draw[fill=mnmN0] (xCL/yDopeA) rectangle node[white] {$n^{++}$} (xCR/yA);
+\draw[fill=mnmN0] (xBuL/yDopeC) rectangle node[white] {\small $n^{++}$} (xBuR/yB);
+
+\draw (xBp/yA) -- node[right] {\footnotesize Base} node[left] {\footnotesize 基集} (xBp/yPin) node[ocirc] {} node[above] {B};
+
+\draw (xCp/yA) -- node[right] {\footnotesize Collector} node[left] {\footnotesize 集电集} (xCp/yPin) node[ocirc] {} node[above] {C};
+
+\draw (xEp/yA) -- node[right] {\footnotesize Emitter} node[left] {\footnotesize 发射极} (xEp/yPin) node[ocirc] {} node[above] {E};
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\end{tikzpicture}
+\end{document}

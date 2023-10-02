@@ -9,3 +9,79 @@
 
 \newcommand{\mne}{m_{n}^{*}}
 \newcommand{\mpe}{m_{p}^{*}}
+
+\def\xEval#1{\expandafter\csname#1\endcsname}
+
+\NewDocumentCommand{\xGeneratePoints}{mm}%
+{%
+    \foreach \x in {#1}%
+    {%
+        \path (\xEval{\x},0) coordinate(\x);%
+    }%
+    \foreach \y in {#2}%
+    {%
+        \path (0,\xEval{\y}) coordinate(\y);%
+    }%
+    \foreach \x in {#1}%
+    {%
+        \foreach \y in {#2}%
+        {%
+            \path (\xEval{\x},\xEval{\y}) coordinate(\x/\y);%
+        }%
+    }%
+}%
+
+\NewDocumentCommand{\xValDefine}{mO{0}}%
+{%
+    \expandafter\def\csname#1\endcsname{#2}
+}%
+
+\NewDocumentCommand{\xValOffset}{mmO{0}}%
+{%
+    \xValDefine{#1}[\fpeval{(\xEval{#2})+(#3)}]%
+}%
+
+\NewDocumentCommand{\xValProportion}{mmmO{0.5}}%
+{%
+    \xValDefine{#1}[\fpeval{(1-#4)*(\xEval{#2})+(#4)*(\xEval{#3})}]%
+}%
+
+\NewDocumentCommand{\xValMiddle}{mmm}%
+{%
+    \xValProportion{#1}{#2}{#3}[0.5]%
+}%
+
+\NewDocumentCommand{\xValMirror}{mmm}%
+{%
+    \xValProportion{#1}{#2}{#3}[2]%
+}%
+
+\NewDocumentCommand{\xValSymmetrize}{mmmm}%
+{%
+    \xValDefine{#1}[\fpeval{\xEval{#3}+\xEval{#4}-\xEval{#2}}]%
+}%
+
+
+%--------------------------------------%
+
+\definecolor{mnmP}{HTML}{FF0000}
+\definecolor{mnmN}{HTML}{0000FF}
+\colorlet{mnmP0}{mnmP!95!white}
+\colorlet{mnmN0}{mnmN!95!white}
+\colorlet{mnmP1}{mnmP!65!white}
+\colorlet{mnmN1}{mnmN!65!white}
+\colorlet{mnmP2}{mnmP!40!white}
+\colorlet{mnmN2}{mnmN!40!white}
+\colorlet{mnmP3}{mnmP!20!white}
+\colorlet{mnmN3}{mnmN!20!white}
+\colorlet{mnmSiO2}{green!30!white}
+\colorlet{mnmSi3N4}{green!50!yellow!30!white}
+\colorlet{mnmSiON}{green!50!red!30!white}
+\colorlet{mnmLIGsoft}{yellow!30!white}
+\colorlet{mnmLIGhard}{yellow!80!black}
+\colorlet{mnmIon}{purple!50!blue}
+\colorlet{mnmPolySi}{black!75!white}
+\colorlet{mnmPolySiP}{black!75!white!92!red}
+\colorlet{mnmPolySiN}{black!75!white!90!blue}
+\colorlet{mnmAl}{black}
+\colorlet{mnmDepletion}{black!50!white}

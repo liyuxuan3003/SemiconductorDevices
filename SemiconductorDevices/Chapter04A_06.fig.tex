@@ -1,0 +1,26 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-3.5]
+\xValDefine{xR}[+3.5]
+\xValMiddle{xC}{xL}{xR}
+\xValOffset{xBorL}{xL}[-0.6]
+\xValOffset{xBorR}{xR}[+0.6]
+
+\xValDefine{yA}[0]
+\xValDefine{yB}[-2]
+\xValOffset{yBorB}{yB}[-0.7]
+\xValOffset{yBorA}{yA}[+0.7]
+
+\xGeneratePoints{xL,xR,xC,xBorL,xBorR}{yA,yB,yBorB,yBorA}
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\draw (xL/yA) node[left] {E} node[above right] {(S)} to[D,o-] (xC/yA);
+\draw (xR/yA) node[right] {C} node[above left] {(D)} to[D,o-] (xC/yA);
+\draw (xC/yA) to[short,*-o] (xC/yB) node[below] {B} node[above right] {(G)};
+
+\end{tikzpicture}
+\end{document}
