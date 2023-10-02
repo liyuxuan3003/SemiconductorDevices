@@ -1,0 +1,46 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-3]
+\xValDefine{xR}[+3]
+\xValOffset{xBorL}{xL}[-0.7]
+\xValOffset{xBorR}{xR}[+0.7]
+\xValMiddle{xC}{xL}{xR}
+\xValMiddle{xLc}{xL}{xC}
+\xValMiddle{xRc}{xR}{xC}
+
+\xValDefine{yB}[-3]
+\xValDefine{yA}[+3]
+\xValOffset{yBorB}{yB}[-0.7]
+\xValOffset{yBorA}{yA}[+0.7]
+\xValMiddle{yC}{yB}{yA}
+\xValMiddle{yBc}{yB}{yC}
+\xValMiddle{yAc}{yA}{yC}
+
+\xGeneratePoints{xL,xR,xBorL,xBorR,xC,xLc,xRc}{yB,yA,yBorB,yBorA,yC,yBc,yAc}
+
+\draw[-latex] (xL/yC) -- (xR/yC) node[above] {$+V_{BE}$};
+\draw[-latex] (xC/yB) -- (xC/yA) node[right] {$-V_{BC}$};
+
+\draw (xLc/yBc) 
+node[above] {反向放大区}
+node[below] {\tiny 发射结反偏\quad 集电结正偏};
+
+\draw (xRc/yBc) 
+node[above] {饱和区}
+node[below] {\tiny 发射结反偏\quad 集电结正偏};
+
+\draw (xLc/yAc) 
+node[above] {截止区}
+node[below] {\tiny 发射结反偏\quad 集电结反偏};
+
+\draw (xRc/yAc) 
+node[above] {正向放大区}
+node[below] {\tiny 发射结正偏\quad 集电结反偏};
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\end{tikzpicture}
+\end{document}
