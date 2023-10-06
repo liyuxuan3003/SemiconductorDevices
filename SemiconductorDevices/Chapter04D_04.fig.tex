@@ -1,0 +1,45 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-5.5]
+\xValDefine{xR}[+5.5]
+\xValMiddle{xC}{xL}{xR}
+\xValOffset{xBorL}{xL}[-0.75]
+\xValOffset{xBorR}{xR}[+0.75]
+\xValProportion{xIRa}{xL}{xC}[0.25]
+\xValProportion{xIRb}{xL}{xC}[0.875]
+\xValMirror{xIFa}{xIRa}{xC}
+\xValMirror{xIFb}{xIRb}{xC}
+
+\xValDefine{yA}[+1.5]
+\xValDefine{yB}[-1.5]
+\xValOffset{yBorA}{yA}[+1.75]
+\xValOffset{yBorB}{yB}[-0.5]
+\xValOffset{yIs}{yA}[0.75]
+\xValMirror{yD}{yIs}{yA}
+
+\xGeneratePoints{xL,xR,xC,xBorL,xBorR,xIRa,xIRb,xIFa,xIFb}{yA,yB,yBorA,yBorB,yIs,yD}
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\draw
+(xL/yA) node[left] {E} to[short,o-,i=$I_E'$]
+(xIRa/yA) -- (xIRa/yIs) to[cisource,l=$\alpha_RI_R$]
+(xIRb/yIs) -- (xIRb/yA) -- 
+(xIFb/yA) -- (xIFb/yIs) to[cisource,l=$\alpha_FI_F$,invert]
+(xIFa/yIs) -- (xIFa/yA) to[short,i=$I_C'$,invert,-o] (xR/yA) node[right] {C};
+
+\draw
+(xIRb/yA) to[short,*-] (xIRb/yD) to[D,v=$V_{BE}$,i=$I_F$] (xIRa/yD) to[short,-*] (xIRa/yA);
+
+\draw
+(xIFb/yA) to[short,*-] (xIFb/yD) to[D,v^=$V_{BC}$,i_=$I_R$] (xIFa/yD) to[short,-*] (xIFa/yA);
+
+\draw (xL/yB) node[left] {B} to[short,o-o] (xR/yB);
+
+\draw (xC/yB) to[short,*-*,i=$I_B'$] (xC/yA);
+
+\end{tikzpicture}
+\end{document}

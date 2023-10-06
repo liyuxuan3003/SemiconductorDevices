@@ -1,0 +1,40 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-2]
+\xValDefine{xR}[+2]
+\xValOffset{xBorL}{xL}[-0.75]
+\xValOffset{xBorR}{xR}[+0.75]
+
+\xValDefine{yB}[-2]
+\xValDefine{yA}[+2]
+\xValMiddle{yC}{yA}{yB}
+\xValOffset{yBorB}{yB}[-0.5]
+\xValOffset{yBorA}{yA}[+0.5]
+\xValMiddle{yBE}{yC}{yB}
+\xValMiddle{yBC}{yC}{yA}
+
+\xGeneratePoints{xL,xR,xBorL,xBorR}{yB,yA,yC,yBorB,yBorA,yBE,yBC}
+
+\path (xR/yC) node[npn,name=bjt] {};
+
+\draw (bjt.B) to[short,i<=$I_B'$,-o] (xL/yC) node[left] {B};
+
+\draw (bjt.E) to[short,i<=$I_E'$] (bjt.E |- yB) to[short,-o] (xL/yB) node[left] {E};
+
+\draw (bjt.C) to[short,i<_=$I_C'$] (bjt.C |- yA) to[short,-o] (xL/yA) node[left] {C};
+
+\path (xL/yC) node[below] {$+$};
+\path (xL/yA) node[below] {$-$};
+\path (xL/yC) node[above] {$+$};
+\path (xL/yB) node[above] {$-$};
+
+\path (xL/yBE) node {$V_{BE}$};
+\path (xL/yBC) node {$V_{BC}$};
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\end{tikzpicture}
+\end{document}

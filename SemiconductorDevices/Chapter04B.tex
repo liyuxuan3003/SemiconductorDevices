@@ -1,2 +1,196 @@
 \section{BJT的少子分布}
 
+我们很感兴趣的是计算BJT中的电流，而这一点上BJT和\xref{chap:PN结的电流特性}中的PN结一致，扩散电流是少子浓度分布的梯度，因此，若要计算扩散电流，就要求我们先计算出少子的浓度分布。
+
+我们先研究最重要的，即BJT在正向放大区下的少子分布。\xref{fig:BJT在正向放大区的少子分布}先给出了正向放大区少子分布的图像，在展开数学计算前，我们先做一些说明和约定。首先，BJT的少子分布的计算其实并不比PN结复杂，仍然是求解扩散方程，只不过各区域的边界条件会有些不同。其次，为便于计算，我们为BJT的每个区域建立独立的坐标体系，基区B、发射区E、集电区C的横坐标分别记为$x, x', x''$，分别是向右（自E向C）、向左（向外）、向右（向外）。这三个区域的少子分别为电子、空穴、空穴，故三者的少子浓度分别以$n_B(x),\ p_E(x'),\ p_{C}(x'')$表示。
+
+\begin{Figure}[BJT在正向放大区的少子分布]
+    \includegraphics[scale=1.2]{build/Chapter04B_01a.fig.pdf}
+\end{Figure}
+
+\subsection{放大区BJT的基区少子分布}
+\begin{BoxFormula}[放大区BJT的基区少子分布]
+    当BJT处于放大区时，其基区过剩少子浓度$\fdd{n_B}(x)$满足
+    \begin{Equation}
+        \qquad
+        \fdd{n_B}(x)=\frac{n_{B0}}{\sinh(x_B/L_B)}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{\kB T})-1]\sinh(\frac{x_B-x}{L_B})-\sinh(\frac{x}{L_B})}
+        \qquad
+    \end{Equation}
+    当$x_B\ll L_B$时，通过双曲正弦的近似，得到
+    \begin{Equation}
+        \fdd{n_B}(x)=\frac{n_{B0}}{x_B}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{\kB T})-1](x_B-x)-x}
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    在基区，扩散方程的形式为
+    \begin{Equation}&[1]
+        D_B\pdv[2]{\fdd{n_B(x)}}{x}-\frac{\fdd{n_B}(x)}{\tau_{B0}}=0
+    \end{Equation}
+    通解是我们熟悉的，其中$L_B=\sqrt{D_B\tau_{B0}}$
+    \begin{Equation}&[2]
+        \fdd{n_B(x)}=A\exp(\frac{+x}{L_B})+B\exp(\frac{-x}{L_B})
+    \end{Equation}
+    左侧边界，发射结正偏，因此
+    \begin{Equation}&[3]
+        \fdd{n_B}(0)=n_{B0}\qty[\exp(\frac{eV_{BE}}{\kB T})-1]
+    \end{Equation}
+    右侧边界，集电结反偏，因此
+    \begin{Equation}&[4]
+        \fdd{n_B}(x_B)=-n_{B0}
+    \end{Equation}
+    将\xrefpeq{3}和\xrefpeq{4}代入\xrefpeq{2}
+    \begin{Equation}&[5]
+        \begin{pmatrix}
+            1&1\\
+            \exp(+x_B/L_B)&\exp(-x_B/L_B)\\
+        \end{pmatrix}
+        \begin{pmatrix}
+            A\\
+            B\\
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            n_{B0}\qty[\exp(eV_{BE}/\kB T)-1]\\
+            -n_{B0}
+        \end{pmatrix}
+    \end{Equation}
+    计算$D$
+    \begin{Equation}&[6]
+        D=\exp(-x_{B}/L_B)-\exp(+x_{B}/L_B)=-2\sinh(x_B/L_B)
+    \end{Equation}
+    计算$D_A$
+    \begin{Equation}&[7]
+        D_A=+n_{B0}\qty[\exp(eV_{BE}/\kB T)-1]\exp(-x_B/L_B)+n_{B0}
+    \end{Equation}
+    计算$D_B$
+    \begin{Equation}&[8]
+        D_B=-n_{B0}\qty[\exp(eV_{BE}/\kB T)-1]\exp(+x_B/L_B)-n_{B0}
+    \end{Equation}
+    故$A$为
+    \begin{Equation}&[9]
+        A=\frac{D_A}{D}=-\frac{n_{B0}\qty[\exp(eV_{BE}/\kB T)-1]\exp(-x_B/L_B)+n_{B0}}{2\sinh(x_B/L_B)}
+    \end{Equation}
+    故$B$为
+    \begin{Equation}&[10]
+        B=\frac{D_B}{D}=+\frac{n_{B0}\qty[\exp(eV_{BE}/\kB T)-1]\exp(+x_B/L_B)+n_{B0}}{2\sinh(x_B/L_B)}
+    \end{Equation}
+    将\xrefpeq{9}和\xrefpeq{10}代回\xrefpeq{2}
+    \begin{Split}[12pt]
+        \qquad\fdd{n_B(x)}=\frac{n_{B0}}{2\sinh(x_B/L_B)}\Bigg\{
+        &\qty[\exp(\frac{eV_{BE}}{\kB T})-1]\qty[\exp(\frac{x_B-x}{L_B})-\exp(\frac{x-x_B}{L_B})]\qquad\\
+        +&\qty[\exp(\frac{-x}{L_B})-\exp(\frac{+x}{L_B})]\Bigg\}
+    \end{Split}
+    运用双曲正弦简化
+    \begin{Equation}
+        \qquad
+        \fdd{n_B(x)}=\frac{n_{B0}}{\sinh(x_B/L_B)}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{kT})-1]\sinh(\frac{x_B-x}{L_B})-\sinh(\frac{x}{L_B})}
+        \qquad
+    \end{Equation}
+    运用双曲正弦$\sinh(x)\approx x$的近似
+    \begin{Equation}
+        \fdd{n_B(x)}=\frac{n_{B0}}{x_B/L_B}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{kT})-1]\qty(\frac{x_B-x}{L_B})-\qty(\frac{x}{L_B})}
+    \end{Equation}
+    即
+    \begin{Equation}*
+        \fdd{n_B(x)}=\frac{n_{B0}}{x_B}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{kT})-1]\qty(x_B-x)-x}\qedhere
+    \end{Equation}
+\end{Proof}
+
+\subsection{放大区BJT的发射区少子分布}
+\begin{BoxFormula}[放大区BJT的发射区少子分布]
+    当BJT处于放大区时，其发射区过剩少子浓度$\fdd{p_E}(x')$满足
+    \begin{Equation}
+        \qquad\qquad\quad
+        \fdd{p_E}(x')=\frac{p_{E0}}{\sinh(x_E/L_E)}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{\kB T})-1]\sinh(\frac{x_E-x'}{L_E})}
+        \qquad\qquad\quad
+    \end{Equation}
+    当$x_E\ll L_E$时，通过双曲正弦的近似，得到
+    \begin{Equation}
+        \fdd{p_E}(x')=\frac{p_{E0}}{x_E}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{\kB T})-1](x_E-x')}
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    在发射区，扩散方程的形式为
+    \begin{Equation}
+        D_E\pdv[2]{\fdd{p_E(x')}}{{x'}}-\frac{p_E(x')}{\tau_{E0}}=0
+    \end{Equation}
+    通解是我们熟悉的，其中$L_E=\sqrt{D_E\tau_{E0}}$
+    \begin{Equation}
+        \fdd{p_E(x')}=A\exp(\frac{+x'}{L_B})+B\exp(\frac{-x'}{L_E})
+    \end{Equation}
+    内侧边界，发射结正偏，因此
+    \begin{Equation}
+        \fdd{p_E(0)}=p_{E0}\qty[\exp(\frac{eV_{BE}}{\kB T})-1]
+    \end{Equation}
+    外侧边界，在$x'=x_B$处过剩少子浓度降至零
+    \begin{Equation}
+        \fdd{p_E(x_B)}=0
+    \end{Equation}
+    这就是短PN结的格局，参照\fancyref{fml:短二极管的载流子分布}的过程，结果应为
+    \begin{Equation}
+        \qquad\qquad\qquad
+        \fdd{p_E}(x')=\frac{p_{E0}}{\sinh(x_E/L_E)}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{\kB T})-1]\sinh(\frac{x_E-x'}{L_E})}
+        \qquad\qquad\qquad
+    \end{Equation}
+    运用双曲正弦$\sinh(x)\approx x$的近似
+    \begin{Equation}
+        \fdd{p_E}(x')=\frac{p_{E0}}{x_E/L_E}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{\kB T})-1]\qty(\frac{x_E-x'}{L_E})}
+    \end{Equation}
+    即
+    \begin{Equation}*
+        \fdd{p_E}(x')=\frac{p_{E0}}{x_E}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{\kB T})-1](x_E-x')}\qedhere
+    \end{Equation}
+\end{Proof}
+
+\subsection{放大区BJT的集电区少子分布}
+\begin{BoxFormula}
+    当BJT处于放大区时，其集电区过剩少子浓度$\fdd{p_C(x'')}$满足
+    \begin{Equation}
+        \fdd{p_C(x'')}=-p_{C0}\exp(\frac{-x''}{L_C})
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    在集电区，扩散方程的形式为
+    \begin{Equation}
+        D_C\pdv[2]{\fdd{p_C(x'')}}{{x''}}-\frac{p_C(x'')}{\tau_{C0}}=0
+    \end{Equation}
+    通解是我们熟悉的，其中$L_C=\sqrt{D_C\tau_{C0}}$
+    \begin{Equation}
+        \fdd{p_C(x'')}=A\exp(\frac{+x''}{L_C})+B\exp(\frac{-x''}{L_C})
+    \end{Equation}
+    内侧边界，集电结反偏，因此
+    \begin{Equation}
+        \fdd{p_C(0)}=-p_{C0}
+    \end{Equation}
+    外侧边界，在$x'=x_C$处过剩少子浓度降至零，但集电区域很长，可近似认为$x_C=\infty$
+    \begin{Equation}
+        \fdd{p_0(\infty)}=0
+    \end{Equation}
+    这就是一个标准的反偏PN结，很容易解出
+    \begin{Equation}
+        A=0\qquad B=-p_{C0}
+    \end{Equation}
+    故
+    \begin{Equation}*
+        \fdd{p_C(x'')}=-p_{C0}\exp(\frac{-x''}{L_C})\qedhere
+    \end{Equation}
+\end{Proof}
+
+至此，\xref{fig:BJT在正向放大区的少子分布}中的各段曲线的解析式就求出来了（其中，实线为精确值，虚线为近似值）。
+
+\subsection{BJT在各工作区的少子分布}
+通过前面的讨论，我们看到BJT的少子分布没有什么特别的，无非就是在不同边值条件下求解同一个扩散方程，这非常无趣。因此，对于BJT的其他工作区，我们不再手工计算，而是直接通过Mathematica软件求解并令其绘图，通过图像直观理解。\xref{tab:BJT在各工作区的少子分布}展示了这些工作。
+
+\begin{Tablex}[BJT在各工作区的少子分布]{|Y|Y|}
+\xcell<Y>[1ex][-1ex]{\includegraphics[width=7cm]{build/Chapter04B_01e.fig.pdf}}&
+\xcell<Y>[1ex][-1ex]{\includegraphics[width=7cm]{build/Chapter04B_01b.fig.pdf}}\\
+\xcell<Y>[0ex][-1ex]{截止区\\ \footnotesize （发射结反偏\quad 集电结反偏）}&
+\xcell<Y>[0ex][-1ex]{正向放大区\\ \footnotesize （发射结正偏\quad 集电结反偏）}\\ \hlinelig
+\xcell<Y>[1ex][-1ex]{\includegraphics[width=7cm]{build/Chapter04B_01c.fig.pdf}}&
+\xcell<Y>[1ex][-1ex]{\includegraphics[width=7cm]{build/Chapter04B_01d.fig.pdf}}\\
+\xcell<Y>[0ex][-1ex]{反向放大区\\ \footnotesize （发射结反偏\quad 集电结正偏）}&
+\xcell<Y>[0ex][-1ex]{饱和区\\ \footnotesize （发射结正偏\quad 集电结正偏）}\\ \hlinelig
+\end{Tablex}

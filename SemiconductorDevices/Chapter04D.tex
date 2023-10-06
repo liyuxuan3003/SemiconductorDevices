@@ -1,0 +1,158 @@
+\section{BJT的电路模型}
+在本节，我们将分别讨论BJT的两个模型，它们分别适用于大信号和小信号。
+
+\subsection{BJT的大信号模型}
+
+Ebers-Moll模型，或简称EM模型，是适用于BJT大信号的电路模型，也是BJT的经典模型之一。Ebers-Moll模型是以PN结间的相互作用为基础，可以适用于BJT的任何工作区。
+
+Ebers-Moll模型中规定的电流方向和作为自变量的电压的选取，和通常所使用的共射极接法是有所不同的。原因主要是EM模型需要对等的考虑包括正向放大区和反向放大区的各个工作区，因此，电流和电压的朝向的选取应以BJT的结构为中心，而不能顺着正向放大区的习惯来。如\xref{fig:BJT在共射极接法中的方向约定}所示，通常的规定是，$I_B,I_C$流入BJT，$I_E$流出BJT，电压则以“共射”为基础选择为$V_{BE}$和$V_{CE}$。而在Ebers-Moll模型中，如\xref{fig:BJT在EM模型中的方向约定}所示，电流$I_B',I_C',I_E'$均被指定为流入BJT，电压则选取了直接与BJT工作区划分有关，即决定发射结和集电结偏置状态的$V_{BE}$和$V_{BC}$。某种意义上，EM模型的电流电压选取，是更接近BJT的器件物理本质的。
+\begin{Figure}[BJT的电流和电压方向约定]
+    \begin{FigureSub}[BJT在共射极接法中的方向约定]
+        \includegraphics{build/Chapter04D_05.fig.pdf}
+    \end{FigureSub}
+    \hspace{1cm}
+    \begin{FigureSub}[BJT在EM模型中的方向约定]
+        \includegraphics{build/Chapter04D_06.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+将Ebers-Moll模型中的这种方向指定，整理如下
+\begin{BoxFormula}[Ebers-Moll模型中的变量代换]*
+    Ebers-Moll模型中，电流选取为
+    \begin{Equation}
+        I_B'=I_B\qquad I_C'=I_C\qquad I_E'=-I_E
+    \end{Equation}
+    Ebers-Moll模型中，电压选取为
+    \begin{Equation}
+        V_{BE}=V_{BE}\qquad V_{BC}=V_{BE}-V_{CE}
+    \end{Equation}
+\end{BoxFormula}
+现在的问题是，作为一个能覆盖BJT各个工作区的模型，Ebers-Moll模型到底是如何被构建的？关键在于平等看待BJT的结构！前面我们已经系统学过了正向放大区，而相同的想法也适用反向放大区。因为\xref{subsec:BJT的四个工作区}就提到过，BJT的结构组成是对称的，只是参数不对称！
+\begin{itemize}
+    \item 在正向放大区，若$\te{B}\to\te{E}$结正偏电流为$I_F$，则$\te{C}\to\te{B}$的电流为$\alpha_FI_F$。
+    \item 在反向放大区，若$\te{B}\to\te{C}$结正偏电流为$I_R$，则$\te{E}\to\te{B}$的电流为$\alpha_RI_R$。
+\end{itemize}
+
+\begin{Figure}[Ebers-Moll模型]
+    \includegraphics[scale=0.9]{build/Chapter04D_04.fig.pdf}
+\end{Figure}
+而事实是，在BJT中，这两套放大机制是同时叠加存在的！\xref{fig:Ebers-Moll模型}展示的就是Ebers-Moll模型的电路，它包含两个二极管和两个受控电流源（这里的两个二极管相互独立，原先BJT中的发射结和集电结间的那种耦合关系已经被两个受控源表示了），分别代表了两套放大机制。
+
+% 而在这种想法下，各工作区就很容易统一在一起了
+\begin{itemize}
+    \item 当处于正向放大区时，由于集电结反偏$I_R\approx 0$，事实只有正向放大机制在运作。
+    \item 当处于反向放大区时，由于发射结反偏$I_F\approx 0$，事实只有反向放大机制在运作。
+    \item 当处于饱和区时，即两套放大机制同时工作。
+    \item 当处于截止区时，即两套放大机制均不工作。
+\end{itemize}
+这其实就是Ebers-Moll模型能普遍适用BJT任何工作区的秘密:对等考虑正向放大特性和反向放大特性，认为两者具有相同的放大机制并同时存在，将各工作区视为这两种机制的叠加。\setpeq{EM模型}
+
+接下来进行数学上的分析，显然$I_E',I_B',I_C'$间满足
+\begin{Equation}&[1]
+    I_E'+I_B'+I_C'=0
+\end{Equation}
+这是基尔霍夫电流定律的结果（注意$I_E',I_B',I_C'$的方向都被定义为流入BJT的方向）。\goodbreak
+
+集电极电流通常可以写为
+\begin{Equation}&[2]
+    I_C'=\alpha_FI_F-I_R
+\end{Equation}
+发射极电流通常可以写为
+\begin{Equation}&[3]
+    I_E'=\alpha_RI_R-I_F
+\end{Equation}
+这里$\alpha_F$和$\alpha_R$分别是正向放大和反向放大时的共基极增益，实际上BJT的参数不对称最终就反映在$\alpha_F$和$\alpha_R$的不同上，通常比较两者依$\beta=\alpha/(1-\alpha)$对应的$\beta_F$和$\beta_R$的值，通常来说，$\beta_F$在$20$至$200$间，$\beta_R$在$0$至$20$间。这也是为何我们认为反向放大区的性能很差。
+
+$I_F$和$I_R$是二极管上的电流，根据\fancyref{fml:PN结的理想电流--电压关系}
+\begin{Equation}&[4]
+    I_F=I_{FS}\qty[\exp(\frac{eV_{BE}}{\kB T})-1]\qquad
+    I_R=I_{RS}\qty[\exp(\frac{eV_{BC}}{\kB T})-1]
+\end{Equation}
+$I_{FS}, I_{RS}, \alpha_F, \alpha_R$是Ebers-Moll模型的四个参数，但只有三个是独立的
+\begin{Equation}&[5]
+    \alpha_FI_{FS}=\alpha_RI_{RS}
+\end{Equation}
+由于$\alpha_F$和$\alpha_R$都是很接近$1$的参数，故$I_{FS}$和$I_{RS}$几乎是相等的。
+
+至将\xrefpeq{4}代入\xrefpeq{2}和\xrefpeq{3}，并结合\xrefpeq{1}和\xrefpeq{4}，就得到了EM模型的全貌了。
+
+\begin{BoxFormula}[Ebers-Moll模型]
+    在Ebers-Moll模型中，集电极电流$I_C'$为
+    \begin{Equation}
+        I_C'=\alpha_FI_{FS}\qty[\exp(\frac{eV_{BE}}{\kB T})-1]-I_{RS}\qty[\exp(\frac{eV_{BC}}{\kB T})-1]
+    \end{Equation}
+    在Ebers-Moll模型中，发射极电流$I_E'$为
+    \begin{Equation}
+        I_E'=\alpha_RI_{RS}\qty[\exp(\frac{eV_{BE}}{\kB T})-1]-I_{FS}\qty[\exp(\frac{eV_{BC}}{\kB T})-1]
+    \end{Equation}
+    $I_E',I_B',I_C'$间满足
+    \begin{Equation}
+        I_E'+I_B'+I_C'=0
+    \end{Equation}
+    $I_{FS}, I_{RS}, \alpha_F, \alpha_R$间存在约束关系
+    \begin{Equation}
+        \alpha_FI_{FS}=\alpha_RI_{RS}
+    \end{Equation}
+\end{BoxFormula}
+
+在\xref{fig:Ebers-Moll模型}中，展示了Ebers-Moll模型下BJT的特性方程$I_C'=f(V_{BE},V_{BC})$。绘图时，我们取参数$\beta_F=100$和$\beta_R=10$，为避免恼人的数量级问题，所有图像中的$I_C'$均以$I_C'/I_{FS}$的形式绘制。\xref{fig:Ebers-Moll模型的特性曲面}展示了特性曲面，联合\xref{fig:BJT的四个工作区}，可以清楚看到BJT在各工作区的特性。
+
+\begin{Figure}[Ebers-Moll模型]
+    \begin{FigureSub}[Ebers-Moll模型的特性曲面]
+        \includegraphics{build/Chapter04D_01b.fig.pdf}
+    \end{FigureSub}\\ \vspace{1.5cm}
+    \begin{FigureSub}[关于集电结电压的曲线]
+        \includegraphics[scale=0.8]{build/Chapter04D_01c.fig.pdf}
+    \end{FigureSub}
+    \hspace{0.25cm}
+    \begin{FigureSub}[关于发射结电压的曲线]
+        \includegraphics[scale=0.8]{build/Chapter04D_01e.fig.pdf}
+    \end{FigureSub}\\ \vspace{1cm}
+    \begin{FigureSub}[Ebers-Moll模型的共射增益]
+        \includegraphics{build/Chapter04D_01g.fig.pdf}
+    \end{FigureSub}
+    % \begin{FigureSub}[共射增益的异常解释]
+    %     \includegraphics{build/Chapter04D_01h.fig.pdf}
+    % \end{FigureSub}
+\end{Figure}
+
+\xref{fig:关于集电结电压的曲线}绘制了$I_C'$关于$V_{BC}$的图像，注意到$I_C'$会随集电结反偏电压$-V_{BC}$的增大而趋于饱和。这是因为，集电结正偏时，集电结的集电能力是饱和的，能抽取多少电子取决于集电结的反偏电压有多少，故这一阶段被称为“饱和区”。此时$I_C'$会随$-V_{BC}$的快速增长，即该阶段中，集电结电流反而是非饱和的。而随着$-V_{BC}$的增大，集电结进入反偏，电场足够强，以至于发射结注入多少电子集电结就能抽取多少电子，因而，集电结的电流饱和了。此时$I_C'$不再随$-V_{BC}$变化，变成了仅关于$V_{BE}$的函数，形成了稳定的放大关系，故被称为“放大区”。
+
+\xref{fig:关于发射结电压的曲线}绘制了$I_C'$关于$V_{BE}$的图像，它告诉我们BJT的$I_C'=f(V_{BE})$的放大关系是指数的，这一点和MOSFET很不同，MOSFET是平方放大，BJT是指数放大。当然，这都是大信号上的讨论，由于放大都是对小信号而言，在静态工作点附近，两者都可视为线性放大。
+
+除此之外，\xref{fig:Ebers-Moll模型的共射增益}还全面展示了共射增益$\beta=I_C'/I_B'$，可以看到，截止区中$\beta=0$（截止区边界的异常突变是由于$I_B'$由负转正导致的，并不重要，可以视为是Ebers-Moll模型构建时的缺陷），正向放大区$\beta=\beta_F$，反向放大区$\beta=\beta_R$，饱和区中$\beta$则包含了$\beta_F$至$\beta_R$的过渡。
+
+\begin{Figure}[BJT的特性方程]
+    \begin{FigureSub}[BJT的特性曲面]
+        \includegraphics{build/Chapter04D_01a.fig.pdf}
+    \end{FigureSub}\\ \vspace{0.5cm}
+    \begin{FigureSub}[BJT的转移特性]
+        \includegraphics[scale=0.8]{build/Chapter04D_01d.fig.pdf}
+    \end{FigureSub}
+    \hspace{0.25cm}
+    \begin{FigureSub}[BJT的输出特性]
+        \includegraphics[scale=0.8]{build/Chapter04D_01f.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+当然，我们也可以将\xref{fml:Ebers-Moll模型中的变量代换}代入\xref{fml:Ebers-Moll模型}，从而得到在通常的BJT的电流电压习惯下的特性方程$I_C=f(V_{BE},V_{CE})$和相应的特性曲面，如\xref{fig:BJT的特性方程}所示。这样绘制的图像其实离BJT的物理机制更远了，例如饱和区和放大区的界线就变得更难以理解了。但补偿好处是，在这种坐标系下BJT的特性方程$I_C=f(V_{BE},V_{CE})$与MOSFET的$I_D=f(V_{GS},V_{DS})$就能对应了。
+
+\subsection{BJT的小信号模型}
+Hybrid Pi模型，是适用于BJT小信号的电路模型，其电路图如\xref{fig:Hybrid Pi模型}所示。
+\begin{Figure}[Hybrid Pi模型]
+    \begin{FigureSub}[完整模型]
+        \includegraphics[scale=0.9]{build/Chapter04D_02.fig.pdf}   
+    \end{FigureSub}\\ \vspace{0.75cm}
+    \begin{FigureSub}[简化模型]
+        \includegraphics[scale=0.9]{build/Chapter04D_03.fig.pdf}   
+    \end{FigureSub}
+\end{Figure}
+
+Hybrid Pi模型看起来很复杂，但若划分为几个部分，则仍然是很好理解的
+\begin{itemize}
+    \item 电阻$r_e,r_c,r_b$分别是发射区、集电区、基各自的体电阻。
+    \item 电容$C_s$是集电区（如\xref{fig:BJT的结构}所示，集电区在最外侧）和衬底间的电容。
+    \item EC间的受控电流源$g_mV_{b'e'}$是小信号放大的核心，而$r_0$是厄利效应导致的输出电阻。
+    \item BE间的$r_{\pi},C_{\pi},C_{je}$即正偏BE结的小信号模型（扩散电阻、扩散电容、势垒电容）。
+    \item BC间的$r_{\mu},C_{\mu}$即反偏BE结的小信号模型（扩散电阻、势垒电容），参见\xref{fig:二极管的完整小信号等效电路}。
+\end{itemize}
+而如\xref{fig:简化模型}所示的简化模型中，可以只保留受控电流源，以及发射结的扩散电容和电阻。

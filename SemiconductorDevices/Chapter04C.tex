@@ -1,0 +1,356 @@
+\section{BJT的电流关系}
+
+\subsection{BJT的电流组成}
+现在我们来讨论BJT的电流，\xref{fig:BJT的电流关系}展示了BJT处于放大区时的电流构成
+\begin{itemize}
+    \item $J_{nE}, J_{pE}$分别是$\te{E}\to\te{B}$和$\te{B}\to\te{E}$的电子电流和空穴电流。
+    \item $J_{nC}, J_{pC}$分别是$\te{C}\to\te{B}$和$\te{B}\to\te{C}$的电子电流和空穴电流。
+    \item $J_R$是正偏发射结的复合电流，参见\xref{subsec:正偏复合电流}。
+    \item $J_G$是反偏发射结的产生电流，参见\xref{subsec:反偏产生电流}。
+\end{itemize}
+这里唯一比较费解的是$J_{pB}$，它到底是什么？\xref{fig:PN结的电流密度分布}或许给了我们答案。我们知道，在正偏PN结中，随着电子在P区的扩散，电子的扩散电流会逐渐转换为空穴的漂移电流，然而，这种转换是需要一个过程的，在BJT的基区，发射极注入基区的电子扩散流$J_{nE}$在只有很少的部分转换为空穴电流$J_{pB}$时就到达了基区边界，而剩余电流则仍然会保持电子电流$J_{nC}$的形式进入集电区。这也为先前我们称“发射区电子流，少部分从基区流出，大部分流向集电区”提供了更完善的理论支持，即$J_{nE}=J_{nC}+J_{pB}$中，对于进入基区的电子扩散电流$J_{nE}$
+\begin{itemize}
+    \item 那部分在通过基区中被转化为空穴电流的部分$J_{pB}$，将从基极流出。
+    \item 那部分到达基区边界时还剩下的电子电流的部分$J_{nC}$，将进入集电区。
+\end{itemize}
+
+\begin{Figure}[BJT的电流组成]
+    \includegraphics[width=\linewidth]{build/Chapter04B_02.fig.pdf}
+\end{Figure}
+
+这里将BJT的电流组成整理如下
+\begin{BoxFormula}[BJT的发射极电流组成]
+    BJT的发射极电流$J_E$的构成为
+    \begin{Equation}
+        J_E=J_{pE}+J_{nE}+J_R
+    \end{Equation}
+\end{BoxFormula}
+\begin{BoxFormula}[BJT的集电极电流组成]
+    BJT的集电极电流$J_C$的构成为
+    \begin{Equation}
+        J_C=J_{pC}+J_{nC}+J_G
+    \end{Equation}
+\end{BoxFormula}
+\begin{BoxFormula}[BJT的基极电流组成]
+    BJT的基极电流$J_B$的构成为
+    \begin{Equation}
+        J_B=J_{pB}+(J_{pE}+J_R)-(J_{pC}+J_G)
+    \end{Equation}
+\end{BoxFormula}
+
+\subsection{BJT的电流增益}
+在\xref{sec:BJT的基本结构}中，我们已经提到了增益$\beta$的概念，实际上BJT上有$\alpha,\beta$两个常用的增益指标。
+
+\begin{BoxDefinition}[共基极电流增益]
+    共基极电流增益，定义为集电极电流$I_C$与射极电流$I_E$的比（正向放大区）
+    \begin{Equation}
+        \alpha=\frac{I_C}{I_E}=\frac{J_C}{J_E}
+    \end{Equation}
+    通常共基极电流增益$\alpha$是一个略小于$1$的值。
+\end{BoxDefinition}
+\begin{BoxDefinition}[共射极电流增益]
+    共射极电流增益，定义为集电极电流$I_C$与基极电流$I_B$的比（正向放大区）
+    \begin{Equation}
+        \beta=\frac{I_C}{I_B}=\frac{J_C}{J_B}
+    \end{Equation}
+    通常共射极电流增益$\beta$的典型值在$50$至$200$左右。
+\end{BoxDefinition}
+
+而考虑到$I_E=I_C+I_B$的关系（参见\xref{fig:BJT的核心原理}），实际上$\alpha$和$\beta$并不是独立的。
+
+我们知道
+\begin{Equation}
+    I_E-I_C-I_B=0
+\end{Equation}
+根据\xref{def:共基极电流增益}和\xref{def:共射极电流增益}，有
+\begin{Equation}
+    \qty(\frac{1}{\alpha}-\frac{1}{\beta}-1)I_C=0
+\end{Equation}
+即
+\begin{Equation}
+    \frac{1}{\alpha}-\frac{1}{\beta}=1
+\end{Equation}
+若想通过$\beta$计算$\alpha$
+\begin{Equation}
+    \alpha=\qty(\frac{1}{\beta}+1)^{-1}=\qty(\frac{1+\beta}{\beta})^{-1}=\frac{\beta}{1+\beta}
+\end{Equation}
+若想通过$\alpha$计算$\beta$
+\begin{Equation}
+    \beta=\qty(\frac{1}{\alpha}-1)^{-1}=\qty(\frac{1-\alpha}{\alpha})^{-1}=\frac{\alpha}{1-\alpha}
+\end{Equation}
+我们将结论整理一下
+\begin{BoxFormula}[BJT电流增益间的关系]*
+    BJT的电流增益$\alpha, \beta$间的关系是
+    \begin{Equation}
+        \frac{1}{\alpha}-\frac{1}{\beta}=1
+    \end{Equation}
+    计算$\alpha$
+    \begin{Equation}
+        \alpha=\frac{\beta}{1+\beta}
+    \end{Equation}
+    计算$\beta$
+    \begin{Equation}
+        \beta=\frac{\alpha}{1-\alpha}
+    \end{Equation}
+\end{BoxFormula}
+作为一个参考，若$\alpha=0.99$，则$\beta=99$，因此$\alpha$需要非常接近$1$。现在的问题是，增益$\alpha$到底与那些因素有关？这就需要让我们考察电流了，依照\fancyref{def:共基极电流增益}
+\begin{Equation}
+    \alpha=\frac{J_C}{J_E}
+\end{Equation}
+根据\fancyref{fml:BJT的发射极电流组成}和\fancyref{fml:BJT的集电极电流组成}
+\begin{Equation}
+    \alpha=\frac{J_{pC}+J_{nC}+J_G}{J_{pE}+J_{nE}+J_R}
+\end{Equation}
+这里$J_{pC}$和$J_G$是通常的反偏电流，远远小于$J_{pC}$，可以忽略
+\begin{Equation}
+    \alpha=\frac{J_{nC}}{J_{pE}+J_{nE}+J_R}
+\end{Equation}
+我们愿意将$\alpha$剥离为关系清晰的三个部分
+\begin{Equation}
+    \alpha=\qty(\frac{J_{nC}}{J_{nE}})\frac{J_{nE}}{J_{pE}+J_{nE}+J_R}
+\end{Equation}
+% 第一个被剥离的部分$J_{nC}/J_{nE}$被称为基区输运系数，其衡量了电子流经过基区时的损失。
+
+而继续剥离可以得到
+\begin{Equation}
+    \alpha=\qty(\frac{J_{nC}}{J_{nE}})\qty(\frac{J_{nE}}{J_{nE}+J_{pE}})\qty(\frac{J_{nE}+J_{pE}}{J_{nE}+J_{pE}+J_{R}})
+\end{Equation}
+
+% 第二个部分$J_{nE}/(J_{nE}+J_{pE})$被称为注入系数，它是发射结电子电流与电子电流和空穴电流和的比，换言之，它代表了对BJT工作有帮助的，注入基区的电子电流在理想电流中的比例。
+
+% 第三个部分$(J_{nE}+J_{pE})/(J_{nE}+J_{pE}+J_{R})$被称为复合系数，它是理想电流占总电流的比。
+
+这三部分依次被称为：输运系数$\alpha_T$、注入系数$\gamma$、复合系数$\delta$。
+
+\begin{BoxDefinition}[输运系数]
+    \uwave{输运系数}（Transport Factor）衡量了电子流通过基区时的损耗
+    \begin{Equation}
+        \alpha_T=\frac{J_{nC}}{J_{nE}}
+    \end{Equation}
+\end{BoxDefinition}
+
+\begin{BoxDefinition}[注入系数]
+    \uwave{注入系数}（Injection Factor）衡量了发射结的电子流和空穴流中，注入电子流的占比
+    \begin{Equation}
+        \gamma=\frac{J_{nE}}{J_{nE}+J_{pE}}
+    \end{Equation}
+\end{BoxDefinition}
+
+\begin{BoxDefinition}[复合系数]
+    \uwave{复合系数}（Recombination Factor）衡量了发射结正偏复合电流的影响
+    \begin{Equation}
+        \delta=\frac{J_{nE}+J_{pE}}{J_{nE}+J_{pE}+J_{R}}
+    \end{Equation}
+\end{BoxDefinition}
+
+因此，共基极电流增益$\alpha$就可以被分解为以上三个部分。
+\begin{BoxFormula}[共基极电流增益的分解]
+    共基极电流增益$\alpha$可以分解为
+    \begin{Equation}
+        \alpha=\alpha_T\cdot \gamma\cdot \delta
+    \end{Equation}
+\end{BoxFormula}
+我们期望的一个好的BJT应当具有较高的共射极电流增益$\beta$，这就要求共基极电流增益$\alpha$尽可能的接近1，而$\alpha=\alpha_T\cdot \gamma\cdot \delta$，这就要求$\alpha_T, \gamma, \delta$都很接近$1$。因此现在的任务就是，依次计算出输运系数$\alpha_T$、注入系数$\gamma$、复合系数$\delta$的表达式，并考察哪些参数会对三者有影响。
+
+\subsection{输运系数}
+\begin{BoxFormula}[输运系数]
+    输运系数$\alpha_T$可以表示为
+    \begin{Equation}
+        \alpha_T=\frac{1}{\cosh(x_B/L_B)}
+    \end{Equation}
+    或近似为
+    \begin{Equation}
+        \alpha_T=1-\frac{1}{2}(x_B/L_B)^2
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    根据\fancyref{def:输运系数}
+    \begin{Equation}&[1]
+        \alpha_T=\frac{J_{nC}}{J_{nE}}
+    \end{Equation}
+    参照\xref{fig:BJT的电流组成}，此处$J_{nE}$和$J_{nC}$分别是$\fdd{n_B(x)}$在$x=0$和$x=x_B$处的取值。
+
+    $J_{nE}$应当表示为
+    \begin{Equation}&[2]
+        J_{nE}=-eD_B\eval{\dv{\fdd{n_B(x)}}{x}}_{x=0}
+    \end{Equation}
+    $J_{nC}$应当表示为
+    \begin{Equation}&[3]
+        \hspace{0.5em}J_{nC}=-eD_B\eval{\dv{\fdd{n_B(x)}}{x}}_{x=x_B}
+    \end{Equation}
+    而根据\fancyref{fml:放大区BJT的基区少子分布}
+    \begin{Equation}&[3.5]
+        \qquad
+        \fdd{n_B}(x)=\frac{n_{B0}}{\sinh(x_B/L_B)}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{\kB T})-1]\sinh(\frac{x_B-x}{L_B})-\sinh(\frac{x}{L_B})}
+        \qquad
+    \end{Equation}
+    求导结果为
+    \begin{Equation}&[4]
+        \qquad
+        \dv{\fdd{n_B}(x)}{x}=\frac{-n_{B0}}{L_B\sinh(x_B/L_B)}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{\kB T})-1]\cosh(\frac{x_B-x}{L_B})+\cosh(\frac{x}{L_B})}
+        \qquad
+    \end{Equation}
+    对于$J_{nE}$，应乘以$-eD_B$并取$x=0$
+    \begin{Equation}&[5]
+        J_{nE}=\frac{eD_Bn_{B0}}{L_B}\qty\Bigg{\frac{\qty[\exp(eV_{BE}/\kB T)-1]}{\tanh(x_B/L_B)}+\frac{1}{\sinh(x_B/L_B)}}
+    \end{Equation}
+    对于$J_{nC}$，应乘以$-eD_B$并取$x=x_B$
+    \begin{Equation}&[6]
+        J_{nC}=\frac{eD_Bn_{B0}}{L_B}\qty\Bigg{\frac{\qty[\exp(eV_{BE}/\kB T)-1]}{\sinh(x_B/L_B)}+\frac{1}{\tanh(x_B/L_B)}}
+    \end{Equation}
+    将\xrefpeq{5}通分为以$\sinh(x_B/L_B)$为分母
+    \begin{Equation}&[7]
+        \qquad\qquad\quad
+        J_{nE}=\frac{eD_{B}n_{B0}}{L_{B}\sinh(x_B/L_B)}\qty\Big{\qty[\exp(eV_{BE}/\kB T)-1]\cosh(x_B/L_B)+1}
+        \qquad\qquad\quad
+    \end{Equation}
+    将\xrefpeq{5}通分为以$\sinh(x_B/L_B)$为分母
+    \begin{Equation}&[8]
+        \qquad\qquad\quad
+        J_{nC}=\frac{eD_{B}n_{B0}}{L_{B}\sinh(x_B/L_B)}\qty\Big{\qty[\exp(eV_{BE}/\kB T)-1]+\cosh(x_B/L_B)}
+        \qquad\qquad\quad
+    \end{Equation}
+    将\xrefpeq{7}和\xrefpeq{8}代入\xrefpeq{1}
+    \begin{Equation}&[9]
+        \alpha_T=\frac{J_{nC}}{J_{nE}}=\frac{[\exp(eV_{BE}/\kB T)-1]+\cosh(x_B/L_B)}{[\exp(eV_{BE}/\kB T)-1]\cosh(x_B/L_B)+1}
+    \end{Equation}
+    应用发射结正偏电压足够大$V_{BE}\gg \kB T/e$的近似，这使得$\exp(eV_{BE}/\kB T)\gg 1$
+    \begin{Equation}&[10]
+        \alpha_T=\frac{\exp(eV_{BE}/\kB T)+\cosh(x_B/L_B)}{\exp(eV_{BE}/\kB T)\cosh(x_B/L_B)+1}
+    \end{Equation}
+
+    应用基区很窄$x_B\ll L_B$，这使得$\cosh(x_B/L_B)$只是略大于$1$，而同时，按照上面的讨论，我们又有$\exp(eV_{BE}/\kB T)\gg 1$，故\xrefpeq{10}中，分母的$1$和分子的$\cosh(x_B/L_B)$可以忽略
+    \begin{Equation}
+        \alpha_T=\frac{\exp(eV_{BE}/\kB T)}{\exp(eV_{BE}/\kB T)\cosh(x_B/L_B)}
+    \end{Equation}
+    即
+    \begin{Equation}
+        \alpha_T=\frac{1}{\cosh(x_B/L_B)}
+    \end{Equation}
+    依据$x_B\ll L_B$的条件，作泰勒展开近似$\cosh(\xi)=1+(\xi)^2/2$
+    \begin{Equation}
+        \alpha_T=\frac{1}{1+(x_B/L_B)^2/2}
+    \end{Equation}
+    依据$x_B\ll L_B$的条件，作泰勒展开近似$1/(1+\xi)=1-\xi$
+    \begin{Equation}
+        \alpha_T=1-\frac{1}{2}(x_B/L_B)^2
+    \end{Equation}
+    至此，我们就完成了$\alpha_T$的计算和近似。
+\end{Proof}
+
+输运系数$\alpha_T$解释了为何BJT的基区需要很窄。输运系数$\alpha_T$代表了发射结注入的电子流能有多少能最终到达集电结，换言之$1-\alpha_T$就代表了电子流在基区的损失状况，而\xref{fml:输运系数}告诉我们$1-\alpha_T\propto x_B^2$的关系，换言之，基区的宽度$x_B$和电子流在基区的损失是呈平方关系的！因此，降低基区宽度$x_B$即令基区很窄可以显著改善增益，使$\alpha_T$并最终使$\alpha$更接近$1$。
+
+\subsection{注入系数}
+\begin{BoxFormula}[注入系数]
+    注入系数$\gamma$可以表示为
+    \begin{Equation}
+        \gamma=\qty[1+\frac{D_E}{D_B}\frac{N_B}{N_E}\frac{L_B\tanh(x_B/L_B)}{L_E\tanh(x_E/L_E)}]^{-1}
+    \end{Equation}
+    或近似为
+    \begin{Equation}
+        \gamma=\qty[1+\frac{D_E}{D_B}\frac{N_B}{N_E}\frac{x_B}{x_E}]^{-1}
+    \end{Equation}
+\end{BoxFormula}
+\begin{Proof}
+    根据\fancyref{def:注入系数}
+    \begin{Equation}&[1]
+        \gamma=\frac{J_{nE}}{J_{nE}+J_{pE}}
+    \end{Equation}
+    不妨上下同除$J_{nE}$化简为
+    \begin{Equation}&[2]
+        \gamma=\frac{1}{1+J_{pE}/J_{nE}}=\qty[1+\frac{J_{pE}}{J_{nE}}]^{-1}
+    \end{Equation}
+    参照\xref{fig:BJT的电流组成}，此处$J_{pE}$是$\fdd{p_E(x')}$在$x'=0$处的取值，故
+    \begin{Equation}&[3]
+        J_{pE}=-eD_{E}\eval{\dv{\fdd{p_E(x')}}{x'}}_{x'=0}
+    \end{Equation}
+    而根据\fancyref{fml:放大区BJT的发射区少子分布}
+    \begin{Equation}&[4]
+        \qquad\qquad\qquad
+        \fdd{p_E}(x')=\frac{p_{E0}}{\sinh(x_E/L_E)}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{\kB T})-1]\sinh(\frac{x_E-x'}{L_E})}
+        \qquad\qquad\qquad
+    \end{Equation}
+    求导结果为
+    \begin{Equation}&[5]
+        \qquad\qquad\quad
+        \dv{\fdd{p_E(x')}}{x'}=\frac{-p_{E0}}{L_E\sinh(x_E/L_E)}\qty\Bigg{\qty[\exp(\frac{eV_{BE}}{\kB T})-1]\cosh\qty(\frac{x_E-x'}{L_E})}
+        \qquad\qquad\quad
+    \end{Equation}
+    这样$J_{pE}$就可以表示为（乘以$-eD_E$并取$x'=0$）
+    \begin{Equation}&[6]
+        J_{pE}=\frac{eD_Ep_{E0}}{L_E}\qty\Bigg{\frac{[\exp(eV_{BE}/\kB T)-1]}{\tanh(x_E/L_E)}}
+    \end{Equation}
+    
+    这里$J_{nE}$我们已经在\fancyref{fml:输运系数}中的\xrefpeq[输运系数]{5}推导过了
+    \begin{Equation}&[7]
+        J_{nE}=\frac{eD_Bn_{B0}}{L_B}\qty\Bigg{\frac{\qty[\exp(eV_{BE}/\kB T)-1]}{\tanh(x_B/L_B)}+\frac{1}{\sinh(x_B/L_B)}}
+    \end{Equation}
+    关于\xrefpeq{7}，这里我们可以忽略$1/\sinh(x_B/L_B)$项
+    \begin{Equation}&[8]
+        J_{nE}=\frac{eD_Bn_{B0}}{L_B}\qty\Bigg{\frac{\qty[\exp(eV_{BE}/\kB T)-1]}{\tanh(x_B/L_B)}}
+    \end{Equation}
+    简化后，计算$J_{pE}$和$J_{nE}$的比就容易很多了，将\xrefpeq{6}和\xrefpeq{8}代入\xrefpeq{2}
+    \begin{Equation}&[9]
+        \gamma=\qty[1+\frac{J_{pE}}{J_{nE}}]^{-1}=\qty[1+\frac{D_Ep_{E0}}{D_Bn_{B0}}\frac{L_B\tanh(x_B/L_B)}{L_E\tanh(x_E/L_E)}]^{-1}
+    \end{Equation}
+    由于$p_{E0}$和$n_{B0}$分别为发射区和基区的少子，应用
+    \begin{Equation}&[10]
+        p_{E0}=\frac{n_i^2}{N_E}\qquad
+        n_{B0}=\frac{n_i^2}{N_B}
+    \end{Equation}
+    这里$N_E$和$N_B$分别表示发射区和基区的掺杂浓度，将\xrefpeq{10}代入\xrefpeq{9}
+    \begin{Equation}
+        \gamma=\qty[1+\frac{D_E}{D_B}\frac{N_B}{N_E}\frac{L_B\tanh(x_B/L_B)}{L_E\tanh(x_E/L_E)}]^{-1}
+    \end{Equation}
+    由于$x_B\ll L_B$，可以将$\tanh(xB/L_B)$近似为$x_B/L_B$
+    \begin{Equation}
+        \gamma=\qty[1+\frac{D_E}{D_B}\frac{N_B}{N_E}\frac{x_B}{x_E}]^{-1}
+    \end{Equation}
+    至此，我们就完成了$\gamma$的计算和近似。
+\end{Proof}
+
+注入系数$\gamma$解释了为何BJT的发射区需重掺而基区需很窄，在\xref{fml:注入系数}中，我们看到，发射区和基区的掺杂比$N_E/N_B$和宽度比$x_E/x_B$越高（前者由发射区重掺提高，后者由基区很窄提高），注入系数$\gamma$就越接近$1$，换言之，发射结理想电流中对BJT放大有帮助的电子电流就占越高的比例（即那部分对BJT放大无帮助，由基区流向发射区的空穴电流，就会越少）。
+
+\subsection{复合系数}
+\begin{BoxFormula}[复合系数]
+    复合系数$\delta$可以表示为
+    \begin{Equation}
+        \delta=\qty[1+\frac{J_{r0}}{J_{s0}}\exp(-\frac{eV_{BE}}{2\kB T})]^{-1}
+    \end{Equation}
+    其中$J_{r0}, J_{s0}$分别代表复合电流和理想电流的系数
+    \begin{Equation}
+        J_{r0}=\frac{eW_{BE}n_i}{2\tau_0}\qquad
+        J_{s0}=\frac{eD_Bn_{B0}}{L_B\tanh(x_B/L_B)}
+    \end{Equation}
+    其中$W_{BE}$是发射结空间电荷区的宽度。
+\end{BoxFormula}
+
+\begin{Proof}
+    根据\fancyref{def:复合系数}
+    \begin{Equation}&[1]
+        \delta=\frac{J_{nE}+J_{pE}}{J_{nE}+J_{pE}+J_R}
+    \end{Equation}
+    复合系数主要关注的是复合电流$J_R$的影响，因此可以忽略$J_{pE}$
+    \begin{Equation}&[2]
+        \delta=\frac{J_{nE}}{J_{nE}+J_R}
+    \end{Equation}
+    不妨上下同除$J_{nE}$化简为
+    \begin{Equation}&[3]
+        \delta=\frac{1}{1+J_R/J_{nE}}=\qty[1+\frac{J_R}{J_{nE}}]^{-1}
+    \end{Equation}
+    $J_{nE}$我们援引\xrefpeq[注入系数]{8}的近似式，并再近似掉指数后的$-1$
+    \begin{Equation}&[4]
+        J_{nE}=\frac{eD_Bn_{B0}}{L_B\tanh(x_B/L_B)}\exp(\frac{eV_{BE}}{\kB T})=J_{s0}\exp(\frac{eV_{BE}}{\kB T})
+    \end{Equation}
+    $J_R$是PN结非理想效应的复合电流，我们引用\fancyref{fml:正偏复合电流}
+    \begin{Equation}&[5]
+        J_{R}=\frac{eW_{BE}n_i}{2\tau_0}\exp(\frac{eV_{BE}}{2\kB T})=J_{r0}\exp(\frac{eV_{BE}}{2\kB T})
+    \end{Equation}
+    将\xrefpeq{4}和\xrefpeq{5}代入\xrefpeq{3}
+    \begin{Equation}
+        \delta=\qty[1+\frac{J_{r0}}{J_{s0}}\exp(-\frac{eV_{BE}}{2\kB T})]^{-1}
+    \end{Equation}
+    至此，我们就完成了$\delta$的计算。
+\end{Proof}
+复合系数$\delta$表征了复合电流的影响，复合电流和空穴电流一样，都会冲淡电子电流在发射结电流中的占比。我们注意到，当发射结正偏电压$V_{BE}$较大时，复合系数$\delta$就会较接近$1$，因此，只要适当增大$V_{BE}$就可以基本避免复合电流的影响。这很合理，因为在\xref{fig:实际PN结的电流--电压关系}中就已经提到过，PN结正偏时，正偏电压较小时由复合电流主导，正偏电压较大时由扩散电流主导。

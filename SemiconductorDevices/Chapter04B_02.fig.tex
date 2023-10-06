@@ -1,0 +1,106 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\tikzset{Fn/.style={very thick,cyan!30!white}}
+\tikzset{Fp/.style={very thick,orange!30!white}}
+\tikzset{Fg/.style={very thick,white}}
+
+\xValDefine{xL}[-5.5]
+\xValDefine{xR}[+5.5]
+\xValOffset{xELa}{xL}[-0.2]
+\xValOffset{xELb}{xL}[-3]
+\xValOffset{xCRa}{xR}[+0.2]
+\xValOffset{xCRb}{xR}[+3]
+\xValOffset{xBorL}{xELb}[-0.75]
+\xValOffset{xBorR}{xCRb}[+0.75]
+\xValProportion{xBEL}{xL}{xR}[0.30]
+\xValProportion{xBER}{xL}{xR}[0.35]
+\xValProportion{xBCL}{xL}{xR}[0.55]
+\xValProportion{xBCR}{xL}{xR}[0.65]
+\xValOffset{xEL}{xL}
+\xValOffset{xER}{xBEL}
+\xValOffset{xBL}{xBER}
+\xValOffset{xBR}{xBCL}
+\xValOffset{xCL}{xBCR}
+\xValOffset{xCR}{xR}
+\xValMiddle{xBEc}{xBEL}{xBER}
+\xValMiddle{xBCc}{xBCL}{xBCR}
+\xValMiddle{xEc}{xEL}{xER}
+\xValMiddle{xBc}{xBL}{xBR}
+\xValMiddle{xCc}{xCL}{xCR}
+\xValProportion{xBma}{xBL}{xBR}[1/6]
+\xValProportion{xBmb}{xBL}{xBR}[2/6]
+\xValProportion{xBmc}{xBL}{xBR}[3/6]
+\xValProportion{xBmd}{xBL}{xBR}[4/6]
+\xValProportion{xBme}{xBL}{xBR}[5/6]
+
+\xValDefine{yB}[-2.5]
+\xValDefine{yA}[+2.5]
+\xValOffset{yBBa}{yB}[-0.2]
+\xValOffset{yBBb}{yB}[-1.5]
+\xValMiddle{yC}{yA}{yB}
+\xValOffset{yBorB}{yBBb}[-0.75]
+\xValOffset{yBorA}{yA}[+0.25]
+\xValProportion{yTexta}{yA}{yB}[0.08]
+\xValProportion{yTextb}{yA}{yB}[0.17]
+\xValProportion{yJa}{yA}{yB}[0.30]
+\xValProportion{yJb}{yA}{yB}[0.50]
+\xValProportion{yJc}{yA}{yB}[0.70]
+\xValMiddle{yJ}{yJa}{yJb}
+
+\xGeneratePoints{xL,xR,xBorL,xBorR,xBEL,xBER,xBCL,xBCR,xEL,xER,xBL,xBR,xCL,xCR,xBEc,xBCc,xEc,xBc,xCc,xBma,xBmb,xBmc,xBmd,xBme,xELa,xELb,xCRa,xCRb}{yB,yA,yBorB,yBorA,yTexta,yTextb,yJa,yJb,yJc,yJ,yC,yBBa,yBBb}
+
+\fill[mnmN0] (xEL/yB) rectangle (xER/yA);
+\fill[mnmP1] (xBL/yB) rectangle (xBR/yA);
+\fill[mnmN2] (xCL/yB) rectangle (xCR/yA);
+\fill[mnmDepletion] (xBEL/yB) rectangle (xBER/yA);
+\fill[mnmDepletion] (xBCL/yB) rectangle (xBCR/yA);
+
+\draw[rectangle] (xL/yB) rectangle (xR/yA);
+\foreach \x in {xBEL,xBER,xBCL,xBCR}
+{
+    \draw (\x/yA) -- (\x/yB);
+}
+
+\foreach \x/\ta/\tb in {xEc/发射区/$n^{++}$,xBc/基区/$p^{+}$,xCc/集电区/$n$}
+{
+    \draw (\x/yTexta) node[white] {\ta};
+    \draw (\x/yTextb) node[white] {\tb};
+}
+
+\draw[Fn,-latex] (xCR/yJa) node[above left] {$J_{nC}$} -- (xCc/yJa);
+\draw[Fn,-latex] (xCc/yJa) -- (xEc/yJa);
+\draw[Fn] (xEc/yJa) -- (xEL/yJa) node[above right] {$J_{nE}$};
+\draw[Fp,-latex] (xBmc/yB) -- (xBmc/yJ) node[right] {$J_{pB}$};
+\draw[Fp] (xBmc/yJ) -- (xBmc/yJa) node[point=gray] {};
+\draw[Fp,-latex] (xCR/yJb) node[above left] {$J_{pC}$} -- (xCc/yJb);
+\draw[Fp,rounded corners=0.2cm] (xCc/yJb) -- (xBmd/yJb) -- (xBmd/yB);
+\draw[Fp,rounded corners=0.2cm,-latex] (xBmb/yB) -- (xBmb/yJb) -- (xEc/yJb);
+\draw[Fp] (xEc/yJb) -- (xL/yJb) node[above right] {$J_{pE}$}; 
+
+\path (xBEc/yJc) node[white,name=jr] {\large $\otimes$};
+\path (xBCc/yJc) node[white,name=jg] {\large $\otimes$};
+
+\draw[Fg,rounded corners=0.2cm] (xBma/yB) -- (xBma/yJc) -- ($(jr)+(+0.15,0)$);
+\draw[Fg,-latex] ($(jr)+(-0.15,0)$) -- (xEc/yJc);
+\draw[Fg] (xEc/yJc) -- (xEL/yJc) node[above right] {$J_{R}$}; 
+
+\draw[Fg,-latex] (xCR/yJc) node[above left] {$J_G$} -- (xCc/yJc);
+\draw[Fg] (xCc/yJc) -- ($(jg)+(0.15,0)$);
+\draw[Fg,rounded corners=0.2cm] ($(jg)+(-0.15,0)$) -- (xBme/yJc) -- (xBme/yB);
+
+\draw[ultra thick,-latex] (xELa/yC) --  node[above] {\small $J_\textit{pE}+J_\textit{nE}+J_R$} (xELb/yC) node[left] {$J_E$};
+\draw[ultra thick,-latex] (xCRb/yC) node[right] {$J_C$} -- node[above] {\small $J_\textit{pC}+J_\textit{nC}+J_G$} (xCRa/yC);
+\draw[ultra thick,-latex] (xBc/yBBb) node[below] {$J_B$} -- node[right] {\small $J_\textit{pB}+(J_\textit{pE}+J_R)-(J_\textit{pC}+J_G)$} (xBc/yBBa);
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\foreach \x/\t in {xEL/$x'=x_E$,xER/$0$,xBL/$0$,xBR/$x=x_B$,xCL/$0$,xCR/$x''=x_C$}
+{
+    \path (\x/yB) node[below] {\footnotesize \t\vphantom{$0x'$}};
+}
+
+\end{tikzpicture}
+\end{document}

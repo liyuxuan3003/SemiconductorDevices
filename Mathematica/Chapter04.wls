@@ -55,9 +55,16 @@ JnB=Function[{x},FullSimplify[-e DB D[dnB[t],t]]/.{t->x}]
 JpE=Function[{x},FullSimplify[-e DE D[dpE[t],t]]/.{t->x}]
 
 
+FullSimplify[JnB[x]]
+FullSimplify[JpE[x]]
+
+
 FullSimplify[JnB[0]]
 FullSimplify[JnB[xB]]
 FullSimplify[JpE[0]]
+
+
+Series[1/(1+x^2/2),{x,0,3}]
 
 
 SameQ[Cosh[(-x+xE)/LE] Csch[xE/LE],1/Tanh[xE/LE]]

@@ -1,0 +1,30 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-5.5]
+\xValDefine{xR}[+5.5]
+\xValMiddle{xC}{xL}{xR}
+\xValOffset{xBorL}{xL}[-0.75]
+\xValOffset{xBorR}{xR}[+0.75]
+\xValProportion{xCpi}{xL}{xC}[0.33]
+\xValProportion{xRpi}{xL}{xC}[0.67]
+
+\xValDefine{yA}[+1.5]
+\xValDefine{yB}[-1.5]
+\xValOffset{yBorA}{yA}[+1]
+\xValOffset{yBorB}{yB}[-0.5]
+
+\xGeneratePoints{xL,xR,xC,xBorL,xBorR,xCpi,xRpi}{yA,yB,yBorA,yBorB}
+
+\draw (xL/yA) node[left] {E} to[cisource,invert,l=$g_mV_{be}$,o-o] (xR/yA) node[right] {C};
+
+\draw (xCpi/yA) to[C=$C_{\pi}$,*-*] (xCpi/yB);
+\draw (xRpi/yA) to[R=$r_{\pi}$,*-*] (xRpi/yB);
+\draw (xL/yB) node[left] {B} to[short,o-o] (xR/yB);
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\end{tikzpicture}
+\end{document}

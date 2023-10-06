@@ -103,7 +103,7 @@ fig1=Plot3D[IC//.valList//.volatgeList1,{VCE,-0.5,0.5},{VBE,-0.5,0.5},
 	PlotPoints->100,Mesh->60,MeshStyle->Gray,
 	Exclusions->{VBE==VCE,VBE==0},
 	Evaluate@xFig3DTicks[{-0.5,0.5,0.25},{3,2},{-0.5,0.5,0.25},{3,2},{-10,10,5},{2,0}],
-	Evaluate@xFig3DLabel["V_{CE}~(\\si{V})","V_{BE}~(\\si{V})","I_{C}/I_{s}"],
+	Evaluate@xFig3DLabel["V_{CE}~(\\si{V})","V_{BE}~(\\si{V})","I_{C}/I_{FS}"],
 	Evaluate@xFig3DConfig]
 
 
@@ -115,7 +115,7 @@ fig2=Plot3D[IC//.valList//.volatgeList2,{VCB,-0.5,0.5},{VBE,-0.5,0.5},
 	MeshStyle->Gray,
 	Exclusions->{VCB==0,VBE==0},
 	Evaluate@xFig3DTicks[{-0.5,0.5,0.25},{3,2},{-0.5,0.5,0.25},{3,2},{-10,10,5},{2,0}],
-	Evaluate@xFig3DLabel["-V_{BC}~(\\si{V})","+V_{BE}~(\\si{V})","I_{C}/I_{s}"],
+	Evaluate@xFig3DLabel["-V_{BC}~(\\si{V})","+V_{BE}~(\\si{V})","I_{C}'/I_{FS}"],
 	Evaluate@xFig3DConfig]
 
 
@@ -137,7 +137,7 @@ fig3=Plot[Evaluate@Join[Table[fig3Func,{VBE,0.00,0.04,0.01}]],
 	PlotStyle->ColorData[10],
 	GridLines->{xGrids[{-0.2,0.5,0.02}],xGrids[{-2.4,5.4,0.2}]},
 	Evaluate@xFigTicks[{-0.2,0.5,0.1},{2,1},{-2,5,1},{2,1}],
-	Evaluate@xFigLabel["-V_{BC}~(\\si{V})","I_{C}/I_{S}"],
+	Evaluate@xFigLabel["-V_{BC}~(\\si{V})","I_{C}'/I_{FS}"],
 	Evaluate@xFigConfig]
 
 
@@ -158,25 +158,25 @@ fig4=Plot[Evaluate@Join[Table[fig4Func,{VBE,0.00,0.04,0.01}],{fig4Func//.{VBE->V
 	PlotStyle->Join[ColorData[10]/@{1,2,3,4,5},{Directive[Black,Thickness[0.002],Dashed]}],
 	GridLines->{xGrids[{-0.2,0.5,0.02}],xGrids[{-1.4,5.4,0.2}]},
 	Evaluate@xFigTicks[{-0.2,0.5,0.1},{2,1},{-1,5,1},{2,1}],
-	Evaluate@xFigLabel["V_{CE}~(\\si{V})","I_{C}/I_{S}"],
+	Evaluate@xFigLabel["V_{CE}~(\\si{V})","I_{C}/I_{FS}"],
 	Evaluate@xFigConfig]
 
 
 fig5Func=IC//.valList//.volatgeList2
 fig5=Plot[Evaluate@Join[Table[fig5Func,{VCB,{0.0,0.5}}]],
 	{VBE,-0.2,0.5},PlotRange->{-1.5,5.5},
-	GridLines->{xGrids[{-0.2,1,0.02}],xGrids[{-1.4,5.4,0.2}]},
+	GridLines->{xGrids[{-0.2,0.5,0.02}],xGrids[{-1.4,5.4,0.2}]},
 	Epilog->{
 		Black,Dashed,Thickness[0.002],Line[{{0,-2.5},{0,5.5}}],
 		Text[xLaTeX["-V_{BC}=0.0\\si{V}",0.6],{-0.1,-1.20}],
 		Text[xLaTeX["-V_{BC}=0.5\\si{V}",0.6],{-0.1,+0.40}],
-		Text[xLaTeX["-V_{BE}=0",0.8],{-0.07,5.1}],
+		Text[xLaTeX["+V_{BE}=0",0.8],{-0.07,5.1}],
 		Text[Style["\:622a\:6b62\:533a",FontFamily->"Noto Serif CJK SC",FontSize->9],{-0.11,4.02}],
 		Text[Style["\:653e\:5927\:533a",FontFamily->"Noto Serif CJK SC",FontSize->9],{+0.15,4.02}]
 	},
 	PlotStyle->ColorData[10],
-	Evaluate@xFigTicks[{-0.2,1,0.1},{2,1},{-1,5,1},{2,1}],
-	Evaluate@xFigLabel["+V_{BE}~(\\si{V})","I_{C}/I_{S}"],
+	Evaluate@xFigTicks[{-0.2,0.5,0.1},{2,1},{-1,5,1},{2,1}],
+	Evaluate@xFigLabel["+V_{BE}~(\\si{V})","I_{C}/I_{FS}"],
 	Evaluate@xFigConfig]
 
 
@@ -189,9 +189,10 @@ fig6=Plot[Evaluate@Join[Table[fig6Func,{VCE,2,2,0.1}]],
 		Text[xLaTeX["V_{CE}\\gg V_{BE,\\max}",0.6],{-0.12,0.50}],
 		Text[xLaTeX["V_{BE}=0",0.8],{-0.06,5.1}],
 		Text[Style["\:622a\:6b62\:533a",FontFamily->"Noto Serif CJK SC",FontSize->9],{-0.11,4.02}],
-		Text[Style["\:653e\:5927\:533a",FontFamily->"Noto Serif CJK SC",FontSize->9],{+0.15,4.02}]
+		Text[Style["\:653e\:5927\:533a",FontFamily->"Noto Serif CJK SC",FontSize->9],{+0.15,4.02}],
+		Text[Style["\:6307\:6570\:5173\:7cfb",FontFamily->"Noto Serif CJK SC",FontSize->9],{+0.08,1}]
 	},
-	GridLines->{xGrids[{-0.2,1,0.02}],xGrids[{-1.4,5.4,0.2}]},
+	GridLines->{xGrids[{-0.2,0.5,0.02}],xGrids[{-1.4,5.4,0.2}]},
 	Evaluate@xFigTicks[{-0.2,1,0.1},{2,1},{-1,5,1},{2,1}],
 	Evaluate@xFigLabel["V_{BE}~(\\si{V})","I_{C}/I_{S}"],
 	Evaluate@xFigConfig]
@@ -204,7 +205,7 @@ fig7=Plot3D[(IC/IB)//.valList//.volatgeList2,{VCB,-0.5,0.5},{VBE,-0.5,0.5},
 	MeshStyle->Gray,
 	BoxRatios->{1,1,0.7},
 	Ticks->{xTicks[{-0.5,0.5,0.25},{3,2}],xTicks[{-0.5,0.5,0.25},{3,2}],Table[{x,xLaTeX[ToString[x],0.5]},{x,{-10,0,25,50,75,100}}]},
-	Evaluate@xFig3DLabel["-V_{BC}","+V_{BE}","\\dfrac{I_{C}}{I_{B}}"],
+	Evaluate@xFig3DLabel["-V_{BC}","+V_{BE}","\\dfrac{I_{C}'}{I_{B}'}"],
 	Evaluate@xFig3DTicks[{-0.5,0.5,0.25},{3,2},{-0.5,0.5,0.25},{3,2},{-10,100,10},{3,0}],
 	Evaluate@xFig3DConfig]
 
@@ -212,7 +213,7 @@ fig7=Plot3D[(IC/IB)//.valList//.volatgeList2,{VCB,-0.5,0.5},{VBE,-0.5,0.5},
 fig8Func={IB,IC}//.valList//.volatgeList2
 fig8=Plot[Evaluate@Join[Table[fig8Func,{VCB,{0.5}}]],
 	{VBE,-0.2,0.5},PlotRange->{-1.5,5.5},
-	GridLines->{xGrids[{-0.2,1,0.02}],xGrids[{-1.4,5.4,0.2}]},
+	GridLines->{xGrids[{-0.2,0.5,0.02}],xGrids[{-1.4,5.4,0.2}]},
 	Epilog->{
 		Black,Dashed,Thickness[0.002],Line[{{0,-2.5},{0,5.5}}],
 		Text[xLaTeX["-V_{BC}=0.5\\si{V}",0.6],{-0.1,+0.40}],
@@ -221,12 +222,12 @@ fig8=Plot[Evaluate@Join[Table[fig8Func,{VCB,{0.5}}]],
 	},
 	PlotLegends->Placed[LineLegend[
 		{
-			xLaTeX["I_B",0.8],
-			xLaTeX["I_C",0.8]
+			xLaTeX["I_B'",0.8],
+			xLaTeX["I_C'",0.8]
 		},LegendFunction->"Panel",LegendLayout -> {"ReversedRow",1}],{Right,Bottom}],
 	PlotStyle->{Red,Blue,Black},
-	Evaluate@xFigTicks[{-0.2,1,0.1},{2,1},{-1,5,1},{2,1}],
-	Evaluate@xFigLabel["+V_{BE}~(\\si{V})","I/I_{S}"],
+	Evaluate@xFigTicks[{-0.2,0.5,0.1},{2,1},{-1,5,1},{2,1}],
+	Evaluate@xFigLabel["+V_{BE}~(\\si{V})","I/I_{FS}"],
 	Evaluate@xFigConfig]
 
 
