@@ -3,16 +3,16 @@
 \begin{document}
 \begin{tikzpicture}
 
-\xValDefine{xL}[-3]
-\xValDefine{xR}[+3]
+\xValDefine{xL}[-3.5]
+\xValDefine{xR}[+3.5]
 \xValOffset{xBorL}{xL}[-0.7]
 \xValOffset{xBorR}{xR}[+0.7]
 \xValMiddle{xC}{xL}{xR}
 \xValMiddle{xLc}{xL}{xC}
 \xValMiddle{xRc}{xR}{xC}
 
-\xValDefine{yB}[-3]
-\xValDefine{yA}[+3]
+\xValDefine{yB}[-3.5]
+\xValDefine{yA}[+3.4]
 \xValOffset{yBorB}{yB}[-0.7]
 \xValOffset{yBorA}{yA}[+0.7]
 \xValMiddle{yC}{yB}{yA}
@@ -25,20 +25,24 @@
 \draw[-latex] (xC/yB) -- (xC/yA) node[right] {$-V_{BC}$};
 
 \draw (xLc/yBc) 
-node[above] {反向放大区}
-node[below] {\tiny 发射结反偏\quad 集电结正偏};
+node[above=0.10cm] {反向放大区}
+node {\scriptsize Reverse Active Region}
+node[below=0.25cm] {\tiny 发射结反偏\quad 集电结正偏};
 
 \draw (xRc/yBc) 
-node[above] {饱和区}
-node[below] {\tiny 发射结反偏\quad 集电结正偏};
+node[above=0.10cm] {饱和区}
+node {\scriptsize Saturation Region}
+node[below=0.25cm] {\tiny 发射结反偏\quad 集电结正偏};
 
 \draw (xLc/yAc) 
-node[above] {截止区}
-node[below] {\tiny 发射结反偏\quad 集电结反偏};
+node[above=0.10cm] {截止区}
+node {\scriptsize Cut-off Region}
+node[below=0.25cm] {\tiny 发射结反偏\quad 集电结反偏};
 
 \draw (xRc/yAc) 
-node[above] {正向放大区}
-node[below] {\tiny 发射结正偏\quad 集电结反偏};
+node[above=0.10cm] {正向放大区}
+node {\scriptsize Forward Active Region}
+node[below=0.25cm] {\tiny 发射结正偏\quad 集电结反偏};
 
 \draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
 
