@@ -1,0 +1,39 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-4]
+\xValDefine{xR}[+4]
+\xValMiddle{xC}{xL}{xR}
+\xValProportion{xLi}{xL}{xR}[0.18]
+\xValMirror{xRi}{xLi}{xC}
+\xValProportion{xLc}{xLi}{xRi}[0.35]
+\xValMirror{xRc}{xLc}{xC}
+\xValOffset{xBorL}{xL}[-0.75]
+\xValOffset{xBorR}{xR}[+0.75]
+
+\xValDefine{yB}[-1.8]
+\xValDefine{yA}[+1.8]
+\xValMiddle{yC}{yA}{yB}
+\xValProportion{yGA}{yA}{yB}[0.18]
+\xValMirror{yGB}{yGA}{yC}
+\xValProportion{yAc}{yGA}{yC}[0.5]
+\xValMirror{yBc}{yAc}{yC}
+\xValOffset{yBorB}{yC}[-0.3]
+\xValOffset{yBorA}{yA}[+0.3]
+
+\xGeneratePoints{xL,xR,xC,xLi,xRi,xBorL,xBorR,xLc,xRc}{yA,yC,yGA,yBorA,yBorB,yAc}
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\draw[fill=mnmP0] (xLi/yGA) rectangle node[white] {$p^{+}$} (xRi/yA);
+\draw[fill=mnmN2] (xLi/yGA) rectangle (xRi/yC);
+
+\draw (xLi/yAc) to[short,-o] (xL/yAc) node[left] {S};
+\draw (xRi/yAc) to[short,-o,i<=$I_{D1}$] (xR/yAc) node[right] {D};
+
+\draw[-latex] (xRc/yAc) -- (xLc/yAc) node[left] {$I_{D1}$};
+
+\end{tikzpicture}
+\end{document}

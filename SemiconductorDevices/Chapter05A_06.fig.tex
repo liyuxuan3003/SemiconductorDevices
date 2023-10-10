@@ -1,0 +1,49 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-3.5]
+\xValDefine{xR}[+3.5]
+\xValMiddle{xC}{xL}{xR}
+\xValProportion{xSL}{xL}{xR}[0.10]
+\xValProportion{xSR}{xL}{xR}[0.25]
+\xValProportion{xGL}{xL}{xR}[0.35]
+\xValMirror{xGR}{xGL}{xC}
+\xValMirror{xDL}{xSR}{xC}
+\xValMirror{xDR}{xSL}{xC}
+\xValMiddle{xS}{xSL}{xSR}
+\xValMiddle{xD}{xDL}{xDR}
+\xValMiddle{xG}{xGL}{xGR}
+\xValOffset{xBorL}{xL}[-0.6]
+\xValOffset{xBorR}{xR}[+0.6]
+
+\xValDefine{yB}[0.0]
+\xValDefine{yA}[2.0]
+\xValOffset{yPin}{yA}[1.0]
+\xValOffset{yGate}{yA}[0.35]
+\xValOffset{yPinB}{yB}[-0.75]
+\xValProportion{yDopeA}{yA}{yB}[0.3]
+\xValProportion{yDopeB}{yA}{yB}[0.4]
+\xValProportion{yDopeC}{yA}{yB}[0.6]
+\xValOffset{yBorB}{yB}[-0.5]
+\xValOffset{yBorA}{yPin}[+0.6]
+
+\xGeneratePoints{xL,xR,xC,xSL,xSR,xS,xDL,xDR,xD,xGL,xGR,xG,xBorL,xBorR}{yB,yA,yPin,yDopeA,yDopeB,yDopeC,yBorB,yBorA,yGate}
+
+\draw[fill=mnmN2] (xL/yB) rectangle node[white,above] {$n$}  (xR/yA);
+\draw[fill=mnmAl] (xGL/yA) rectangle node[white] {\si{Al}} node[below=0.2cm,white] {\tiny 金半整流接触} (xGR/yGate);
+\draw[fill=mnmN0] (xSL/yDopeA) rectangle node[white] {$n^{+}$} (xSR/yA);
+\draw[fill=mnmN0] (xDL/yDopeA) rectangle node[white] {$n^{+}$} (xDR/yA);
+\draw[fill=mnmSi] (xL/yDopeC) rectangle node{\ce{Si}} (xR/yB);
+
+\draw (xG/yGate) -- node[right] {\footnotesize Gate} node[left] {\footnotesize 栅极} (xG/yPin) node[ocirc] {} node[above] {G};
+
+\draw (xS/yA) -- node[right] {\footnotesize Source} node[left] {\footnotesize 源极} (xS/yPin) node[ocirc] {} node[above] {S};
+
+\draw (xD/yA) -- node[right] {\footnotesize Drain} node[left] {\footnotesize 漏极} (xD/yPin) node[ocirc] {} node[above] {D};
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\end{tikzpicture}
+\end{document}

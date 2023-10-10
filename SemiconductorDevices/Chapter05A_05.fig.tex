@@ -1,0 +1,50 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-3.5]
+\xValDefine{xR}[+3.5]
+\xValMiddle{xC}{xL}{xR}
+\xValProportion{xSL}{xL}{xR}[0.10]
+\xValProportion{xSR}{xL}{xR}[0.25]
+\xValProportion{xGL}{xL}{xR}[0.35]
+\xValMirror{xGR}{xGL}{xC}
+\xValMirror{xDL}{xSR}{xC}
+\xValMirror{xDR}{xSL}{xC}
+\xValMiddle{xS}{xSL}{xSR}
+\xValMiddle{xD}{xDL}{xDR}
+\xValMiddle{xG}{xGL}{xGR}
+\xValOffset{xBorL}{xL}[-0.6]
+\xValOffset{xBorR}{xR}[+0.6]
+
+\xValDefine{yB}[0.0]
+\xValDefine{yA}[2.0]
+\xValOffset{yPin}{yA}[1.0]
+\xValOffset{yPinB}{yB}[-0.75]
+\xValProportion{yDopeA}{yA}{yB}[0.3]
+\xValProportion{yDopeB}{yA}{yB}[0.4]
+\xValProportion{yDopeC}{yA}{yB}[0.7]
+\xValOffset{yBorB}{yPinB}[-0.6]
+\xValOffset{yBorA}{yPin}[+0.6]
+
+\xGeneratePoints{xL,xR,xC,xSL,xSR,xS,xDL,xDR,xD,xGL,xGR,xG,xBorL,xBorR}{yB,yA,yPin,yPinB,yDopeA,yDopeB,yDopeC,yBorB,yBorA}
+
+\draw[fill=mnmP2] (xL/yB) rectangle node[white] {$p$}  (xR/yA);
+\draw[fill=mnmN0] (xGL/yDopeA) rectangle node[white] {$n^{+}$} (xGR/yA);
+\draw[fill=mnmP0] (xSL/yDopeA) rectangle node[white] {$p^{+}$} (xSR/yA);
+\draw[fill=mnmP0] (xDL/yDopeA) rectangle node[white] {$p^{+}$} (xDR/yA);
+\draw[fill=mnmN0] (xL/yDopeC) rectangle node[white] {$n^{+}$} (xR/yB);
+
+\draw (xG/yA) -- node[right] {\footnotesize Gate} node[left] {\footnotesize 栅极} (xG/yPin) node[ocirc] {} node[above] {G};
+
+\draw (xG/yB) -- (xG/yPinB) node[ocirc] {} node[below] {G};
+
+\draw (xS/yA) -- node[right] {\footnotesize Source} node[left] {\footnotesize 源极} (xS/yPin) node[ocirc] {} node[above] {S};
+
+\draw (xD/yA) -- node[right] {\footnotesize Drain} node[left] {\footnotesize 漏极} (xD/yPin) node[ocirc] {} node[above] {D};
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\end{tikzpicture}
+\end{document}

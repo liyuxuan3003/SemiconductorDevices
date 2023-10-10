@@ -1,0 +1,56 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-4]
+\xValDefine{xR}[+4]
+\xValMiddle{xC}{xL}{xR}
+\xValOffset{xBorL}{xL}[-0.6]
+\xValOffset{xBorR}{xR}[+0.6]
+\xValProportion{xLi}{xL}{xR}[0.24]
+\xValMirror{xRi}{xLi}{xC}
+\xValProportion{xGL}{xLi}{xRi}[0.15]
+\xValMirror{xGR}{xGL}{xC}
+\xValProportion{xDpL}{xLi}{xRi}[0.12]
+\xValMirror{xDpR}{xDpL}{xC}
+
+\xValDefine{yA}[+1.2]
+\xValDefine{yB}[-1.2]
+\xValMiddle{yC}{yA}{yB}
+\xValOffset{yBB}{yB}[-0.75]
+\xValMirror{yAA}{yBB}{yC}
+\xValOffset{yBorB}{yBB}[-0.6]
+\xValOffset{yBorA}{yAA}[+0.6]
+\xValProportion{yGA}{yA}{yB}[0.3]
+\xValMirror{yGB}{yGA}{yC}
+\xValProportion{yDpA}{yGA}{yGB}[0.50]
+\xValMirror{yDpB}{yDpA}{yC}
+
+\xGeneratePoints{xL,xR,xC,xLi,xRi,xBorL,xBorR,xGL,xGR,xDpL,xDpR}{yA,yB,yC,yAA,yBB,yBorB,yBorA,yGA,yGB,yDpA,yDpB}
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\draw[fill=mnmN2] (xLi/yB) rectangle (xRi/yA);
+
+\draw[fill=mnmDepletion] (xDpL/yDpA) rectangle (xDpR/yA); 
+\draw[fill=mnmDepletion] (xDpL/yDpB) rectangle (xDpR/yB); 
+
+\draw[fill=mnmP0] (xGL/yGA) rectangle node[white] {$p^{+}$} (xGR/yA); 
+\draw[fill=mnmP0] (xGL/yGB) rectangle node[white] {$p^{+}$} (xGR/yB); 
+
+\draw (xC/yA) -- node[right] {$V_{GS}=V_2^{-}$}
+(xC/yAA) node[ocirc] {} node[above] {G};
+
+\draw (xC/yB) --
+(xC/yBB) node[ocirc] {} node[below] {G};
+
+\draw (xLi/yC) to[short,i_=$I_D$]
+(xL/yC) node[ground] {} node[left] {S};
+
+\draw (xRi/yC) -- node[above] {$V_{DS}=0\si{V}$}
+(xR/yC) node[ocirc] {} node[right] {D};
+
+
+\end{tikzpicture}
+\end{document}

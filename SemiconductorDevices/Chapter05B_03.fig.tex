@@ -1,0 +1,50 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-3]
+\xValDefine{xR}[+3]
+\xValMiddle{xC}{xL}{xR}
+\xValOffset{xBorL}{xL}[-1]
+\xValOffset{xBorR}{xR}[+1]
+\xValProportion{xha}{xL}{xR}[-0.05]
+\xValProportion{xhb}{xL}{xR}[+1.05]
+\xValProportion{xa}{xL}{xR}[0.8]
+\xValMiddle{xhap}{xha}{xL}
+\xValMiddle{xhbp}{xhb}{xR}
+
+\xValDefine{yB}[0]
+\xValDefine{yA}[+3]
+\xValMiddle{yC}{yA}{yB}
+\xValProportion{yG}{yA}{yB}[0.2]
+\xValProportion{yHa}{yA}{yB}[0.5]
+\xValProportion{yHb}{yA}{yB}[0.8]
+\xValOffset{yBorB}{yB}[-0.35]
+\xValOffset{yBorA}{yA}[+0.8]
+
+\xGeneratePoints{xL,xR,xC,xBorL,xBorR,xha,xhb,xa,xhap,xhbp}{yB,yA,yC,yBorB,yBorA,yG,yHa,yHb}
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\fill[mnmN2] (xL/yB) -- (xL/yHa) -- (xR/yHa) -- (xR/yB) -- cycle;
+
+\draw[fill=mnmP0] (xL/yG) rectangle node[white] {$p^{+}$} (xR/yA);
+\draw[fill=mnmDepletion] (xL/yHa) -- (xL/yG) -- (xR/yG) -- (xR/yHa) -- cycle;
+
+\draw (xL/yB) -- (xL/yHa);
+\draw (xR/yB) -- (xR/yHa);
+\draw[dashed] (xL/yB) -- node[above=0.25cm] {$n$} (xR/yB);
+
+\draw[ultra thin] (xL/yG) -- (xha/yG);
+\draw[ultra thin] (xL/yHa) -- (xha/yHa);
+\draw[ultra thin,latex-latex] (xhap/yG) -- node[left] {$h$} (xhap/yHa);
+
+\draw[very thin,latex-latex] (xa/yG) -- node[pos=0.2,right] {$a$} (xa/yB);
+
+\path (xC/yA) node[above=0.1cm] {G};
+\path (xL/yB) node[above left=0.1cm] {S};
+\path (xR/yB) node[above right=0.1cm] {D};
+
+\end{tikzpicture}
+\end{document}

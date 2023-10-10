@@ -1,0 +1,132 @@
+\section{JFET的器件特性}
+现在让我们来推导JFET的器件特性。我们或许已经注意到了JFET是上下对称的，即所谓的“双边JFET”。我们可以只考虑半个JFET来让计算更简单，即“单边HFET”，如\xref{fig:JFET的}
+
+\begin{Figure}[JFET的简化]
+    \begin{FigureSub}[双边JFET]
+        \includegraphics[scale=0.85]{build/Chapter05B_01.fig.pdf}
+    \end{FigureSub}\\ \vspace{0.5cm}
+    \begin{FigureSub}[单边JFET]
+        \includegraphics[scale=0.85]{build/Chapter05B_02.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+以$I_{D2}$和$I_{D1}$分别表示双边JFET和单边JFET上的电流，显然
+\begin{Equation}
+    I_{D2}=2I_{D1}
+\end{Equation}
+这是因为双边JFET可以视为两个单边JFET的并联。后面的分析都对单边JFET进行。
+
+\subsection{栅源夹断电压}
+这一小节的目的是，推导$V_{GS}$为何值时，JFET沟道被夹断？
+\begin{Figure}[栅源夹断电压的推导]
+    \includegraphics{build/Chapter05B_03.fig.pdf}
+\end{Figure}
+如\xref{fig:栅源夹断电压的推导}所示，设JFET的沟道的总厚度为$a$，其中，设耗尽区占据的厚度为$h$。\setpeq{栅源夹断电压}
+
+根据\fancyref{fml:反偏时的空间电荷区宽度}，考虑到$V_{GS}$形式上为正偏电压，且$N_{a}\gg N_d$
+\begin{Equation}&[1]
+    h=\qty[\frac{2\epsilon_s(V_{bi}-V_{GS})}{eN_d}]^{1/2}
+\end{Equation}
+其中$V_{bi}$是栅--沟道PN结的内建电势差。
+
+这里$a$是一个常量，当$h=a$时，就意味着耗尽区完全夹断了沟道，记此时的$V_{GS}$为$V_p$
+\begin{Equation}&[2]
+    a=\qty[\frac{2\epsilon_s(V_{bi}-V_{p})}{eN_d}]^{1/2}
+\end{Equation}
+这里还常引入$V_{p0}=V_{bi}-V_p$代换
+\begin{Equation}&[3]
+    a=\qty[\frac{2\epsilon_sV_{p0}}{eN_d}]^{1/2}
+\end{Equation}
+正式定义如下
+\begin{BoxDefinition}[内建夹断电压]
+    内建夹断电压$V_{p0}$定义为
+    \begin{Equation}
+        V_{p0}=V_{bi}-V_p
+    \end{Equation}
+    这里，$V_{bi}$是内建电压，$V_{p}$是夹断电压，$V_{p0}$是内建夹断电压。\footnote[2]{其中p代表的是夹断的英文pinch off。}
+\end{BoxDefinition}
+
+关于$V_p$和$V_{p0}$，我们可能会觉得很绕，可以通过以下方式记忆
+\begin{itemize}
+    \item $V_p$是夹断电压，它是一个负值，它的意义是当栅压达到$V_{GS}=V_p$的负值时，沟道夹断。
+    \item $V_{p0}$是内建夹断电压，它和内建电压$V_{bi}$一样都是一个正值，且$V_{bi}<V_{p0}$，它的意义可以解释为，假如栅--沟道PN结的内建电压能到达$V_{p0}$，那么，在零栅压时耗尽区就已经挤占了整个沟道，发生夹断了。换言之，$V_{p0}=V_{bi}-V_{p}$代表夹断发生时的耗尽区电压。
+\end{itemize}\setpeq{栅源夹断电压}
+$V_{p0}$关于$V_p$的表达式为
+\begin{Equation}
+    V_{p0}=V_{bi}-V_p
+\end{Equation}
+$V_{p}$关于$V_{p0}$的表达式为
+\begin{Equation}
+    V_{p}=V_{bi}-V_{p0}
+\end{Equation}
+这是非常好记忆的：夹断电压$V_{p}$和内建夹断电压$V_{p0}$分别等于$V_{bi}$减去对方。
+
+内建夹断电压$V_{p0}$是一个与总厚度$a$直接相关的量，由\xrefpeq{3}稍微做一些变换，就可以得到
+\begin{BoxFormula}[内建夹断电压]
+    内建夹断电压$V_{p0}$可以表示为
+    \begin{Equation}
+        V_{p0}=\frac{ea^2N_d}{2\epsilon_s}
+    \end{Equation}
+\end{BoxFormula}
+
+现在，我们就可以明确写出栅源电压$V_{GS}$达到多少时，夹断会发生了。
+\begin{BoxFormula}[JFET的栅源夹断电压]
+    当栅源电压$V_{GS}$满足下式时，沟道夹断
+    \begin{Equation}
+        V_{GS}\leq V_p
+    \end{Equation}
+    即
+    \begin{Equation}
+        V_{GS}\leq V_{bi}-V_{p0}
+    \end{Equation}
+\end{BoxFormula}
+
+\subsection{漏源饱和电压}
+这一小节的目的是，推导$V_{DS}$为何值时，JFET沟道电流饱和？
+\begin{Figure}[漏源夹断电压的推导]
+    \includegraphics{build/Chapter05B_04.fig.pdf}
+\end{Figure}
+如\xref{fig:漏源夹断电压的推导}所示，此时耗尽区是倾斜的，宽度$h(x)$并不均等，源侧记为$h_1$，漏侧记为$h_2$。
+
+在源侧，“反偏电压”就是$-V_{GS}$，故$h_1$和前面的$h$是相同的
+\begin{BoxFormula}[JFET的源侧耗尽区厚度]
+    JFET在源侧的耗尽区厚度$h_1$为
+    \begin{Equation}
+        h_1=
+        \qty[\frac{2\epsilon_s(V_{bi}-V_{GS})}{eN_d}]^{1/2}
+    \end{Equation}
+\end{BoxFormula}
+在漏侧，“反偏电压”增大至$V_{DS}-V_{GS}$，故$h_2$应改写为
+\begin{BoxFormula}[JFET的源侧耗尽区厚度]
+    JFET在源侧的耗尽区厚度$h_2$为
+    \begin{Equation}
+        h_2=
+        \qty[\frac{2\epsilon_s(V_{bi}+V_{DS}-V_{GS})}{eN_d}]^{1/2}
+    \end{Equation}
+\end{BoxFormula}\setpeq{漏源夹断电压}
+很明显，漏源电压$V_{DS}$导致的那种使电流饱和的夹断的条件是$h_2=a$，即$V_{DS}$要满足
+\begin{Equation}
+    a=\qty[\frac{2\epsilon_s(V_{bi}+V_{DS}-V_{GS})}{eN_d}]^{1/2}
+\end{Equation}
+容易解出
+\begin{Equation}
+    V_{DS}=\frac{ea^2N_{d}}{2\varepsilon_{s}}-V_{bi}+V_{GS}
+\end{Equation}
+根据\fancyref{fml:内建夹断电压}
+\begin{Equation}
+    V_{DS}=V_{p0}-V_{bi}+V_{GS}
+\end{Equation}
+根据\fancyref{def:内建夹断电压}
+\begin{Equation}
+    V_{DS}=V_{GS}-V_{p}
+\end{Equation}
+由此，我们就可以归纳出电流饱和时$V_{DS}$的条件了
+\begin{BoxFormula}[漏源饱和电压]
+    当漏源电压$V_{DS}$满足下式时，沟道电流饱和
+    \begin{Equation}
+        V_{DS}\geq V_{GS}-V_{p}
+    \end{Equation}
+    即
+    \begin{Equation}
+        V_{DS}\geq V_{GS}-V_{bi}+V_{p0}
+    \end{Equation}
+\end{BoxFormula}

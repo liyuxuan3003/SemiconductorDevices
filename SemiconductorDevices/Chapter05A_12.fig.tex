@@ -1,0 +1,29 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-2]
+\xValDefine{xR}[+2]
+\xValMiddle{xC}{xL}{xR}
+\xValOffset{xBorL}{xL}[-0.6]
+\xValOffset{xBorR}{xR}[+0.6]
+
+\xValDefine{yA}[1]
+\xValDefine{yB}[0]
+\xValOffset{yBorB}{yB}[-0.7]
+\xValOffset{yBorA}{yA}[+0.7]
+
+\xGeneratePoints{xL,xR,xC,xBorL,xBorR}{yA,yB,yBorA,yBorB}
+
+\path (xC/yB) node[njfet,name=t,rotate=-90] {};
+
+\draw (t.S) to[short,-o] (xL |- t.S) node[left] {S};
+\draw (t.D) to[short,-o] (xR |- t.D) node[right] {D};
+\draw (t.G) to[short,-o] (t.G |- yA) node[above] {G};
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+
+\end{tikzpicture}
+\end{document}

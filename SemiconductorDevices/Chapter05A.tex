@@ -1,0 +1,89 @@
+\section{JFET的基本结构}
+场效应管的基础，即场效应现象早在1930年左右就已经被发现，但由于那时还没有良好的半导体材料和先进的半导体加工工艺，所以知道1950年左右，场效应管这种器件才被重新研究。
+
+场效应现象的定义是，\empx{半导体的电导被垂直于半导体表面的电场调制}。
+
+场效应管工作时只存在一种载流子，即多数载流子，这与\xref{chap:双极结型晶体管}的BJT即\uwave{双极晶体管}是不同的。BJT中多子少子同时导电，FET中仅多子导电，故场效应管有时也被称为\uwave{单极晶体管}。
+
+\subsection{JFET的结构}
+JFET的结构如\xref{fig:JFET的结构简图}所示（以下JFET均指PN JFET），同样是三个掺杂区和两个PN结。
+
+JFET的三个区域依次为：\uwave{源极}（Source, S）、\uwave{栅极}（Gate, G）、\uwave{漏极}（Drain, D）。这样的电极命名场效应管通用的，对于JFET和MOSFET都是如此。但是JFET非常不同于MOSFET的一点是，JFET的源和漏是直通的！例如在\xref{fig:N沟道JFET的结构简图}我们看到，源和漏之间直接由N型半导体相连，换言之，源和漏间的沟道原本就是导通的（“生而导通”），并不需要通过栅压开启。
+
+\begin{Figure}[JFET的结构简图]
+    \begin{FigureSub}[N沟道JFET的结构简图]
+        \includegraphics[scale=0.87]{build/Chapter05A_02.fig.pdf}
+    \end{FigureSub}
+    \hspace{0.2cm}
+    \begin{FigureSub}[P沟道JFET的结构简图]
+        \includegraphics[scale=0.87]{build/Chapter05A_03.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+JFET的结构中，栅包含了上下两部分，实际工艺中两者是不对称的，如\xref{fig:JFET的实际结构}，一侧的栅和源和漏一样作为表面掺杂，一侧的栅则直接由衬底充当。源漏极附近重掺是为了形成欧姆接触。
+\begin{Figure}[JFET的实际结构]
+    \begin{FigureSub}[N沟道JFET的实际结构]
+        \includegraphics[scale=0.87]{build/Chapter05A_04.fig.pdf}
+    \end{FigureSub}
+    \hspace{0.2cm}
+    \begin{FigureSub}[P沟道JFET的实际结构]
+        \includegraphics[scale=0.87]{build/Chapter05A_05.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+
+JFET的电路符号如\xref{fig:JFET的电路符号}所示，箭头代表了栅--沟道PN结的方向
+\begin{Figure}[JFET的电路符号]
+    \begin{FigureSub}[N沟道JFET的电路符号]
+        \includegraphics{build/Chapter05A_12.fig.pdf}
+    \end{FigureSub}
+    \hspace{1cm}
+    \begin{FigureSub}[P沟道JFET的电路符号]
+        \includegraphics{build/Chapter05A_13.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+JFET的电路符号是单线的，作为对比，MOSFET是双线的（多的一根线代表栅极氧化层）。
+
+\subsection{JFET的原理}
+正如\xref{subsec:JFET的结构}中提到，JFET的源和漏是直通的，并不需要栅来开启，那么，JFET中的栅扮演了什么样一种角色？事实是，JFET的沟道可以通过负栅压关闭！这是怎么实现的呢？
+
+\begin{Tablex}[JFET的原理]{|c|c|}
+<栅源电压$V_{GS}$的影响&漏源电压$V_{DS}$的影响\\>
+    \xcell<Y>[2ex][-1ex]{\includegraphics[width=6.7cm]{build/Chapter05A_07.fig.pdf}}&
+    \xcell<Y>[2ex][-1ex]{\includegraphics[width=6.7cm]{build/Chapter05A_07.fig.pdf}}\\
+    \xgp[2ex][2ex]{$V_{GS}$为零}&
+    \xgp[2ex][2ex]{$V_{DS}$为零}\\ \hlinelig
+    \xcell<Y>[2ex][-1ex]{\includegraphics[width=6.7cm]{build/Chapter05A_08.fig.pdf}}&
+    \xcell<Y>[2ex][-1ex]{\includegraphics[width=6.7cm]{build/Chapter05A_10.fig.pdf}}\\
+    \xgp[2ex][2ex]{$V_{GS}$为较小的负电压$V_1^{-}$}&
+    \xgp[2ex][2ex]{$V_{DS}$为较小的正电压$V_1^{+}$}\\ \hlinelig
+    \xcell<Y>[2ex][-1ex]{\includegraphics[width=6.7cm]{build/Chapter05A_09.fig.pdf}}&
+    \xcell<Y>[2ex][-1ex]{\includegraphics[width=6.7cm]{build/Chapter05A_11.fig.pdf}}\\
+    \xgp[2ex][2ex]{$V_{GS}$为较大的负电压$V_2^{-}$}&
+    \xgp[2ex][2ex]{$V_{DS}$为较大的正电压$V_2^{+}$}\\ \hlinelig
+\end{Tablex}
+
+\subsubsection{栅源电压$V_{GS}$的影响}
+JFET的栅极是P型，而源漏和源漏间的沟道为N型（对于N沟道JFET），这就意味着栅和沟道间形成了一个PN结，而有PN结就意味着有耗尽区。当栅压为零时，耗尽区很薄，对沟道几乎没有什么影响。然而，当栅压的负值越来越大，栅--沟道PN结的反偏程度将会越来越大，根据\xref{chap:PN结的静电特性}的内容，我们知道，反偏电压越高，耗尽区越厚，这会挤压沟道的宽度，沟道越来越窄，最终，沟道夹断，不再导通。在该过程中，沟道的电阻会逐渐增大至无穷大。
+
+JFET在这一点上和MOSFET的差异是比较大的，两者栅压的作用相反
+\begin{itemize}
+    \item JFET的沟道原本导通，负栅压关闭沟道，是\uwave{耗尽型}（Depletion Mode）器件。
+    \item MOSFET的沟道原本不导通，正栅压开启沟道，是\uwave{增强型}（Enhancement Mode）器件。
+\end{itemize}
+当然，JFET为耗尽型，MOSFET为增强型，这也只是最典型的情况，两者都可以通过特殊的工艺方法实现耗尽型和增强型（例如MOSFET可以向栅氧掺正离子使其变为耗尽型）。
+
+\subsubsection{漏源电压$V_{DS}$的影响}
+JFET的栅--沟道PN结的反偏情况，不仅会受到$V_{GS}$的影响，也会受到$V_{DS}$的影响，这是因为，由于$V_{DS}$的电压降是在漏和源间，沟道从漏至源电压逐渐降低至零，沟道作为PN结的负端，其上的正电压意味着PN结的反偏。因此，如\xref{tab:JFET的原理}所示，当有$V_{DS}$存在时，耗尽区会发生倾斜，漏侧耗尽区最厚，源侧耗尽区最薄。因此随着$V_{DS}$的增加，漏电流$I_{DS}$增加会越来越慢，直到$V_{DS}$增大至漏测耗尽区相互接触将沟道在漏极处夹断，但这种漏源电压导致的夹断不同于栅源电压导致的夹断，并不会使电流为零，相反，漏电流$I_{DS}$将转为恒流。可以这么理解，夹断后，进一步增加的$V_{DS}$完全降落在随之增加的夹断耗尽区上，故电流不变。
+
+再次指出，尽管两种情况都被称为“夹断”，但结果完全不同的
+\begin{itemize}
+    \item 由栅源电压$V_{GS}$导致的夹断，将会使得漏电流$I_D$为零。
+    \item 由漏源电压$V_{DS}$导致的夹断，将会使得漏电流$I_D$转为恒流。
+\end{itemize}
+
+\subsection{MESFET的结构}
+MESFET的结构和PN JFET是非常相似的，如\xref{fig:MESFET的实际结构}所示，区别仅在于，栅极由P型区域变为了金属，栅--沟道结由PN结变为了金半结，同时，器件由“双边”变为了“单边”，这就是说MESFET中栅仅出现在器件的一侧，而另一侧是电导率几乎为零的本征材料。而更有意思的是，MESFET和PN JFET间的差别比\xref{fig:MESFET的实际结构}和\xref{fig:JFET的实际结构}展现的还要小，因为金属电极其实并不只是存在于MESFET中，即便在PN JFET中，栅、源、漏上也存在金属，只不过由于相应半导体区域都是重掺，形成的是欧姆接触，省略不绘了。故MESFET相较PN JFET的唯一区别就是取消了栅极的$p^{+}$掺杂，此时原先栅的金属电极就自然与沟道轻掺的$n$区域形成了整流接触。MESFET的原理和PN JFET也基本是一致的，同样是以负栅压关闭沟道。
+\begin{Figure}[MESFET的实际结构]
+    \includegraphics[scale=0.87]{build/Chapter05A_06.fig.pdf}
+\end{Figure}
+% 我们后面的讨论主要以PN JFET为主，相关的结论和公式基本可以直接用于MESFET。
