@@ -96,7 +96,7 @@ $V_{p}$关于$V_{p0}$的表达式为
     \end{Equation}
 \end{BoxFormula}
 在漏侧，“反偏电压”增大至$V_{DS}-V_{GS}$，故$h_2$应改写为
-\begin{BoxFormula}[JFET的源侧耗尽区厚度]
+\begin{BoxFormula}[JFET的漏侧耗尽区厚度]
     JFET在源侧的耗尽区厚度$h_2$为
     \begin{Equation}
         h_2=
@@ -130,3 +130,224 @@ $V_{p}$关于$V_{p0}$的表达式为
         V_{DS}\geq V_{GS}-V_{bi}+V_{p0}
     \end{Equation}
 \end{BoxFormula}
+
+\subsection{JFET的电流--电压关系}
+经过前面两个小节的准备后，现在我们可以正式开始推导JFET的电流--电压关系了。
+
+\begin{BoxFormula}[JFET的电流--电压关系]*
+    当$V_{GS}\leq V_{p}$时，JFET处于截止区
+    \begin{Equation}&[1]
+        I_{D1}=0
+    \end{Equation}
+    当$V_{GS}\geq V_{p}$且$V_{DS}\leq V_{GS}-V_{p}$时，JFET处于线性区
+    \begin{Equation}&[2]
+        \qquad\qquad
+        I_{D1}=I_{P1}\qty[3\qty(\frac{V_{DS}}{V_{p0}})-2\qty(\frac{V_{DS}+V_{bi}-V_{GS}}{V_{p0}})^{3/2}+2\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})^{3/2}]
+        \qquad\qquad
+    \end{Equation}
+    当$V_{GS}\geq V_{p}$且$V_{DS}\geq V_{GS}-V_{p}$时，JFET处于饱和区
+    \begin{Equation}&[3]
+        I_{D1}=I_{P1}\qty[1-3\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})+2\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})^{3/2}]
+    \end{Equation}
+    其中$I_{P1}$为
+    \begin{Equation}
+        I_{P1}=e^2N_d^2\mu_nWa^3
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    现在考虑一个N沟道单边JFET，在沟道$x$处的微分电阻为
+    \begin{Equation}&[1]
+        \dd{R(x)}=\frac{\rho\dx}{A(x)}
+    \end{Equation}
+    其中，$\rho$为沟道电阻率，$A(x)$为$x$处的横截面积。
+
+    沟道的电阻率可以由下式给出
+    \begin{Equation}&[2]
+        \rho=\frac{1}{\e\mu_nN_d}
+    \end{Equation}
+    沟道的横截面积可以由下式给出
+    \begin{Equation}&[3]
+        A(x)=\qty[a-h(x)]W
+    \end{Equation}
+    将\xrefpeq{2}和\xrefpeq{3}代入\xrefpeq{1}
+    \begin{Equation}&[4]
+        \dd{R(x)}=\frac{\dx}{e\mu_nN_d\qty[a-h(x)]W}
+    \end{Equation}
+    在$\dx$上的微分电压为
+    \begin{Equation}&[5]
+        \dd{V(x)}=I_{D1}\dd{R(x)}
+    \end{Equation}
+    在整个沟道中漏电流$I_{D1}$是一个常数。将\xrefpeq{4}代入\xrefpeq{5}
+    \begin{Equation}&[6]
+        \dd{V(x)}=\frac{I_{D1}\dx}{e\mu_nN_dW\qty[a-h(x)]}
+    \end{Equation}
+    或
+    \begin{Equation}&[7]
+        I_{D1}\dx=e\mu_nN_dW[a-h(x)]\dd{V(x)}
+    \end{Equation}
+    耗尽层宽度$h(x)$表示为
+    \begin{Equation}&[8]
+        h(x)=\qty[\frac{2\epsilon_s\qty(V(x)+V_{bi}-V_{GS})}{eN_d}]^{1/2}
+    \end{Equation}
+    两端平方得到
+    \begin{Equation}&[9]
+        h(x)^2=\frac{2\epsilon_s\qty(V(x)+V_{bi}-V_{GS})}{eN_d}
+    \end{Equation}
+    解得$V(x)$为
+    \begin{Equation}&[10]
+        V(x)=\frac{eN_dh(x)^2}{2\epsilon_s}+V_{GS}-V_{bi}
+    \end{Equation}
+    两端对$x$求微分
+    \begin{Equation}&[11]
+        \dd{V(x)}=\frac{eN_dh(x)\dd{h(x)}}{\epsilon_s}
+    \end{Equation}
+    将\xrefpeq{11}代入\xrefpeq{7}，这样就将$\dd{V(x)}$都转化为了$h(x)$和$\dd{h(x)}$
+    \begin{Equation}&[12]
+        I_{D1}\dx=e\mu_nN_dW\qty[a-h(x)]\frac{eN_ah(x)\dd{h(x)}}{\epsilon_s}
+    \end{Equation}
+    整理得到
+    \begin{Equation}&[13]
+        I_{D1}\dx=\frac{e^2N_d^2\mu_nW}{\epsilon_s}\qty[ah(x)\dd{h(x)}-h(x)^2\dd{h(x)}]
+    \end{Equation}
+    两端积分，左侧对$x$积分，右侧对$h$积分 
+    \begin{Equation}&[14]
+        \Int[0][L]I_{D1}\dx=\frac{e^2N_d^2\mu_nW}{\epsilon_s}\qty[\Int[h_1][h_2]ah(x)\dd{h(x)}-\Int[h_1][h_2]h(x)^2\dd{h(x)}]
+    \end{Equation}
+    容易得到
+    \begin{Equation}&[15]
+        I_{D1}L=\frac{e^2N_d^2\mu_nW}{\epsilon_s}\qty[\frac{1}{2}a(h_2^2-h_1^2)-\frac{1}{3}\qty(h_2^3-h_1^3)]
+    \end{Equation}
+    这里$L$是沟道长度。接下来要做的就是代入$h_1$和$h_2$，但在此之前先对它们做一些化简。
+
+    根据\fancyref{fml:JFET的源侧耗尽区厚度}
+    \begin{Equation}&[16]
+        h_1=
+        \qty[\frac{2\epsilon_s(V_{bi}-V_{GS})}{eN_d}]^{1/2}
+    \end{Equation}
+    根据\fancyref{fml:JFET的漏侧耗尽区厚度}
+    \begin{Equation}&[17]
+        h_2=
+        \qty[\frac{2\epsilon_s(V_{bi}+V_{DS}-V_{GS})}{eN_d}]^{1/2}
+    \end{Equation}
+    根据\fancyref{fml:内建夹断电压}
+    \begin{Equation}&[18]
+        V_{p0}=\frac{ea^2N_d}{2\epsilon_s}\qquad \frac{1}{V_{p0}}=\frac{2\epsilon_s}{ea^2N_d}
+    \end{Equation}
+    将\xrefpeq{18}代入\xrefpeq{16}
+    \begin{Equation}&[19]
+        h_1=
+        \qty[\frac{a^2(V_{bi}-V_{GS})}{V_{p0}}]^{1/2}
+    \end{Equation}
+    将\xrefpeq{18}代入\xrefpeq{17}
+    \begin{Equation}&[19]
+        h_2=
+        \qty[\frac{a^2(V_{bi}+V_{DS}-V_{GS})}{V_{p0}}]^{1/2}
+    \end{Equation}
+    \xrefpeq{15}右端方括号的第一项可以写为
+    \begin{Equation}&[20]
+        \frac{1}{2}a\qty(h_2^2-h_1^2)=
+        \frac{a}{2}\qty\Bigg{\frac{a^2\qty(V_{bi}+V_{DS}-V_{GS})}{V_{p0}}-\frac{a^2\qty(V_{bi}-V_{GS})}{V_{p0}}}
+    \end{Equation}
+    即
+    \begin{Equation}&[21]
+        \frac{1}{2}a\qty(h_2^2-h_1^2)=
+        \frac{a^3}{2}\qty\Bigg{\frac{\qty(V_{bi}+V_{DS}-V_{GS})}{V_{p0}}-\frac{\qty(V_{bi}-V_{GS})}{V_{p0}}}
+    \end{Equation}
+    或
+    \begin{Equation}&[22]
+        \frac{1}{2}a\qty(h_2^2-h_1^2)=
+        \frac{a^3}{2}\frac{V_{DS}}{V_{p0}}
+    \end{Equation}\goodbreak
+    \xrefpeq{15}右端方括号的第二项可以写为
+    \begin{Equation}&[23]
+        \qquad\qquad
+        \frac{1}{3}\qty(h_2^2-h_1^2)=
+        \frac{1}{3}\qty\Bigg{\qty[\frac{a^2\qty(V_{bi}+V_{DS}-V_{GS})}{V_{p0}}]^{3/2}-\qty[\frac{a^2\qty(V_{bi}-V_{GS})}{V_{p0}}]^{3/2}}
+        \qquad\qquad
+    \end{Equation}
+    即
+    \begin{Equation}&[23]
+        \qquad\qquad\qquad
+        \frac{1}{3}\qty(h_2^2-h_1^2)=
+        \frac{a^3}{3}\qty\Bigg{\qty[\frac{\qty(V_{bi}+V_{DS}-V_{GS})}{V_{p0}}]^{3/2}-\qty[\frac{\qty(V_{bi}-V_{GS})}{V_{p0}}]^{3/2}}
+        \qquad\qquad\qquad
+    \end{Equation}
+    现在，让我们将\xrefpeq{21}和\xrefpeq{23}
+    \begin{Equation}&[24]
+        \qquad
+        I_{D1}=\frac{e^2N_d^2\mu_nW}{\epsilon_sL}\qty[\frac{a^3}{2}\frac{V_{DS}}{V_{p0}}-\frac{a^3}{3}\qty(\frac{V_{bi}+V_{DS}-V_{GS}}{V_{p0}})^{3/2}+\frac{a^3}{3}\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})^{3/2}]
+        \qquad
+    \end{Equation}
+    提出一个$3a^3$
+    \begin{Equation}&[25]
+        \qquad
+        I_{D1}=\frac{e^2N_d^2\mu_nWa^3}{6\epsilon_sL}\qty[3\qty(\frac{V_{DS}}{V_{p_0}})-2\qty(\frac{V_{bi}+V_{DS}-V_{GS}}{V_{p0}})^{3/2}+2\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})^{3/2}]
+        \qquad
+    \end{Equation}
+    若引入$I_{P1}$代换
+    \begin{Equation}&[26]
+        I_{P1}=\frac{e^2N_d^2\mu_nWa^3}{6\epsilon_sL}  
+    \end{Equation}
+    即得
+    \begin{Equation}
+        \qquad\qquad
+        I_{D1}=I_{P1}\qty[3\qty(\frac{V_{DS}}{V_{p_0}})-2\qty(\frac{V_{bi}+V_{DS}-V_{GS}}{V_{p0}})^{3/2}+2\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})^{3/2}]
+        \qquad\qquad
+    \end{Equation}
+    以上推导是在线性区进行的，当进入饱和区时，电流不再随$V_{DS}$变化，令$V_{DS}=V_{GS}-V_{p}$
+    \begin{Equation}
+        \qquad\qquad\qquad
+        I_{D1}=I_{P1}\qty[3\qty(\frac{V_{GS}-V_p}{V_{p0}})-2\qty(\frac{V_{bi}-V_p}{V_{p0}})^{3/2}+2\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})^{3/2}]
+        \qquad\qquad\qquad
+    \end{Equation}
+    运用$V_p=V_{bi}-V_{p0}$和$V_{p0}=V_{bi}-V_{p}$
+    \begin{Equation}
+        \qquad\qquad
+        I_{D1}=I_{P1}\qty[3\qty(\frac{V_{GS}-V_{bi}+V_{p0}}{V_{p0}})-2\qty(\frac{V_{p0}}{V_{p0}})^{3/2}+2\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})^{3/2}]
+        \qquad\qquad
+    \end{Equation}
+    整理得到
+    \begin{Equation}
+        I_{D1}=I_{P1}\qty[1-3\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})+2\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})^{3/2}]
+    \end{Equation}
+    至此，我们就完成了所有的推导。
+\end{Proof}
+
+我们将\fancyref{fml:JFET的电流--电压关系}中的结论展现在\xref{fig:JFET的特性方程}中。尽管JFET的电流电压关系相较MOSFET复杂了很多，但从特性曲面和曲线上看，两者却是惊人般的相似！
+\begin{Figure}[JFET的特性方程]
+    \begin{FigureSub}[JFET的特性曲面]
+        \includegraphics{build/Chapter05A_01a.fig.pdf}
+    \end{FigureSub}\\ \vspace{0.5cm}
+    \begin{FigureSub}[JFET的转移特性]
+        \includegraphics[scale=0.8]{build/Chapter05A_01b.fig.pdf}
+    \end{FigureSub}
+    \hspace{0.25cm}
+    \begin{FigureSub}[JFET的输出特性]
+        \includegraphics[scale=0.8]{build/Chapter05A_01c.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+关于JFET，我们常常引入下面的简化公式，以更方便的计算饱和区电流。
+
+\begin{BoxFormula}[JFET的饱和电流公式]
+    当JFET处于饱和区时，可以应用以下简化公式
+    \begin{Equation}
+        I_{D1}=I_{DSS1}\qty(1-\frac{V_{GS}}{V_p})^2
+    \end{Equation}
+    其中，$I_{DSS1}$是$V_{GS}=0$时的饱和电流$I_{D1}$
+    \begin{Equation}
+        I_{DSS1}=I_{P1}\qty[1-3\qty(\frac{V_{bi}}{V_{p0}})+2\qty(\frac{V_{bi}}{V_{p0}})^{3/2}]
+    \end{Equation}
+\end{BoxFormula}
+
+注意！该公式近适用于JFET的饱和区，在线性区没有什么近似公式。\goodbreak
+
+根据\fancyref{fml:JFET的饱和电流公式}，近似的$I_{D1}$的表达式为
+\begin{Equation}
+    I_{D}=I_{P1}\qty[1-3\qty(\frac{V_{bi}}{V_{p0}})+2\qty(\frac{V_{bi}}{V_{p0}})^{3/2}]\qty[1-\frac{V_{GS}}{V_p}]^2
+\end{Equation}\nopagebreak
+根据\fancyref{fml:JFET的电流--电压关系}，精确的$I_{D1}$的表达式为
+\begin{Equation}
+    I_{D1}=I_{P1}\qty[1-3\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})+2\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})^{3/2}]
+\end{Equation}
+由此可见，两者并没有特别明显的联系。因此这里的近似并未作推导，更多的应当视为一种经验性的结论。但从\xref{fig:JFET的输出特性}可以看出，该近似式与精确式的贴合的相当的好！只是略大些。
