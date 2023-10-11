@@ -1,0 +1,56 @@
+\documentclass{xStandalone}
+
+\begin{document}
+\begin{tikzpicture}
+
+\xValDefine{xL}[-5.5]
+\xValDefine{xR}[+5.5]
+\xValMiddle{xC}{xL}{xR}
+\xValOffset{xBorL}{xL}[-0.75]
+\xValOffset{xBorR}{xR}[+0.75]
+\xValProportion{xEp}{xL}{xR}[0.15]
+\xValMirror{xCp}{xEp}{xC}
+\xValProportion{xCL}{xL}{xR}[0.35]
+\xValMirror{xCR}{xCL}{xC}
+\xValProportion{xEa}{xEp}{xC}[0.00]
+\xValProportion{xEb}{xEp}{xC}[0.35]
+\xValProportion{xEc}{xEp}{xC}[0.70]
+\xValMirror{xCa}{xEa}{xC}
+\xValMirror{xCb}{xEb}{xC}
+\xValMirror{xCc}{xEc}{xC}
+
+\xValDefine{yA}[+2.75]
+\xValDefine{yB}[-2.75]
+\xValProportion{yECb}{yA}{yB}[0.2]
+\xValMirror{yECa}{yECb}{yA}
+\xValProportion{yCs}{yA}{yB}[0.35]
+\xValProportion{yBCa}{yA}{yB}[0.3]
+\xValProportion{yBCb}{yA}{yB}[0.70]
+\xValOffset{yBorA}{yA}[+2.2]
+\xValOffset{yBorB}{yB}[-0.5]
+
+\xGeneratePoints{xL,xR,xC,xBorL,xBorR,xEp,xCp,xCL,xCR,xEa,xEb,xEc,xCa,xCb,xCc}{yA,yB,yECb,yECa,yBCa,yBCb,yBorA,yBorB,yCs}
+
+\draw (xL/yA) node[left] {S} to[R=$r_s$,o-] (xEp/yA) to[short] (xCL/yA);
+\draw (xR/yA) node[right] {D} to[R,l_=$r_d$,o-] (xCp/yA) to[short] (xCR/yA);
+\draw (xCp/yA) to[C=$C_s$,*-] (xCp/yCs) node[ground] {};
+\draw (xCL/yA)--(xCL/yECa) to[cisource,invert,l=$g_mV_{g's'}$] (xCR/yECa) -- (xCR/yA);
+\draw (xCL/yA) to[short,*-] (xCL/yECb) to[C=$C_{ds}$] (xCR/yECb) to[short,-*] (xCR/yA);
+\draw (xCL/yA) to[R=$r_{ds}$] (xCR/yA);
+
+\draw (xEb/yA) node[above] {$\te{S}'$} to[short,o-] (xEb/yBCa) to[C=$C_{gs}$] (xEb/yBCb);
+\draw (xEb/yBCa) to[short,*-] (xEc/yBCa) to[R=$r_{gs}$] (xEc/yBCb) to[short,-] (xEb/yBCb);
+
+\draw (xCb/yA) node[above] {$\te{D}'$} to[short,o-] (xCb/yBCa);
+\draw (xCb/yBCa) to[C=$C_{gd}$] (xCb/yBCb);
+\draw (xCb/yBCa) to[short,*-] (xCc/yBCa) to[R=$r_{gd}$] (xCc/yBCb) to[short,-] (xCb/yBCb);
+
+\draw (xEc/yBCb) to[short,*-*] (xCc/yBCb);
+\draw (xC/yBCb) node[above] {$\te{G}'$} to[R=$r_{g}$,o-] (xC/yB);
+\draw (xC/yB) to[short,-o] (xL/yB) node[left] {G};
+\draw (xC/yB) to[short,*-o] (xR/yB);
+
+\draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
+
+\end{tikzpicture}
+\end{document}

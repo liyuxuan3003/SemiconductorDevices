@@ -1,0 +1,21 @@
+\section{JFET的电路模型}
+在本章，我们简要的讨论一下JFET对应的小信号模型。如\xref{fig:JFET的电路模型}所示
+\begin{itemize}
+    \item 电阻$r_s, r_d, r_g$分别是源极、漏极、栅极各自的体电阻。
+    \item 电阻$r_{gs}$和电容$C_{gs}$是栅源间的反偏二极管的扩散电阻和结电容。
+    \item 电阻$r_{gd}$和电容$C_{gd}$是栅漏间的反偏二极管的扩散电阻和结电容。
+    \item 电容$C_s$是漏和衬底间的电容，源侧没有该电容的原因是源通常接地。
+    \item 电容$C_{ds}$是漏源间沟道的奇生电容。
+    \item 受控源$g_mV_{g's'}$代表漏源电流受栅源电压控制，电阻$r_{ds}$代表沟长调制。
+\end{itemize}
+
+
+\begin{Figure}[JFET的电路模型]
+    \begin{FigureSub}[完整模型]
+        \includegraphics[scale=0.9]{build/Chapter05C_01.fig.pdf}   
+    \end{FigureSub}\\ \vspace{0.75cm}
+    \begin{FigureSub}[简化模型]
+        \includegraphics[scale=0.9]{build/Chapter05C_02.fig.pdf}
+    \end{FigureSub}
+\end{Figure}
+在简化的考虑中，如\xref{fig:简化模型}所示，可以只保留受控源和源极体电阻（有时电阻也可以忽略）。

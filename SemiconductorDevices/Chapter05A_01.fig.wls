@@ -81,7 +81,7 @@ xID1S=FullSimplify[IDSS1 (1-VGS/Vp)^2//.{IDSS1->xIDSS1}]
 fig1=Plot3D[xID1//.listAll,{VDS,0,xVp0},{VGS,-xVp0,0},PlotRange->All,
 	Exclusions->({VGS==Vp,VDS==VGS-Vp}//.listAll),
 	Evaluate@xFig3DTicks[{0,4,1},{1,0},{-4,0,1},{1,0},{0.0,0.5,0.1},{2,1}],
-	Evaluate@xFig3DLabel["V_{DS}","V_{GS}","I_{D1}/I_{P1}"],
+	Evaluate@xFig3DLabel["V_{DS}~(\\si{V})","V_{GS}~(\\si{V})","I_{D1}/I_{P1}"],
 	Evaluate@xFig3DConfig]
 
 
@@ -102,7 +102,7 @@ fig2=Plot[Evaluate@Join[{xID1//.listAll//.{VGS->VDS+Vp//.listAll}},
 		Text[Style["\:9971\:548c\:533a",FontFamily->"Noto Serif CJK SC",FontSize->10],{3.5,0.45}]
 	},
 	Evaluate@xFigTicks[{0,4,0.5},{2,1},{0.0,0.5,0.1},{2,1}],
-	Evaluate@xFigLabel["V_{DS}","I_{D1}/I_{P1}"],
+	Evaluate@xFigLabel["V_{DS}~(\\si{V})","I_{D1}/I_{P1}"],
 	GridLines->{xGrids[{0.0,4.0,0.25}],xGrids[{-0.05,0.55,0.02}]},
 	Evaluate@xFigConfig]
 
@@ -117,12 +117,43 @@ fig3=Plot[{
 		Style["\:8fd1\:4f3c\:503c",FontFamily->"Noto Serif CJK SC",FontSize->9]
 	},LegendFunction->"Panel",LegendLayout -> {"Column",1}],{Left,Top}],
 	Evaluate@xFigTicks[{-4,0,0.5},{2,1},{0.0,0.5,0.1},{2,1}],
-	Evaluate@xFigLabel["V_{GS}","I_{D1}/I_{P1}"],
+	Evaluate@xFigLabel["V_{GS}~(\\si{V})","I_{D1}/I_{P1}"],
 	GridLines->{xGrids[{-4.0,0.0,0.25}],xGrids[{-0.05,0.55,0.02}]},
 	Evaluate@xFigConfig]
 
 
-fig={fig1,fig2,fig3}
+xgm=D[xID1//.listFunc,VGS]
+
+
+xgma=Piecewise[{
+	{(3/(2Vp0))(VDS/Sqrt[Vp0(Vbi-VGS)]),VGSth<=VGS<=0&&0<=VDS<=VDSsat},
+	{xgm,True}
+}]
+
+
+fig4=Plot3D[xgm//.listVal,{VDS,0,xVp0},{VGS,-xVp0,0},PlotRange->{0,0.4},
+	ColorFunction->ColorData["ArmyColors"],
+	Exclusions->({VGS==Vp,VDS==VGS-Vp}//.listAll),
+	Evaluate@xFig3DTicks[{0,4,1},{1,0},{-4,0,1},{1,0},{0.0,0.5,0.1},{2,1}],
+	Evaluate@xFig3DLabel["V_{DS}~(\\si{V})","V_{GS}~(\\si{V})","g_m/I_{P1}"],
+	Evaluate@xFig3DConfig]
+
+
+fig5=Plot3D[xgma//.listAll,{VDS,0,xVp0},{VGS,-xVp0,0},PlotRange->{0,0.4},
+	ColorFunction->ColorData["ArmyColors"],
+	Exclusions->({VGS==Vp,VDS==VGS-Vp}//.listAll),
+	Evaluate@xFig3DTicks[{0,4,1},{1,0},{-4,0,1},{1,0},{0.0,0.5,0.1},{2,1}],
+	Evaluate@xFig3DLabel["V_{DS}~(\\si{V})","V_{GS}~(\\si{V})","g_m/I_{P1}"],
+	Evaluate@xFig3DConfig]
+
+
+fig6=Plot[Evaluate@Table[xgm//.listVal//.{VDS->x},{x,0,6xVp0/8,xVp0/8}],{VGS,-xVp0,0},Evaluate@xFigConfig]
+
+
+Series[Sqrt[x],{x,0,5}]
+
+
+fig={fig1,fig2,fig3,fig4,fig5,fig6}
 
 
 figWithName=Transpose[{fig,nbPDFNameList[[1;;Length[fig]]]}];

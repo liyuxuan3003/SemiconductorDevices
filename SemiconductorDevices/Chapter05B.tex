@@ -3,10 +3,10 @@
 
 \begin{Figure}[JFET的简化]
     \begin{FigureSub}[双边JFET]
-        \includegraphics[scale=0.85]{build/Chapter05B_01.fig.pdf}
+        \includegraphics[scale=0.8]{build/Chapter05B_01.fig.pdf}
     \end{FigureSub}\\ \vspace{0.5cm}
     \begin{FigureSub}[单边JFET]
-        \includegraphics[scale=0.85]{build/Chapter05B_02.fig.pdf}
+        \includegraphics[scale=0.8]{build/Chapter05B_02.fig.pdf}
     \end{FigureSub}
 \end{Figure}
 以$I_{D2}$和$I_{D1}$分别表示双边JFET和单边JFET上的电流，显然
@@ -18,7 +18,7 @@
 \subsection{栅源夹断电压}
 这一小节的目的是，推导$V_{GS}$为何值时，JFET沟道被夹断？
 \begin{Figure}[栅源夹断电压的推导]
-    \includegraphics{build/Chapter05B_03.fig.pdf}
+    \includegraphics[scale=0.9]{build/Chapter05B_03.fig.pdf}
 \end{Figure}
 如\xref{fig:栅源夹断电压的推导}所示，设JFET的沟道的总厚度为$a$，其中，设耗尽区占据的厚度为$h$。\setpeq{栅源夹断电压}
 
@@ -83,7 +83,7 @@ $V_{p}$关于$V_{p0}$的表达式为
 \subsection{漏源饱和电压}
 这一小节的目的是，推导$V_{DS}$为何值时，JFET沟道电流饱和？
 \begin{Figure}[漏源夹断电压的推导]
-    \includegraphics{build/Chapter05B_04.fig.pdf}
+    \includegraphics[scale=0.9]{build/Chapter05B_04.fig.pdf}
 \end{Figure}
 如\xref{fig:漏源夹断电压的推导}所示，此时耗尽区是倾斜的，宽度$h(x)$并不均等，源侧记为$h_1$，漏侧记为$h_2$。
 
@@ -327,6 +327,8 @@ $V_{p}$关于$V_{p0}$的表达式为
         \includegraphics[scale=0.8]{build/Chapter05A_01c.fig.pdf}
     \end{FigureSub}
 \end{Figure}
+在\xref{fig:JFET的特性方程}中，取$V_{p0}=4.0\si{V}$，取$V_{bi}=1.0\si{V}$，故$V_{p}=V_{bi}-V_{p0}=-3.0\si{V}$。
+
 关于JFET，我们常常引入下面的简化公式，以更方便的计算饱和区电流。
 
 \begin{BoxFormula}[JFET的饱和电流公式]
@@ -351,3 +353,61 @@ $V_{p}$关于$V_{p0}$的表达式为
     I_{D1}=I_{P1}\qty[1-3\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})+2\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})^{3/2}]
 \end{Equation}
 由此可见，两者并没有特别明显的联系。因此这里的近似并未作推导，更多的应当视为一种经验性的结论。但从\xref{fig:JFET的输出特性}可以看出，该近似式与精确式的贴合的相当的好！只是略大些。
+
+\subsection{JFET的跨导}
+现在！让我们来推导JFET的跨导$g_m$，它是$I_{D1}$对$V_{GS}$的导数，换言之，\xref{fig:JFET的输出特性}的斜率。
+
+\begin{BoxFormula}[JFET的跨导]
+    当JFET处于线性区时，跨导$g_m=g_{ml}$满足
+    \begin{Equation}
+        g_{ml}=\frac{3I_{P1}}{V_{p0}}\qty[\qty(\frac{V_{DS}+V_{bi}-V_{GS}}{V_{p0}})^{1/2}-\qty(\frac{V_{bi}-V_{GS}}{V_{p}})^{1/2}]
+    \end{Equation}
+    当JFET处于饱和区时，跨导$g_m=g_{ms}$满足
+    \begin{Equation}
+        g_{ms}=\frac{3I_{P1}}{V_{p0}}\qty[1-\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})^{1/2}]
+    \end{Equation}
+    关于\uwave{跨导}（Transconductance）表达式前的系数，这里还常引入\uwave{跨导系数}
+    \begin{Equation}
+        G_{01}=\frac{3I_{P1}}{V_{p0}}
+    \end{Equation}
+    除此之外，JFET在饱和区的跨导还有以下近似式可用
+    \begin{Equation}
+        g_{ms}=-\frac{2I_{DSS1}}{V_{p}}\qty(1-\frac{V_{GS}}{V_p})
+    \end{Equation}
+\end{BoxFormula}
+
+\begin{Proof}
+    根据\fancyref{fml:JFET的电流--电压关系}
+    \begin{Equation}&[1]
+        \qquad\qquad
+        I_{D1}=I_{P1}\qty[3\qty(\frac{V_{DS}}{V_{p0}})-2\qty(\frac{V_{DS}+V_{bi}-V_{GS}}{V_{p0}})^{3/2}+2\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})^{3/2}]
+        \qquad\qquad
+    \end{Equation}
+    跨导$g_m$被定义为
+    \begin{Equation}&[2]
+        g_m=\pdv{I_D}{V_{GS}}
+    \end{Equation}
+    将\xrefpeq{1}代入\xrefpeq{2}，容易得到
+    \begin{Equation}
+        g_m=\frac{3I_{P1}}{V_{p0}}\qty[\qty(\frac{V_{DS}+V_{bi}-V_{GS}}{V_{p0}})^{1/2}-\qty(\frac{V_{bi}-V_{GS}}{V_{p}})^{1/2}]
+    \end{Equation}
+    这得到的是线性区的跨导，而若要求饱和区的跨导，只要令$V_{DS}=V_{GS}-V_p$
+    \begin{Equation}
+        g_m=\frac{3I_{p1}}{V_{p0}}\qty[1-\qty(\frac{V_{bi}-V_{GS}}{V_{p0}})^{1/2}]
+    \end{Equation}
+    如果饱和电流应用的是\fancyref{fml:JFET的饱和电流公式}
+    \begin{Equation}
+        I_{D1}=I_{DSS1}\qty(1-\frac{V_{GS}}{V_p})^2
+    \end{Equation}
+    那么求导得到的是
+    \begin{Equation}*
+        g_m=\pdv{I_{D1}}{V_{GS}}=-\frac{2I_{DSS1}}{V_p}\qty(1-\frac{V_{GS}}{V_p})\qedhere
+    \end{Equation}
+\end{Proof}
+
+我们将\fancyref{fml:JFET的跨导}中的结论展现在\xref{fig:JFET的跨导}中
+\begin{Figure}[JFET的跨导]
+    \includegraphics{build/Chapter05A_01d.fig.pdf}
+\end{Figure}
+容易看出，跨导$g_m$随$V_{GS}$的增大而增大，且$g_m$在饱和区的增长比线性区快。
+

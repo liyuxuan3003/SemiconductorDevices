@@ -19,17 +19,15 @@
 
 \xGeneratePoints{xL,xR,xC,xBorL,xBorR,xCpi,xRpi}{yA,yB,yBorA,yBorB,yC}
 
-\draw (xL/yA) node[left] {E} to[cisource,invert,l={$I_C=g_mV_{be}$},o-o] (xR/yA) node[right] {C};
+\draw (xR/yA) node[right] {D} to[cisource,l_={$I_D=g_mV_{be}$},o-] (xC/yA) to[R,l_=$r_s$,-o] (xL/yA) node[left] {S};
 
-\draw (xCpi/yA) to[C=$C_{\pi}$,*-*] (xCpi/yB);
-\draw (xRpi/yA) to[R=$r_{\pi}$,*-*] (xRpi/yB);
-\draw (xL/yB) node[left] {B} to[short,o-o] (xR/yB);
+\draw (xL/yB) node[left] {G} to[short,o-o] (xR/yB);
 
 \draw[ultra thin] (xBorL/yBorB) rectangle (xBorR/yBorA);
 
 \path (xL/yA) node[below] {$-$};
 \path (xL/yB) node[above] {$+$};
-\path (xL/yC) node {$V_{be}$};
+\path (xL/yC) node {$V_{gs}$};
 
 \end{tikzpicture}
 \end{document}
