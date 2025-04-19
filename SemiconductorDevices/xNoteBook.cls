@@ -44,8 +44,8 @@
 \setmonofont{Consolas}
 
 %设定中文字体
-\setCJKmainfont[ItalicFont = FandolKai-Regular]{Noto Serif CJK SC}      %谷歌衬线字体
-\setCJKsansfont[ItalicFont = FandolKai-Regular]{Noto Sans CJK SC}       %谷歌无衬线字体
+\setCJKmainfont{Noto Serif CJK SC}      %谷歌衬线字体
+\setCJKsansfont{Noto Sans CJK SC}       %谷歌无衬线字体
 \setCJKmonofont[AutoFakeBold,AutoFakeSlant=0.25]{FangSong}  %仿宋字体
 
 %设定页眉页脚格式
